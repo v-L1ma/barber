@@ -17,4 +17,8 @@ public class AgendamentoService {
     public List<Agendamento> listarAgendamentos(){
         return agendamentoDAO.listarAgendamentos();
     }
+
+    public List<Agendamento> listarAgendamentosPorCliente(String cliente){
+        return agendamentoDAO.listarAgendamentosPorCliente(cliente);
+    }
 }

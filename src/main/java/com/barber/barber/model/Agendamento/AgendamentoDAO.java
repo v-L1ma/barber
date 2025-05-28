@@ -45,4 +45,18 @@ public class AgendamentoDAO {
         });
         return agendamentos;
     }
+
+    public List<Agendamento> listarAgendamentosPorCliente(String cliente){
+        String sql = "SELECT * FROM agendamento WHERE agendamento.cliente = ?";
+        List<Agendamento> agendamentos = jdbc.query(sql, new Object[]{cliente}, (result, index)->{
+            Agendamento agendamento = new Agendamento();
+            agendamento.setId(result.getInt("id"));
+            agendamento.setCliente(result.getString("cliente"));
+            agendamento.setData(result.getString("data"));
+            agendamento.setHorario(result.getString("horario"));
+            agendamento.setServico(result.getString("servico"));
+            return agendamento;
+        });
+        return agendamentos;
+    }
 }
