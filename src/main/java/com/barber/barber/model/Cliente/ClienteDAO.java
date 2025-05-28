@@ -1,4 +1,4 @@
-package com.barber.barber.model;
+package com.barber.barber.model.Cliente;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;

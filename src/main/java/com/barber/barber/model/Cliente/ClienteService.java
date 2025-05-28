@@ -1,4 +1,4 @@
-package com.barber.barber.model;
+package com.barber.barber.model.Cliente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

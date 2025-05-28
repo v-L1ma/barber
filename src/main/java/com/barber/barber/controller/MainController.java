@@ -1,7 +1,7 @@
 package com.barber.barber.controller;
 
-import com.barber.barber.model.Cliente;
-import com.barber.barber.model.ClienteService;
+import com.barber.barber.model.Cliente.Cliente;
+import com.barber.barber.model.Cliente.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;

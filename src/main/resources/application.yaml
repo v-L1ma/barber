@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/testedb
+    url: jdbc:postgresql://localhost:5432/barberbooking
     username: postgres
     password: root
     diverClassName: org.postgresql.Driver

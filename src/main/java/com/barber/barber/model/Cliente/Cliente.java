@@ -1,4 +1,4 @@
-package com.barber.barber.model;
+package com.barber.barber.model.Cliente;
 
 public class Cliente {
     private int id;
