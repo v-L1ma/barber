@@ -1,0 +1,48 @@
+main{
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    background-color: #050505;
+    color: white;
+    height: 96vh;
+
+    #container{
+        background-color: #232225;
+        border-radius: 2em;
+        padding: 2em;
+
+        form{
+
+            .horariosLista{
+                display: flex;
+                gap: 1em;
+            }
+        
+
+            div{
+                position: relative;
+        
+            input[type="radio"]{
+                appearance: none;
+                position: relative;
+                border: 2px solid rgba(0, 0, 0, 0.548);
+                padding: 1.5em;
+                width: 8em;
+                border-radius: .5em;
+                z-index: 2;
+            }
+        
+            input[type="radio"]:checked{
+                border: 2px solid aqua;
+            }
+        
+            label{
+                position: absolute;
+                left: 40px;
+                top: 13px;
+            }
+            }
+    
+        }
+    }
+}
