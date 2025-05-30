@@ -6,75 +6,80 @@
                 nome do cliente para criar o agendamento</p>
         </div>
         <form>
-            <label for="">Data</label>
-            <input type="date">
-            <label for="">Horários</label>
-            <p>Manhã</p>
-            <div class="horariosLista">
 
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">09:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">10:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">11:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">12:00</label>
-                </div>
-                
-            </div>
-            <p>Tarde</p>
-            <div class="horariosLista">
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">13:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">14:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">15:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">16:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">17:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">18:00</label>
-                </div>
-            </div>
-
-            <p>Noite</p>
-            <div class="horariosLista">
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">19:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">20:00</label>
-                </div>
-                <div>
-                    <input type="radio" name="horarios" id="">
-                    <label for="">21:00</label>
-                </div>
-                
-            </div>
             <div>
+                <label for="">Data</label>
+                <input type="date">
+            </div>
+
+            <div>
+                <label for="">Horários</label>
+                <p>Manhã</p>
+                <div class="horariosLista">
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">09:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">10:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">11:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">12:00</label>
+                    </div>
+                
+                </div>
+                <p>Tarde</p>
+                <div class="horariosLista">
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">13:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">14:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">15:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">16:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">17:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">18:00</label>
+                    </div>
+                </div>
+                <p>Noite</p>
+                <div class="horariosLista">
+                    <div class="horarioBtn">
+                        <input [disabled]="true" type="radio" name="horarios" id="">
+                        <label for="">19:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">20:00</label>
+                    </div>
+                    <div class="horarioBtn">
+                        <input type="radio" name="horarios" id="">
+                        <label for="">21:00</label>
+                    </div>
+                
+                </div>
+            </div>
+
+            <div id="cliente">
                 <label for="">Cliente</label>
                 <input type="text" placeholder="Seu nome">
             </div>
