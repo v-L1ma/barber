@@ -1,20 +1,21 @@
 <main>
     <div id="container">
-        <div>
+        <div id="divHeader">
             <h1>Agende um atendimento</h1>
             <p>Selecione data, horário e informe o
                 nome do cliente para criar o agendamento</p>
         </div>
+
         <form>
 
-            <div>
+            <div id="divData">
                 <label for="">Data</label>
                 <input type="date">
             </div>
 
-            <div>
+            <div id="divHorarios">
                 <label for="">Horários</label>
-                <p>Manhã</p>
+                
                 <div class="horariosLista">
                     <div class="horarioBtn">
                         <input type="radio" name="horarios" id="">
@@ -33,9 +34,6 @@
                         <label for="">12:00</label>
                     </div>
                 
-                </div>
-                <p>Tarde</p>
-                <div class="horariosLista">
                     <div class="horarioBtn">
                         <input type="radio" name="horarios" id="">
                         <label for="">13:00</label>
@@ -60,9 +58,7 @@
                         <input type="radio" name="horarios" id="">
                         <label for="">18:00</label>
                     </div>
-                </div>
-                <p>Noite</p>
-                <div class="horariosLista">
+                
                     <div class="horarioBtn">
                         <input [disabled]="true" type="radio" name="horarios" id="">
                         <label for="">19:00</label>
@@ -85,5 +81,8 @@
             </div>
             <button>AGENDAR</button>
         </form>
+    </div>
+    <div id="imagem">
+        <img src="logoBarbearia.png" alt="">
     </div>
 </main>

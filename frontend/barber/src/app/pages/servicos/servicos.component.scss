@@ -1,0 +1,105 @@
+main{
+    background-color: #050505;
+    padding: 1em;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+
+    #banner{
+        height: 20em;
+        width: 70vw;
+        margin: auto;
+        border-radius: .5em;
+        background-image: url(/clientes.png);
+        background-position: center;
+        background-size: cover;
+        padding: 1em;
+
+        button{
+            appearance: none;
+            background-color: yellow;
+            border: none;
+            height: 3em;
+            width: 3em;
+            border-radius: 100%;
+            font-weight: bolder;
+            box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.137);
+            cursor: pointer;
+
+            &:hover{
+                opacity: .8;
+            }
+        }
+    }
+
+
+    #container{
+        background-color: #232225b9;
+        width: 70vw;
+        margin: auto;
+        padding: 1em;
+        border-radius: 1em;
+
+        #headerText{
+            padding-top: 1em;
+            padding-bottom: 1em;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+    
+            p{
+                color: rgba(255, 255, 255, 0.8);
+            }
+        }
+    
+        .card{
+            display: flex;
+            justify-content: space-between;
+            padding-top: 2em;
+            padding-bottom: 2em;
+            border-bottom: 1px solid rgba(128, 128, 128, 0.288);
+    
+            div{
+                display: flex;
+                flex-direction: column;
+                gap: .5em;
+    
+                .lista{
+                    flex-direction: row;
+                    gap: 1em;
+    
+                    div, img{
+                        background-color: black;
+                        border-radius: .5em;
+                        height: 3em;
+                        width: 3em;
+                    }
+    
+                }
+            }
+    
+            div:nth-child(2){
+                flex-direction: row;
+                align-items: center;
+                button{
+                    appearance: none;
+                    background-color: yellow;
+                    border: none;
+                    padding: 1em;
+                    padding-left: 2em;
+                    padding-right: 2em;
+                    border-radius: 1em;
+                    cursor: pointer;
+
+                    &:hover{
+                        opacity: .8;
+                    }
+                }
+            }
+        }
+        
+    }
+    
+}
