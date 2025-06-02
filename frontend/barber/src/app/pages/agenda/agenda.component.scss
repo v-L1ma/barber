@@ -1,0 +1,63 @@
+main{
+    background-color: #19181B;
+    min-height: 100vh;
+    color: white;
+
+    section{
+        width: 70vw;
+        margin: 0 auto;
+        padding: 4em 0;
+
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+
+        #header{
+            display: flex;
+            justify-content: space-between;
+
+            input[type="date"]{
+                appearance: none;
+                border: 1.5px solid #3E3C41;
+                padding: 1em;
+                background-color: #19181B;
+                border-radius: .5em;
+                color: white;
+
+                &:focus{
+                color: #B8952E;
+                border: #B8952E;
+                outline: 1.5px solid #B8952E;
+                }
+            }
+        }
+
+        .card{
+            border: 1px solid #3E3C41;
+            border-radius: 1em;
+            
+            h2{
+                padding: 1em;
+                font-size: 1em;
+                font-weight: bold;
+            }
+
+            ul{
+                padding: 2em 1.5em;
+                border-top: 1px solid #3E3C41;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 1em;
+                
+                li{
+                    display: flex;
+                    gap: 2em;
+
+                }
+
+                
+            }
+        }
+    }
+}
