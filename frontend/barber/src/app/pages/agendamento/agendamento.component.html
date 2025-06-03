@@ -1,9 +1,12 @@
 <main>
     <div id="container">
         <div id="divHeader">
-            <h1>Agende um atendimento</h1>
-            <p>Selecione data, horário e informe o
-                nome do cliente para criar o agendamento</p>
+            <app-voltar-btn go="/servicos"></app-voltar-btn>
+            <div>
+                <h1>Agende um atendimento</h1>
+                <p>Selecione data, horário e informe o
+                    nome do cliente para criar o agendamento</p>
+            </div>
         </div>
 
         <form>
@@ -78,6 +81,10 @@
             <div id="cliente">
                 <label for="">Cliente</label>
                 <input type="text" placeholder="Seu nome">
+            </div>
+            <div id="cliente">
+                <label for="">Celular</label>
+                <input type="text" placeholder="(13) 98193-4062">
             </div>
             <button>AGENDAR</button>
         </form>

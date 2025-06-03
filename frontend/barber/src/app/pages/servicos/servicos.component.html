@@ -1,7 +1,7 @@
 <main>
     
         <div id="banner">
-            <app-voltar-btn></app-voltar-btn>
+            <app-voltar-btn go="/"></app-voltar-btn>
         </div>
 
         <div id="container">
@@ -37,7 +37,9 @@
                 </div>
                 <div>
                     <p>R$ 80,00</p>
-                    <button>Reservar</button>
+                    <button [routerLink]="['/agendamento']" [state]="{servico: 'Corte + Barba'}">
+                        Reservar
+                      </button>
                 </div>
             </div>
             <div class="card">
