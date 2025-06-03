@@ -1,0 +1,16 @@
+<div class="card">
+    <div>
+        <h2>{{titulo}}</h2>
+        <div class="lista">
+            <img src="homem.png" alt="">
+            <img src="mulher.png" alt="">
+            <img src="homem.png" alt="">
+        </div>
+    </div>
+    <div>
+        <p>R$ {{preco}}</p>
+        <button [routerLink]="['/agendamento']" [state]="{servico: titulo}">
+            Reservar
+        </button>
+    </div>
+</div>

@@ -12,140 +12,30 @@
         </div>
         <div>
             <h1>Serviços populares</h1>
-            <div class="card">
-                <div>
-                    <h2>Corte masculino</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 40,00</p>
-                    <button>Reservar</button>
-                </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2>Corte + barba</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 80,00</p>
-                    <button [routerLink]="['/agendamento']" [state]="{servico: 'Corte + Barba'}">
-                        Reservar
-                      </button>
-                </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2>Barba</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 40,00</p>
-                    <button>Reservar</button>
-                </div>
-            </div>
+
+            <app-card-servicos titulo="Corte masculino" preco="40,00"></app-card-servicos>
+
+            <app-card-servicos titulo="Corte + Barba" preco="80,00"></app-card-servicos>
+            
+            <app-card-servicos titulo="Barba" preco="40,00"></app-card-servicos>
+
         </div>
+
         <div>
             <h1>Outros serviços</h1>
-            <div class="card">
-                <div>
-                    <h2>Corte masculino</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 40,00</p>
-                    <button>Reservar</button>
-                </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2>Corte + barba</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 40,00</p>
-                    <button>Reservar</button>
-                </div>
-            </div>
-            <div class="card">
-                <div>
-                    <h2>Barba</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 40,00</p>
-                    <button>Reservar</button>
-                </div>
-            </div>
 
-            <div class="card">
-                <div>
-                    <h2>Corte com pente + barba</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 60,00</p>
-                    <button>Reservar</button>
-                </div>
-            </div>
+            <app-card-servicos titulo="Corte masculino" preco="40,00"></app-card-servicos>
 
-            <div class="card">
-                <div>
-                    <h2>Corte feminino</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 50,00</p>
-                    <button>Reservar</button>
-                </div>
-            </div>
+            <app-card-servicos titulo="Corte + barba" preco="80,00"></app-card-servicos>
 
-            <div class="card">
-                <div>
-                    <h2>Corte com pente</h2>
-                    <div class="lista">
-                        <img src="homem.png" alt="">
-                        <img src="mulher.png" alt="">
-                        <img src="homem.png" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p>R$ 30,00</p>
-                    <button>Reservar</button>
-                </div>
-            </div>
+            <app-card-servicos titulo="Barba" preco="40,00"></app-card-servicos>
+
+            <app-card-servicos titulo="Corte com pente + barba" preco="60,00"></app-card-servicos>
+
+            <app-card-servicos titulo="Corte feminino" preco="60,00"></app-card-servicos>
+
+            <app-card-servicos titulo="Corte com pente" preco="30,00"></app-card-servicos>
+
         </div>
     </div>
 </main>
