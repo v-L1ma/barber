@@ -16,6 +16,10 @@ main{
             display: flex;
             justify-content: space-between;
 
+            h1{
+                text-align: center;
+            }
+
             input[type="date"]{
                 appearance: none;
                 border: 1.5px solid #3E3C41;

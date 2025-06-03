@@ -2,6 +2,7 @@ package com.barber.barber.controller;
 
 import com.barber.barber.model.Agendamento.Agendamento;
 import com.barber.barber.model.Agendamento.AgendamentoService;
+import com.barber.barber.model.Agendamento.CadastrarAgendamentoDto;
 import com.barber.barber.model.Agendamento.ListarAgendamentoResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -47,11 +48,11 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<String> criarAgendamento(@RequestBody Agendamento agendamento){
-        if (agendamento.getCliente() == null ||
-                agendamento.getData() == null ||
-                agendamento.getHorario() == null||
-                agendamento.getServico() == null){
+    public ResponseEntity<String> criarAgendamento(@RequestBody CadastrarAgendamentoDto agendamentoDto){
+        if (agendamentoDto.cliente() == null ||
+                agendamentoDto.data() == null ||
+                agendamentoDto.horario() == null||
+                agendamentoDto.servico() == null){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Todos os campos são obrigatórios.");
         }
 
@@ -60,14 +61,30 @@ public class AgendamentoController {
         List<Agendamento> agendamentos = agendamentoService.listarAgendamentos();
 
         for (Agendamento item : agendamentos){
-            if (item.getData().equals(agendamento.getData()) && item.getHorario().equals(agendamento.getHorario())){
+            if (item.getData().equals(agendamentoDto.data()) && item.getHorario().equals(agendamentoDto.horario())){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Já existe um agendamento nessa data e nesse horário.");
         }
         }
 
-        agendamentoService.inserirAgendamento(agendamento);
+        agendamentoService.inserirAgendamento(agendamentoDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Agendamento feito com sucesso");
     }
 
+    @PutMapping("/{id}")
+    public void atualizarAgendamento(@PathVariable int id, @RequestBody Agendamento agendamento){
+
+        AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
+
+        agendamentoService.atualizarAgendamento(id, agendamento);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletarAgendamento(@PathVariable int id){
+
+        AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
+        agendamentoService.deletarAgendamento(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Usuario excluido com sucesso");
+    }
 
 }

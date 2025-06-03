@@ -1,0 +1,15 @@
+button{
+    appearance: none;
+    background-color: yellow;
+    border: none;
+    height: 3em;
+    width: 3em;
+    border-radius: 100%;
+    font-weight: bolder;
+    box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.137);
+    cursor: pointer;
+
+    &:hover{
+        opacity: .8;
+    }
+}
