@@ -4,6 +4,8 @@ import com.barber.barber.model.Cliente.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +22,7 @@ public class AgendamentoService {
         return Agendamento.converterVarios(agendamentoDAO.listarAgendamentos());
     }
 
-    public List<Agendamento> listarAgendamentosPorCliente(String data){
+    public List<Agendamento> listarAgendamentosPorData(LocalDate data){
         return Agendamento.converterVarios(agendamentoDAO.listarAgendamentoPorData(data));
     }
 

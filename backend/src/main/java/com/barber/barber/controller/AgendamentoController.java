@@ -6,10 +6,13 @@ import com.barber.barber.model.Agendamento.CadastrarAgendamentoDto;
 import com.barber.barber.model.Agendamento.ListarAgendamentoResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -33,17 +36,17 @@ public class AgendamentoController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{cliente}")
-    public ResponseEntity<ListarAgendamentoResponseDTO> listaPorCliente(@PathVariable String cliente){
+    @GetMapping("/{data}")
+    public ResponseEntity<ListarAgendamentoResponseDTO> listaPorData(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data){
         AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
-        var agendamentos = agendamentoService.listarAgendamentosPorCliente(cliente);
+        var agendamentos = agendamentoService.listarAgendamentosPorData(data);
 
         if (agendamentos.isEmpty()){
             var response = new ListarAgendamentoResponseDTO("Esse cliente não possui agendamentos",agendamentos);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
 
-        var response = new ListarAgendamentoResponseDTO("Listagem do cliente " + cliente + "feita com sucesso!", agendamentos);
+        var response = new ListarAgendamentoResponseDTO("Listagem dos agendamentos do dia " + data + "feita com sucesso!", agendamentos);
         return ResponseEntity.ok(response);
     }
 

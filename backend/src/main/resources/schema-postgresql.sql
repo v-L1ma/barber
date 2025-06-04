@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS cliente(
 
 CREATE TABLE IF NOT EXISTS agendamento(
     id serial PRIMARY KEY,
-    data varchar(10),
-    horario varchar(5),
-    cliente varchar(50),
-    servico varchar(50)
+    data DATE,
+    horario TIME,
+    cliente VARCHAR(50),
+    servico VARCHAR(50)
 );

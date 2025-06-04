@@ -1,4 +1,7 @@
 package com.barber.barber.model.Agendamento;
 
-public record CadastrarAgendamentoDto( String cliente, String data, String horario, String servico) {
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public record CadastrarAgendamentoDto(String cliente, LocalDate data, LocalTime horario, String servico) {
 }

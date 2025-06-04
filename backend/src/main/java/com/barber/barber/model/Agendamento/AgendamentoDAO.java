@@ -6,7 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -38,9 +40,9 @@ public class AgendamentoDAO {
         return jdbc.queryForList(sql);
     }
 
-    public List<Map<String,Object>> listarAgendamentoPorData(String data){
-        String sql = "SELECT * FROM agendamento WHERE agendamento.data = ?";
-        return jdbc.queryForList(sql);
+    public List<Map<String,Object>> listarAgendamentoPorData(LocalDate data){
+        String sql = "SELECT * FROM agendamento where agendamento.data = ?";
+        return jdbc.queryForList(sql, data);
     }
 
     public Map<String,Object> listarAgendamentoPorId(int id){

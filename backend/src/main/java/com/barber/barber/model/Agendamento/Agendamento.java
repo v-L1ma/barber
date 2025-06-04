@@ -1,6 +1,12 @@
 package com.barber.barber.model.Agendamento;
 
 
+import org.springframework.cglib.core.Local;
+
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +15,11 @@ public class Agendamento {
 
     private int id;
     private String cliente;
-    private String data;
-    private String horario;
+    private LocalDate data;
+    private LocalTime horario;
     private String servico;
 
-    public Agendamento(int id, String cliente, String data, String horario, String servico) {
+    public Agendamento(int id, String cliente, LocalDate data, LocalTime horario, String servico) {
         this.id = id;
         this.cliente = cliente;
         this.data = data;
@@ -37,19 +43,19 @@ public class Agendamento {
         this.cliente = cliente;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public String getHorario() {
+    public LocalTime getHorario() {
         return horario;
     }
 
-    public void setHorario(String horario) {
+    public void setHorario(LocalTime horario) {
         this.horario = horario;
     }
 
@@ -64,8 +70,13 @@ public class Agendamento {
     public static Agendamento converter(Map<String,Object> registro){
         int id = (Integer) registro.get("id");
         String cliente = (String) registro.get("cliente");
-        String data = (String) registro.get("data");
-        String horario = (String) registro.get("horario");
+
+        Date dataSql = (Date) registro.get("data");
+        LocalDate data = dataSql.toLocalDate();
+
+        Time horarioSql = (Time) registro.get("horario");
+        LocalTime horario = horarioSql.toLocalTime();
+
         String servico = (String) registro.get("servico");
 
         return new Agendamento(id,cliente,data,horario,servico);
