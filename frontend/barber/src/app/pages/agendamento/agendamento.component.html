@@ -9,82 +9,150 @@
             </div>
         </div>
 
-        <form>
+        <form [formGroup]="agendamentoForm" (ngSubmit)="onSubmit()" #formDir="ngForm">
 
             <div id="divData">
                 <label for="">Data</label>
-                <input type="date">
+                <input type="date" value="{{today}}" min="{{today}}" (change)="fetchAgendamentosPorDia()"
+                    formControlName="data">
             </div>
 
             <div id="divHorarios">
                 <label for="">Horários</label>
-                
+
                 <div class="horariosLista">
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="09:00" 
+                        value="09:00">
                         <label for="">09:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" id="10:00" 
+                        value="10:00">
                         <label for="">10:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="11:00" 
+                        value="11:00">
                         <label for="">11:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="12:00" 
+                        value="12:00">
                         <label for="">12:00</label>
                     </div>
-                
+
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="13:00" 
+                        value="13:00">
                         <label for="">13:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="14:00" 
+                        value="14:00">
                         <label for="">14:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="15:00" 
+                        value="15:00">
                         <label for="">15:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="16:00" 
+                        value="16:00">
                         <label for="">16:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" id="17:00" 
+                        value="17:00">
                         <label for="">17:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="18:00" 
+                        value="18:00">
                         <label for="">18:00</label>
                     </div>
-                
+
                     <div class="horarioBtn">
-                        <input [disabled]="true" type="radio" name="horarios" id="">
+                        <input [disabled]="true" 
+                        type="radio" 
+                        name="horario" 
+                        id="19:00" 
+                        value="19:00">
                         <label for="">19:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="20:00" 
+                        value="20:00">
                         <label for="">20:00</label>
                     </div>
                     <div class="horarioBtn">
-                        <input type="radio" name="horarios" id="">
+                        <input 
+                        type="radio" 
+                        formControlName="horario" 
+                        name="horario" 
+                        id="21:00" 
+                        value="21:00">
                         <label for="">21:00</label>
                     </div>
-                
+
                 </div>
             </div>
 
             <div id="cliente">
                 <label for="">Cliente</label>
-                <input type="text" placeholder="Seu nome">
+                <input 
+                type="text" 
+                placeholder="Seu nome" 
+                formControlName="cliente">
             </div>
             <div id="cliente">
                 <label for="">Celular</label>
-                <input type="text" placeholder="(13) 98193-4062">
+                <input 
+                type="text" 
+                placeholder="(13) 98193-4062">
             </div>
             <button>AGENDAR</button>
         </form>
