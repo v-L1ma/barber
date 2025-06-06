@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { VoltarBtnComponent } from "../../components/voltar-btn/voltar-btn.component";
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FetchAgendamentosPorDataService } from '../../services/fetch-agendamentos-por-data.service';
+
+type TAgendamento = {
+  id:number;
+  data: string;
+  horario: string;
+  cliente: string;
+}
 
 @Component({
   selector: 'app-agendamento',
@@ -13,8 +21,9 @@ export class AgendamentoComponent implements OnInit {
   servico: string;
   today: string;
   agendamentoForm!: FormGroup;
+  agendamentos: TAgendamento[] = [];
 
-  constructor(private router: Router){
+  constructor(private router: Router, private fetchAgendamentosPorDataService: FetchAgendamentosPorDataService){
     const navigation = router.getCurrentNavigation();
     this.servico = navigation?.extras.state?.['servico'];
     console.log(this.servico);
@@ -29,7 +38,7 @@ export class AgendamentoComponent implements OnInit {
       data: new FormControl<string | null>(this.today, [Validators.required, Validators.nullValidator]),
       horario: new FormControl<string>("", [Validators.required, Validators.minLength(5)]),
       cliente: new FormControl<string>("", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-      celular: new FormControl<string>("", [Validators.required, Validators.minLength(11), Validators.maxLength(11)])
+      //celular: new FormControl<string>("", [Validators.required, Validators.minLength(11), Validators.maxLength(11)])
     })
 
     this.fetchAgendamentosPorDia()
@@ -53,7 +62,21 @@ export class AgendamentoComponent implements OnInit {
 
   fetchAgendamentosPorDia(){
     console.log("Data" + this.data.value)
-    //falta passar o valor do input date para fazer a requisição
+    //falta passar o valor do input date para fazer a 
+    this.fetchAgendamentosPorDataService.fetch(this.data.value).subscribe({
+      next: (response)=>{
+        this.agendamentos = response.agendamentos
+        console.log(this.agendamentos)
+      },
+      error: (error)=>{
+        console.log(error)
+      }
+    })
+  }
+
+  validandoHorario(horario:string){
+    console.log(this.agendamentos.some(agendamento => agendamento.horario.slice(0,5) == horario));
+    return this.agendamentos.some(agendamento => agendamento.horario.slice(0,5) == horario);
   }
 
   onSubmit(){

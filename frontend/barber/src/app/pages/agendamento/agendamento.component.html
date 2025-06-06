@@ -26,16 +26,19 @@
                 <div class="horariosLista">
                     <div class="horarioBtn">
                         <input 
+                        [disabled]="validandoHorario('09:00')"
                         type="radio" 
                         formControlName="horario" 
                         name="horario" 
                         id="09:00" 
-                        value="09:00">
+                        value="09:00"
+                        >
                         <label for="">09:00</label>
                     </div>
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('10:00')"
                         formControlName="horario" 
                         name="horario" id="10:00" 
                         value="10:00">
@@ -44,6 +47,7 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('11:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="11:00" 
@@ -53,6 +57,7 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('12:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="12:00" 
@@ -63,6 +68,7 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('13:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="13:00" 
@@ -72,6 +78,7 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('14:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="14:00" 
@@ -81,6 +88,7 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('15:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="15:00" 
@@ -90,6 +98,7 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('16:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="16:00" 
@@ -99,6 +108,7 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('17:00')"
                         formControlName="horario" 
                         name="horario" id="17:00" 
                         value="17:00">
@@ -107,6 +117,7 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('18:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="18:00" 
@@ -115,8 +126,9 @@
                     </div>
 
                     <div class="horarioBtn">
-                        <input [disabled]="true" 
+                        <input 
                         type="radio" 
+                        [disabled]="validandoHorario('19:00')"
                         name="horario" 
                         id="19:00" 
                         value="19:00">
@@ -125,15 +137,18 @@
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('20:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="20:00" 
-                        value="20:00">
+                        value="20:00"
+                        >
                         <label for="">20:00</label>
                     </div>
                     <div class="horarioBtn">
                         <input 
                         type="radio" 
+                        [disabled]="validandoHorario('21:00')"
                         formControlName="horario" 
                         name="horario" 
                         id="21:00" 
@@ -162,9 +177,9 @@
                 <input 
                 type="text" 
                 placeholder="(13) 98193-4062">
-                @if (celular.invalid && formDir.submitted) {
+                <!-- @if (celular.invalid && formDir.submitted) {
                     <p class="erro">Informe o número seu celular para o agendamento.</p>
-                }
+                } -->
             </div>
             <button [disabled]="agendamentoForm.invalid">AGENDAR</button>
         </form>

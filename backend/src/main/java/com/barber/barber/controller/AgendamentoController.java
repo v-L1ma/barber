@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/agendamento")
 public class AgendamentoController {
@@ -40,11 +41,6 @@ public class AgendamentoController {
     public ResponseEntity<ListarAgendamentoResponseDTO> listaPorData(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data){
         AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
         var agendamentos = agendamentoService.listarAgendamentosPorData(data);
-
-        if (agendamentos.isEmpty()){
-            var response = new ListarAgendamentoResponseDTO("Esse cliente não possui agendamentos",agendamentos);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
 
         var response = new ListarAgendamentoResponseDTO("Listagem dos agendamentos do dia " + data + "feita com sucesso!", agendamentos);
         return ResponseEntity.ok(response);
