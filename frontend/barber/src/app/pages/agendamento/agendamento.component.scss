@@ -6,6 +6,10 @@ main{
     box-sizing: border-box;
     gap: 1em;
 
+    .erro{
+        color: red;
+    }
+
     #container{
         background-color: #232225;
         border-radius: 1em;
@@ -143,6 +147,10 @@ main{
                 font-weight: bolder;
                 font-size: 1em;
                 margin-top: .5em;
+
+                &:disabled{
+                    opacity: .4;
+                }
             }
     
         }
