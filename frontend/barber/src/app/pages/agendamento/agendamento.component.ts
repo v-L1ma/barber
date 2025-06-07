@@ -2,14 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { VoltarBtnComponent } from "../../components/voltar-btn/voltar-btn.component";
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FetchAgendamentosPorDataService } from '../../services/fetch-agendamentos-por-data.service';
-
-type TAgendamento = {
-  id:number;
-  data: string;
-  horario: string;
-  cliente: string;
-}
+import { FetchAgendamentosPorDataService } from '../../services/agendamentosPorData/fetch-agendamentos-por-data.service';
+import { TAgendamento } from '../../types/TAgendamentos';
+import { NovoAgendamentoService } from '../../services/agendar/novo-agendamento.service';
 
 @Component({
   selector: 'app-agendamento',
@@ -23,7 +18,11 @@ export class AgendamentoComponent implements OnInit {
   agendamentoForm!: FormGroup;
   agendamentos: TAgendamento[] = [];
 
-  constructor(private router: Router, private fetchAgendamentosPorDataService: FetchAgendamentosPorDataService){
+  constructor(
+    private router: Router, 
+    private fetchAgendamentosPorDataService: FetchAgendamentosPorDataService,
+    private novoAgendamentoService: NovoAgendamentoService
+  ){
     const navigation = router.getCurrentNavigation();
     this.servico = navigation?.extras.state?.['servico'];
     console.log(this.servico);
@@ -38,6 +37,7 @@ export class AgendamentoComponent implements OnInit {
       data: new FormControl<string | null>(this.today, [Validators.required, Validators.nullValidator]),
       horario: new FormControl<string>("", [Validators.required, Validators.minLength(5)]),
       cliente: new FormControl<string>("", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
+      servico: new FormControl<string>(this.servico, [Validators.required])
       //celular: new FormControl<string>("", [Validators.required, Validators.minLength(11), Validators.maxLength(11)])
     })
 
@@ -74,14 +74,19 @@ export class AgendamentoComponent implements OnInit {
     })
   }
 
-  validandoHorario(horario:string){
-    console.log(this.agendamentos.some(agendamento => agendamento.horario.slice(0,5) == horario));
-    return this.agendamentos.some(agendamento => agendamento.horario.slice(0,5) == horario);
-  }
-
   onSubmit(){
-    console.log("implementar")
-    console.log(this.agendamentoForm.value)
+    this.novoAgendamentoService.agendar(this.agendamentoForm.value).subscribe({
+      next: (response)=>{
+        console.log("Status "+response.status)
+        console.log("Body "+response.body.message)
+        console.log(response)
+      },
+      error: (error)=>{
+      
+        console.log("Status "+error.status)
+        console.log("Body "+error.error.message)
+      }
+    })
   }
 
 }

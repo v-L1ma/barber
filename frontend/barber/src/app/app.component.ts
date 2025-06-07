@@ -4,7 +4,7 @@ import { IndexComponent } from "./pages/index/index.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, IndexComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
