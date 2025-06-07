@@ -1,9 +1,6 @@
 package com.barber.barber.controller;
 
-import com.barber.barber.model.Agendamento.Agendamento;
-import com.barber.barber.model.Agendamento.AgendamentoService;
-import com.barber.barber.model.Agendamento.CadastrarAgendamentoDto;
-import com.barber.barber.model.Agendamento.ListarAgendamentoResponseDTO;
+import com.barber.barber.model.Agendamento.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -47,12 +44,13 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<String> criarAgendamento(@RequestBody CadastrarAgendamentoDto agendamentoDto){
+    public ResponseEntity<CadastrarAgendamentoResponseDto> criarAgendamento(@RequestBody CadastrarAgendamentoDto agendamentoDto){
         if (agendamentoDto.cliente() == null ||
                 agendamentoDto.data() == null ||
                 agendamentoDto.horario() == null||
                 agendamentoDto.servico() == null){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Todos os campos são obrigatórios.");
+            var response = new CadastrarAgendamentoResponseDto("Todos os campos são obrigatórios.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
         AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
@@ -61,12 +59,15 @@ public class AgendamentoController {
 
         for (Agendamento item : agendamentos){
             if (item.getData().equals(agendamentoDto.data()) && item.getHorario().equals(agendamentoDto.horario())){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Já existe um agendamento nessa data e nesse horário.");
+
+                var response = new CadastrarAgendamentoResponseDto("Já existe um agendamento nessa data e nesse horário.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
         }
 
         agendamentoService.inserirAgendamento(agendamentoDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Agendamento feito com sucesso");
+        var response = new CadastrarAgendamentoResponseDto("Agendamento feito com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
