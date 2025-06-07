@@ -2,53 +2,76 @@
     <section>
             
             <div id="header">
-                <app-voltar-btn></app-voltar-btn>
-                
-                <div>
-                    <h1>Sua agenda</h1>
-                    <p>Consulte os seus cortes de cabelo agendados por dia</p>
-                </div>
+                    <app-voltar-btn></app-voltar-btn>
+                    
+                    <div>
+                        <h1>Sua agenda</h1>
+                        <p>Consulte os seus cortes de cabelo agendados por dia</p>
+                    </div>
 
-                <input type="date">
+                <input 
+                type="date" 
+                [(ngModel)]="DataSelected"
+                value="{{DataSelected}}" 
+                min="{{DataSelected}}" 
+                (change)="fetch(DataSelected)">
             </div>
 
             <div class="card">
                 <h2>Manhã</h2>
                 <ul>
-                    <li>
-                        <h3>11:00</h3>
-                        <p>Ryan Dorwart</p>
-                    </li>
-                    <li>
-                        <h3>11:00</h3>
-                        <p>Ryan Dorwart</p>
-                    </li>
+                    @for (agendamento of agendamentos; track $index) {
+                        @if (
+                           agendamento.horario.slice(0,5) == "09:00" 
+                        || agendamento.horario.slice(0,5) == "10:00" 
+                        || agendamento.horario.slice(0,5) == "11:00"
+                        || agendamento.horario.slice(0,5) == "12:00") {
+                            <li>
+                                <h3>{{agendamento.horario.slice(0,5)}}</h3>
+                                <p>{{agendamento.cliente}}</p>
+                                <p>{{agendamento.servico}}</p>
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
             <div class="card">
                 <h2>Tarde</h2>
                 <ul>
-                    <li>
-                        <h3>11:00</h3>
-                        <p>Ryan Dorwart</p>
-                    </li>
-                    <li>
-                        <h3>17:00</h3>
-                        <p>Ryan Dorwart</p>
-                    </li>
+                    @for (agendamento of agendamentos; track $index) {
+                        @if (
+                           agendamento.horario.slice(0,5) == "13:00" 
+                        || agendamento.horario.slice(0,5) == "14:00"
+                        || agendamento.horario.slice(0,5) == "15:00"
+                        || agendamento.horario.slice(0,5) == "16:00"
+                        || agendamento.horario.slice(0,5) == "17:00"
+                        ) {
+                            <li>
+                                <h3>{{agendamento.horario.slice(0,5)}}</h3>
+                                <p>{{agendamento.cliente}}</p>
+                                <p>{{agendamento.servico}}</p>
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
             <div class="card">
                 <h2>Noite</h2>
                 <ul>
-                    <li>
-                        <h3>21:00</h3>
-                        <p>Ryan Dorwart</p>
-                    </li>
-                    <li>
-                        <h3>22:00</h3>
-                        <p>Ryan Dorwart</p>
-                    </li>
+                    @for (agendamento of agendamentos; track $index) {
+                        @if (
+                           agendamento.horario.slice(0,5) == "18:00" 
+                        || agendamento.horario.slice(0,5) == "19:00"
+                        || agendamento.horario.slice(0,5) == "20:00"
+                        || agendamento.horario.slice(0,5) == "21:00"
+                        ) {
+                            <li>
+                                <h3>{{agendamento.horario.slice(0,5)}}</h3>
+                                <p>{{agendamento.cliente}}</p>
+                                <p>{{agendamento.servico}}</p>
+                            </li>
+                        }
+                    }
                 </ul>
             </div>
     </section>
