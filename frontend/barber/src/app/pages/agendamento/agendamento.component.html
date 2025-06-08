@@ -13,7 +13,7 @@
 
             <div id="divData">
                 <label for="">Data</label>
-                <input type="date" [value]="today" min="{{today}}" (change)="fetchAgendamentosPorDia()"
+                <input type="date" [value]="today" min="{{today}}" (change)="carregarAgendamentosPorDia(today)"
                     formControlName="data">
                 @if ( data.invalid) {
                     <p class="erro">Selecione a data do agendamento.</p>

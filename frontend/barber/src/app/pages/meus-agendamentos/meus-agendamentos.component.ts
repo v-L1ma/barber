@@ -1,24 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { TAgendamento } from '../../types/TAgendamentos';
-import { FetchTodosAgendamentosService } from '../../services/agendametosTodos/fetch-todos-agendamentos.service';
+
 import { DeletarAgendamentoService } from '../../services/deletarAgendamento/deletar-agendamento.service';
+import { CarregarTodosAgendamentosService } from '../../services/agendametosTodos/carregar-todos-agendamentos.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-meus-agendamentos',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './meus-agendamentos.component.html',
   styleUrl: './meus-agendamentos.component.scss'
 })
 export class MeusAgendamentosComponent implements OnInit{
 
   agendamentos: TAgendamento[] = [];
+  isOpen:boolean = false;
 
-  constructor(private fetchAgendamentos: FetchTodosAgendamentosService,
-    private deleteAgendamento: DeletarAgendamentoService
+  constructor(private carregarAgendamentosService: CarregarTodosAgendamentosService,
+    private deleteAgendamento: DeletarAgendamentoService,
+    private router: Router
   ){}
 
-  fetch(){
-    this.fetchAgendamentos.fetch().subscribe({
+  setMenuOpen(){
+    this.isOpen = !this.isOpen;
+  }
+
+  carregarAgendamentos(){
+    this.carregarAgendamentosService.fetch().subscribe({
       next: (response)=>{
         console.log(response)
         this.agendamentos=response.agendamentos
@@ -31,7 +39,7 @@ export class MeusAgendamentosComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.fetch()
+    this.carregarAgendamentos()
   }
 
   deletar(id:number){
@@ -39,12 +47,18 @@ export class MeusAgendamentosComponent implements OnInit{
     this.deleteAgendamento.delete(id).subscribe({
       next:(response)=>{
         console.log(response)
-        this.fetch()
+        this.carregarAgendamentos()
       },
       error:(error)=>{
         console.log(error)
       }
     })
   }
+
+
+navegarParaEdicao(id: number) {
+  this.router.navigate(['/agendamento/editar', id]);
+}
+
 
 }

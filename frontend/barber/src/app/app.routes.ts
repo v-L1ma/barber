@@ -32,5 +32,9 @@ export const routes: Routes = [
     {
         path: "agenda",
         component: AgendaComponent
+    },
+    {
+        path: "agendamento/editar/:id",
+        component: AgendamentoComponent
     }
 ];

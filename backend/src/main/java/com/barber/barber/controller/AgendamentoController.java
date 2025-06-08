@@ -79,12 +79,14 @@ public class AgendamentoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarAgendamento(@PathVariable int id){
+    public ResponseEntity<CadastrarAgendamentoResponseDto> deletarAgendamento(@PathVariable int id){
 
         AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
         agendamentoService.deletarAgendamento(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Usuario excluido com sucesso");
+        var response = new CadastrarAgendamentoResponseDto("Usuário excluido com sucesso");
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
 }

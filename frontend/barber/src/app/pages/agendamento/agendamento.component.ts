@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { VoltarBtnComponent } from "../../components/voltar-btn/voltar-btn.component";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { FetchAgendamentosPorDataService } from '../../services/agendamentosPorData/fetch-agendamentos-por-data.service';
+import { CarregarAgendamentosPorDataService } from '../../services/agendamentosPorData/carregar-agendamentos-por-data.service';
 import { TAgendamento } from '../../types/TAgendamentos';
 import { NovoAgendamentoService } from '../../services/agendar/novo-agendamento.service';
 
@@ -18,9 +18,13 @@ export class AgendamentoComponent implements OnInit {
   agendamentoForm!: FormGroup;
   agendamentos: TAgendamento[] = [];
 
+  agendamentoId?: number;
+  agendamentoEditar?: TAgendamento;
+
   constructor(
-    private router: Router, 
-    private fetchAgendamentosPorDataService: FetchAgendamentosPorDataService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private carregarAgendamentosPorDataService: CarregarAgendamentosPorDataService,
     private novoAgendamentoService: NovoAgendamentoService
   ){
     const navigation = router.getCurrentNavigation();
@@ -41,7 +45,7 @@ export class AgendamentoComponent implements OnInit {
       //celular: new FormControl<string>("", [Validators.required, Validators.minLength(11), Validators.maxLength(11)])
     })
 
-    this.fetchAgendamentosPorDia()
+    this.carregarAgendamentosPorDia(this.data.value)
   }
 
   get data(){
@@ -60,13 +64,24 @@ export class AgendamentoComponent implements OnInit {
     return this.agendamentoForm?.get("celular")!;
   }
 
-  fetchAgendamentosPorDia(){
-    console.log("Data" + this.data.value)
-    //falta passar o valor do input date para fazer a 
-    this.fetchAgendamentosPorDataService.fetch(this.data.value).subscribe({
+  carregarAgendamentosPorDia(data:string){
+    console.log("Data" + data)
+    this.carregarAgendamentosPorDataService.fetch(data).subscribe({
       next: (response)=>{
         this.agendamentos = response.agendamentos
         console.log(this.agendamentos)
+
+        this.agendamentoId = Number(this.route.snapshot.paramMap.get('id'));
+
+        if(this.agendamentoId!=0){
+          console.log(this.agendamentos)
+          console.log("existeumid")
+          console.log("id", this.agendamentoId)
+
+          this.agendamentoEditar = this.agendamentos.find((a)=>a.id===this.agendamentoId)
+          console.log("agendamento editar",this.agendamentoEditar)
+        }
+
       },
       error: (error)=>{
         console.log(error)
@@ -87,6 +102,10 @@ export class AgendamentoComponent implements OnInit {
         console.log("Body "+error.error.message)
       }
     })
+  }
+
+  carregarInformacoesDoAgendamento(){
+    
   }
 
 }

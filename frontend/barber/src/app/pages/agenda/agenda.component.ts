@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VoltarBtnComponent } from "../../components/voltar-btn/voltar-btn.component";
-import { FetchAgendamentosPorDataService } from '../../services/agendamentosPorData/fetch-agendamentos-por-data.service';
+import { CarregarAgendamentosPorDataService } from '../../services/agendamentosPorData/carregar-agendamentos-por-data.service';
 import { TAgendamento } from '../../types/TAgendamentos';
 import { FormsModule } from '@angular/forms';
 
@@ -16,7 +16,7 @@ export class AgendaComponent implements OnInit {
   agendamentos: TAgendamento[] = [];
   DataSelected : string;
 
-  constructor(private fetchAgendamentos: FetchAgendamentosPorDataService){
+  constructor(private carregarAgendamentos: CarregarAgendamentosPorDataService){
     const date = new Date();    
     this.today = date.toJSON().slice(0,10);
     this.DataSelected = this.today;
@@ -24,7 +24,7 @@ export class AgendaComponent implements OnInit {
   
   fetch(data:string){
     console.log("Mudou", this.DataSelected)
-    this.fetchAgendamentos.fetch(data).subscribe({
+    this.carregarAgendamentos.fetch(data).subscribe({
       next: (response) => {
         this.agendamentos = response.agendamentos.sort(
           (a,b) => parseInt(a.horario.slice(0,2))-parseInt(b.horario.slice(0,2)))

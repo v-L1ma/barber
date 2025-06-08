@@ -6,7 +6,7 @@ import { TFetchAgendamentosResponse } from '../../types/TFetchAgendamentosRespon
 @Injectable({
   providedIn: 'root'
 })
-export class FetchTodosAgendamentosService {
+export class CarregarTodosAgendamentosService {
 
   private baseUrl:string = "http://localhost:8080"
 

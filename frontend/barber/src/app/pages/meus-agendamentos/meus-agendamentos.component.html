@@ -1,7 +1,7 @@
 <section>
     <div class="card">
         <ul>
-            @for (agendamento of agendamentos; track $index) {
+            @for (agendamento of agendamentos; track agendamento.id) {
             <li>
                 <div>
                     <h3>{{agendamento.data.replaceAll("-","/")}}</h3>
@@ -17,7 +17,7 @@
 
                     <div id="popup">
                         <ul>
-                            <li>
+                            <li (click)="navegarParaEdicao(agendamento.id!)">
                                 <img src="editIcon.svg" alt="">
                                 <p>Editar</p>
 
@@ -33,6 +33,10 @@
         }
 
         </ul>
+
+        <div>
+            <h1>Alterar agendamento</h1>
+        </div>
         
     </div>
 </section>

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FetchTodosAgendamentosService } from './fetch-todos-agendamentos.service';
+import { CarregarTodosAgendamentosService } from './carregar-todos-agendamentos.service';
 
 describe('FetchTodosAgendamentosService', () => {
-  let service: FetchTodosAgendamentosService;
+  let service: CarregarTodosAgendamentosService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FetchTodosAgendamentosService);
+    service = TestBed.inject(CarregarTodosAgendamentosService);
   });
 
   it('should be created', () => {

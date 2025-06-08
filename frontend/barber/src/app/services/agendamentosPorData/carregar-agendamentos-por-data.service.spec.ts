@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FetchAgendamentosPorDataService } from './fetch-agendamentos-por-data.service';
+import { CarregarAgendamentosPorDataService } from './carregar-agendamentos-por-data.service';
 
 describe('FetchAgendamentosPorDataService', () => {
-  let service: FetchAgendamentosPorDataService;
+  let service: CarregarAgendamentosPorDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FetchAgendamentosPorDataService);
+    service = TestBed.inject(CarregarAgendamentosPorDataService);
   });
 
   it('should be created', () => {
