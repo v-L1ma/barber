@@ -6,6 +6,40 @@ main{
     flex-direction: column;
     gap: 1em;
 
+    section{
+        display: flex;
+        flex-direction: column;
+        width: 72vw;
+        margin: auto;
+        box-sizing: border-box;
+
+        #outlet{
+            min-height: 30em;
+        }
+
+        #buttons{
+            display: flex;
+            gap: .5em;
+            button{
+                display: flex;
+                gap: 1em;
+                align-items: center;
+
+                appearance: none;
+                background-color: #2322253b;
+                border: none;
+                border-radius: .5em .5em 0 0;
+                color: white;
+                font-weight: bolder;
+                padding: 1em;
+            }
+
+            button.activeRoute{
+                background-color: #232225a9;
+            }
+        }
+    }
+
 
     #banner{
         height: 20em;
@@ -16,31 +50,9 @@ main{
         background-position: center;
         background-size: cover;
         padding: 1em;
-
     }
 
 
-    #container{
-        background-color: #232225b9;
-        width: 70vw;
-        margin: auto;
-        padding: 1em;
-        border-radius: 1em;
-
-        #headerText{
-            padding-top: 1em;
-            padding-bottom: 1em;
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
     
-            p{
-                color: rgba(255, 255, 255, 0.8);
-            }
-        }
-    
-        
-        
-    }
     
 }

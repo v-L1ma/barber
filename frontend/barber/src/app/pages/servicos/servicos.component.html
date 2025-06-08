@@ -4,38 +4,29 @@
             <app-voltar-btn go="/"></app-voltar-btn>
         </div>
 
-        <div id="container">
+        <section>
+
+            <div id="buttons">
+                <button 
+                routerLink="lista"
+                routerLinkActive="activeRoute"
+                [routerLinkActiveOptions]="{ exact: true }">
+                    <img src="addIcon.svg" alt="">
+                    <p>Novo</p>
+                </button>
+
+                <button
+                routerLink="meus-agendamentos"
+                routerLinkActive="activeRoute"
+                [routerLinkActiveOptions]="{ exact: true }">
+                    <img src="bookIcon.svg" alt="">
+                    <p>Meus agendamentos</p>
+                </button>
+            </div>
             
-        <div id="headerText">
-            <h1>Barber Shop</h1>
-            <p>Avenida Senador Feijó, 350 - Vila Matias, Santos - SP, 11015-502</p>
-        </div>
-        <div>
-            <h1>Serviços populares</h1>
-
-            <app-card-servicos titulo="Corte masculino" preco="40,00"></app-card-servicos>
-
-            <app-card-servicos titulo="Corte + Barba" preco="80,00"></app-card-servicos>
+            <div id="outlet">
+                <router-outlet></router-outlet>
+            </div>
             
-            <app-card-servicos titulo="Barba" preco="40,00"></app-card-servicos>
-
-        </div>
-
-        <div>
-            <h1>Outros serviços</h1>
-
-            <app-card-servicos titulo="Corte masculino" preco="40,00"></app-card-servicos>
-
-            <app-card-servicos titulo="Corte + barba" preco="80,00"></app-card-servicos>
-
-            <app-card-servicos titulo="Barba" preco="40,00"></app-card-servicos>
-
-            <app-card-servicos titulo="Corte com pente + barba" preco="60,00"></app-card-servicos>
-
-            <app-card-servicos titulo="Corte feminino" preco="60,00"></app-card-servicos>
-
-            <app-card-servicos titulo="Corte com pente" preco="30,00"></app-card-servicos>
-
-        </div>
-    </div>
+        </section>
 </main>

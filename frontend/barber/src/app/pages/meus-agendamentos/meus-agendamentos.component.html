@@ -1,0 +1,39 @@
+<section>
+    <div class="card">
+        <ul>
+            @for (agendamento of agendamentos; track $index) {
+            <li>
+                <div>
+                    <h3>{{agendamento.data.replaceAll("-","/")}}</h3>
+                    <h3>{{agendamento.horario.slice(0,5)}}</h3>
+                </div>
+                <p>{{agendamento.cliente}}</p>
+                <p>{{agendamento.servico}}</p>
+
+                <div>
+                    <button>
+                        <img src="moreIcon.svg" alt="Três pontos">
+                    </button>
+
+                    <div id="popup">
+                        <ul>
+                            <li>
+                                <img src="editIcon.svg" alt="">
+                                <p>Editar</p>
+
+                            </li>
+                            <li (click)="deletar(agendamento.id!)">
+                                <img src="deleteIcon.svg" alt="">
+                                <p>Cancelar</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        }
+
+        </ul>
+        
+    </div>
+</section>
+
