@@ -1,0 +1,102 @@
+main{
+    nav{
+        display: flex;
+        justify-content: space-between;
+        padding: 1em 3em;
+        align-items: center;
+        background-color: #070A14;
+        color: white;
+        div{
+            display: flex;
+            gap: 1em;
+
+            button{
+                padding: 1em;
+                appearance: none;
+                border: none;
+                border-radius: .5em;
+                background-color: yellow;
+                font-weight: bold;
+            }
+
+            #agenda{
+                background-color: transparent;
+                border: 2px solid yellow;
+                color: yellow;
+            }
+        }
+        ul{
+            display: flex;
+            list-style: none;
+            gap: 1em;
+        }
+    }
+
+    #hero{
+        background-image: url("/heroPage.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 65vh;
+
+        display: flex;
+        flex-direction: column;
+        padding: 5em;
+        text-align: center;
+        color: white;
+        gap: 1em;
+        align-items: center;
+        justify-content: center;
+
+        h1{
+            font-weight: bolder;
+            font-size: 2.5em;
+        }
+
+        button{
+            width: fit-content;
+            padding: 1em 4em;
+            appearance: none;
+            background-color: yellow;
+            border: none;
+            border-radius: .5em;
+            font-weight: bolder;
+        }
+    }
+
+    #sobre{
+        display: flex;
+        padding: 0 10vw;
+        background-color: #0D121E;
+        color: white;
+        height: 100vh;
+        justify-content: space-between;
+
+        #texto{
+            margin-top: 12em;
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+        }
+
+        #images{
+            margin-right: 15em;
+            img{
+                height: 15em;
+                width: 12em;
+                position: relative;
+            }
+
+            img:nth-child(1){
+                left: 10em;
+                top: 5em;
+            }
+
+            img:nth-child(3){
+                left: 10em;
+                top: -8em;
+            }
+
+        }
+    }
+}
