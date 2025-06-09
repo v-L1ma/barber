@@ -23,7 +23,6 @@ export class AgendaComponent implements OnInit {
   }
   
   fetch(data:string){
-    console.log("Mudou", this.DataSelected)
     this.carregarAgendamentos.fetch(data).subscribe({
       next: (response) => {
         this.agendamentos = response.agendamentos.sort(

@@ -5,6 +5,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CarregarAgendamentosPorDataService } from '../../services/agendamentosPorData/carregar-agendamentos-por-data.service';
 import { TAgendamento } from '../../types/TAgendamentos';
 import { NovoAgendamentoService } from '../../services/agendar/novo-agendamento.service';
+import { CarregarTodosAgendamentosService } from '../../services/agendametosTodos/carregar-todos-agendamentos.service';
+import { EditarAgendamentoService } from '../../services/editarAgendamento/editar-agendamento.service';
 
 @Component({
   selector: 'app-agendamento',
@@ -18,13 +20,16 @@ export class AgendamentoComponent implements OnInit {
   agendamentoForm!: FormGroup;
   agendamentos: TAgendamento[] = [];
 
+  isEditando!:boolean;
   agendamentoId?: number;
   agendamentoEditar?: TAgendamento;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private carregarAgendamentosService: CarregarTodosAgendamentosService,
     private carregarAgendamentosPorDataService: CarregarAgendamentosPorDataService,
+    private editarAgendamentoService: EditarAgendamentoService,
     private novoAgendamentoService: NovoAgendamentoService
   ){
     const navigation = router.getCurrentNavigation();
@@ -37,15 +42,19 @@ export class AgendamentoComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.agendamentoId = Number(this.route.snapshot.paramMap.get('id'));
+    this.isEditando = this.agendamentoId!=0;
+
     this.agendamentoForm = new FormGroup({
-      data: new FormControl<string | null>(this.today, [Validators.required, Validators.nullValidator]),
+      data: new FormControl<string>(this.today, [Validators.required, Validators.nullValidator]),
       horario: new FormControl<string>("", [Validators.required, Validators.minLength(5)]),
       cliente: new FormControl<string>("", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
       servico: new FormControl<string>(this.servico, [Validators.required])
       //celular: new FormControl<string>("", [Validators.required, Validators.minLength(11), Validators.maxLength(11)])
     })
 
-    this.carregarAgendamentosPorDia(this.data.value)
+    this.carregarAgendamentos()
+
   }
 
   get data(){
@@ -64,22 +73,30 @@ export class AgendamentoComponent implements OnInit {
     return this.agendamentoForm?.get("celular")!;
   }
 
-  carregarAgendamentosPorDia(data:string){
-    console.log("Data" + data)
-    this.carregarAgendamentosPorDataService.fetch(data).subscribe({
+  get servicoField(){
+    return this.agendamentoForm?.get("servico")!;
+  }
+
+  carregarAgendamentos(){
+    this.carregarAgendamentosService.fetch().subscribe({
       next: (response)=>{
         this.agendamentos = response.agendamentos
-        console.log(this.agendamentos)
+        console.log("agendamentos", this.agendamentos)
 
-        this.agendamentoId = Number(this.route.snapshot.paramMap.get('id'));
-
-        if(this.agendamentoId!=0){
+        if(this.isEditando){
           console.log(this.agendamentos)
           console.log("existeumid")
           console.log("id", this.agendamentoId)
 
           this.agendamentoEditar = this.agendamentos.find((a)=>a.id===this.agendamentoId)
-          console.log("agendamento editar",this.agendamentoEditar)
+          this.today = this.agendamentoEditar?.data!;
+          this.servicoField.setValue(this.agendamentoEditar?.servico!);
+          this.cliente.setValue(this.agendamentoEditar?.cliente);
+          console.log("agendamento editar",this.agendamentoEditar);
+          
+        } else{
+          this.agendamentos = this.agendamentos.filter((a)=>a.data==this.today)
+          console.log("agendamento alterados",this.agendamentos)
         }
 
       },
@@ -90,6 +107,23 @@ export class AgendamentoComponent implements OnInit {
   }
 
   onSubmit(){
+
+    if(this.isEditando){
+      console.log(this.agendamentoForm.value)
+      this.editarAgendamentoService.editar(Number(this.agendamentoId),this.agendamentoForm.value).subscribe({
+        next: (response)=>{
+          console.log(response)
+          this.router.navigate(['servicos/meus-agendamentos'])
+        },
+        error: (error)=>{
+        
+          console.log("Status "+error.status)
+          console.log("Body "+error.error.message)
+        }
+      })
+      return;
+    }
+
     this.novoAgendamentoService.agendar(this.agendamentoForm.value).subscribe({
       next: (response)=>{
         console.log("Status "+response.status)
@@ -104,8 +138,18 @@ export class AgendamentoComponent implements OnInit {
     })
   }
 
-  carregarInformacoesDoAgendamento(){
-    
+  filtrarAgendamentosPorData() {
+    this.carregarAgendamentosPorDataService.fetch(this.data.value).subscribe({
+      next: (response)=>{
+        this.agendamentos = response.agendamentos
+        console.log("agendamentos", this.agendamentos)
+      },
+      error: (error)=>{
+        console.log(error)
+      }
+    })
+  
+  
   }
 
 }

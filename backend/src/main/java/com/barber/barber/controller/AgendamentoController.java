@@ -71,11 +71,14 @@ public class AgendamentoController {
     }
 
     @PutMapping("/{id}")
-    public void atualizarAgendamento(@PathVariable int id, @RequestBody Agendamento agendamento){
+    public ResponseEntity<CadastrarAgendamentoResponseDto> atualizarAgendamento(@PathVariable int id, @RequestBody Agendamento agendamento){
 
         AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
 
         agendamentoService.atualizarAgendamento(id, agendamento);
+
+        var response = new CadastrarAgendamentoResponseDto("Agendamento atualizado com sucesso.");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @DeleteMapping("/{id}")

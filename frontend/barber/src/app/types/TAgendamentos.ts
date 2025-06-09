@@ -3,5 +3,5 @@ export type TAgendamento = {
     data: string;
     horario: string;
     cliente: string;
-    servico?: string
+    servico: string;
   }

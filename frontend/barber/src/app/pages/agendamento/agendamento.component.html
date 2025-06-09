@@ -13,7 +13,7 @@
 
             <div id="divData">
                 <label for="">Data</label>
-                <input type="date" [value]="today" min="{{today}}" (change)="carregarAgendamentosPorDia(today)"
+                <input type="date" [value]="today" min="{{today}}" (change)="filtrarAgendamentosPorData()"
                     formControlName="data">
                 @if ( data.invalid) {
                     <p class="erro">Selecione a data do agendamento.</p>
@@ -144,7 +144,7 @@
                     </div>
 
                 </div>
-                @if (formDir.submitted && horario.invalid) {
+                @if ( horario.invalid) {
                     <p class="erro">"Selecione um horário para o agendamento."</p>
                 }
             </div>
@@ -155,7 +155,7 @@
                 type="text" 
                 placeholder="Seu nome" 
                 formControlName="cliente">
-                @if (formDir.submitted && cliente.invalid) {
+                @if ( cliente.invalid) {
                     <p class="erro">Informe o seu nome para o agendamento.</p>
                 }
             </div>
@@ -168,7 +168,7 @@
                     <p class="erro">Informe o número seu celular para o agendamento.</p>
                 } -->
             </div>
-            <button [disabled]="agendamentoForm.invalid">AGENDAR</button>
+            <button>AGENDAR</button>
         </form>
     </div>
     <div id="imagem">
