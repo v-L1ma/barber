@@ -15,20 +15,39 @@ main{
                 appearance: none;
                 border: none;
                 border-radius: .5em;
-                background-color: yellow;
+                background-color: #B8952E;
                 font-weight: bold;
+                cursor: pointer;
+
+                &:hover{
+                    opacity: .9;
+                }
             }
 
             #agenda{
                 background-color: transparent;
-                border: 2px solid yellow;
-                color: yellow;
+                border: 2px solid #B8952E;
+                color: #B8952E;
+            }
+
+            #agenda:hover{
+                background-color: #B8952E;
+                transition: all 200ms ease;
+                color: black;
             }
         }
         ul{
             display: flex;
             list-style: none;
             gap: 1em;
+
+            li{
+                cursor: pointer;
+            }
+
+            li:hover{
+                color: #B8952E;
+            }
         }
     }
 
@@ -55,9 +74,10 @@ main{
 
         button{
             width: fit-content;
+            cursor: pointer;
             padding: 1em 4em;
             appearance: none;
-            background-color: yellow;
+            background-color: #B8952E;
             border: none;
             border-radius: .5em;
             font-weight: bolder;
@@ -97,6 +117,96 @@ main{
                 top: -8em;
             }
 
+        }
+    }
+
+    #servicos{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+        justify-content: center;
+        text-align: center;
+        padding: 5em 10vw;
+
+        .galery{
+            display: flex;
+            gap: 2em;
+        }
+
+        .card{
+            width: fit-content;
+            box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.456);
+            border-radius: .5em;
+            overflow: hidden;
+
+            div{
+                display: flex;
+                justify-content: space-between;
+                padding: 1em;
+                align-items: center;
+
+                h1{
+                    font-size: 1em;
+                }
+
+                p{
+                    background-color: black;
+                    color: white;
+                    padding: .5em;
+                    border-radius: .5em;
+                }
+            }
+
+        }
+    }
+
+    #unidades{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+
+        padding: 5em 10vw;
+        background-color: #0D121E;
+        text-align: center;
+        justify-content: center;
+        align-self: center;
+
+        #titulo{
+            color: #636A86;
+            height: fit-content;
+            font-size: 2em;
+        }
+
+        .galery{
+            display: flex;
+            gap: 1em;
+            justify-content: space-between;
+        }
+
+        .cardUnidade{
+            background-image:url("/unidade1.png");
+            height: 25em;
+            width: 20em;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-radius: 1em;
+
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            padding: 1em;
+
+            div {
+                background: rgba(228, 228, 228, 0.15); 
+                border-radius: 1em;
+                padding: 0.5em;
+                text-align: center;
+                color: white;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px); 
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+            }
+            
         }
     }
 }

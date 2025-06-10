@@ -21,7 +21,7 @@
         <section id="hero">
             <h1>ESTILO É UM REFLEXO DA SUA ATITUDE E <br> SUA PERSONALIDADE.</h1>
             <p>Horário de funcionamento das 08:00 às 19:00</p>
-            <button>Agendar horário</button>
+            <button [routerLink]="'servicos/lista'">Agendar horário</button>
         </section>
     
         <section id="sobre">
@@ -40,61 +40,61 @@
     
         </section>
     
-        <section>
+        <section id="servicos">
             <h1>SERVIÇOS</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum illo deserunt, repellendus quia deleniti aliquid eligendi maiores sint ullam iusto sit numquam minus harum quaerat explicabo repudiandae quos eaque adipisci.</p>
-            <div>
-                <div>
-                    <img src="" alt="">
+            <div class="galery">
+                <div class="card">
+                    <img src="servico1.png" alt="">
                     <div>
-                        <p>Corte de cabelo</p>
+                        <h1>Corte de cabelo</h1>
                         <p>R$ 40,00</p>
                     </div>
                 </div>
     
-                <div>
-                    <img src="" alt="">
+                <div class="card">
+                    <img src="servico1.png" alt="">
                     <div>
-                        <p>Corte de cabelo</p>
+                        <h1>Corte de cabelo</h1>
                         <p>R$ 40,00</p>
                     </div>
                 </div>
     
-                <div>
-                    <img src="" alt="">
+                <div class="card">
+                    <img src="servico1.png" alt="">
                     <div>
-                        <p>Corte de cabelo</p>
+                        <h1>Corte de cabelo</h1>
                         <p>R$ 40,00</p>
                     </div>
                 </div>
             </div>
         </section>
     
-        <section>
-            <h1>NOSSAS UNIDADES</h1>
+        <section id="unidades">
+            <h1 id="titulo">NOSSAS UNIDADES</h1>
     
-            <div>
-                <div>
+            <div class="galery">
+                <div class="cardUnidade">
                     <div>
     
-                    <h1>Rua seila</h1>
-                    <h2>Campina grande - PB</h2>
+                    <h1>Canal 1</h1>
+                    <h2>Santos - SP</h2>
                     </div>
                 </div>
     
-                <div>
+                <div class="cardUnidade">
                     <div>
     
-                    <h1>Rua seila</h1>
-                    <h2>Campina grande - PB</h2>
+                    <h1>Canal 3</h1>
+                    <h2>Santos - SP</h2>
                     </div>
                 </div>
-    
-                <div>
+
+                <div class="cardUnidade">
                     <div>
     
-                    <h1>Rua seila</h1>
-                    <h2>Campina grande - PB</h2>
+                    <h1>Canal 7</h1>
+                    <h2>Santos - SP</h2>
                     </div>
                 </div>
             </div>
