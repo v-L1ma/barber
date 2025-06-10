@@ -168,10 +168,22 @@
                     <p class="erro">Informe o número seu celular para o agendamento.</p>
                 } -->
             </div>
-            <button>AGENDAR</button>
+            <button [disabled]="agendamentoForm.invalid">AGENDAR</button>
         </form>
     </div>
     <div id="imagem">
         <img src="logoBarbearia.png" alt="">
     </div>
+
+    @if (isOpen) {
+        <div id="popUp">
+            <app-sucesso-agendamento 
+            [isOpen]="isOpen"
+            [status]="status"
+            (close)="fecharPopUp()"
+            >
+            </app-sucesso-agendamento>
+        </div>
+    }
+    
 </main>

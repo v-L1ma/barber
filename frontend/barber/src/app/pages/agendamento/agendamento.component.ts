@@ -7,10 +7,11 @@ import { TAgendamento } from '../../types/TAgendamentos';
 import { NovoAgendamentoService } from '../../services/agendar/novo-agendamento.service';
 import { CarregarTodosAgendamentosService } from '../../services/agendametosTodos/carregar-todos-agendamentos.service';
 import { EditarAgendamentoService } from '../../services/editarAgendamento/editar-agendamento.service';
+import { SucessoAgendamentoComponent } from "../../components/sucesso-agendamento/sucesso-agendamento.component";
 
 @Component({
   selector: 'app-agendamento',
-  imports: [VoltarBtnComponent, ReactiveFormsModule],
+  imports: [VoltarBtnComponent, ReactiveFormsModule, SucessoAgendamentoComponent],
   templateUrl: './agendamento.component.html',
   styleUrl: './agendamento.component.scss'
 })
@@ -21,8 +22,11 @@ export class AgendamentoComponent implements OnInit {
   agendamentos: TAgendamento[] = [];
 
   isEditando!:boolean;
+  isOpen:boolean = false;
   agendamentoId?: number;
   agendamentoEditar?: TAgendamento;
+
+  status:string = "";
 
   constructor(
     private router: Router,
@@ -97,7 +101,7 @@ export class AgendamentoComponent implements OnInit {
         } else{
           this.agendamentos = this.agendamentos.filter((a)=>a.data==this.today)
           console.log("agendamento alterados",this.agendamentos)
-        }
+          }
 
       },
       error: (error)=>{
@@ -112,13 +116,16 @@ export class AgendamentoComponent implements OnInit {
       console.log(this.agendamentoForm.value)
       this.editarAgendamentoService.editar(Number(this.agendamentoId),this.agendamentoForm.value).subscribe({
         next: (response)=>{
+          this.status = "sucesso"
+          this.fecharPopUp()
           console.log(response)
           this.router.navigate(['servicos/meus-agendamentos'])
         },
         error: (error)=>{
-        
           console.log("Status "+error.status)
           console.log("Body "+error.error.message)
+          this.status = "erro"
+          this.fecharPopUp()
         }
       })
       return;
@@ -126,14 +133,17 @@ export class AgendamentoComponent implements OnInit {
 
     this.novoAgendamentoService.agendar(this.agendamentoForm.value).subscribe({
       next: (response)=>{
+        this.status = "sucesso"
         console.log("Status "+response.status)
         console.log("Body "+response.body.message)
         console.log(response)
+        this.fecharPopUp()
       },
       error: (error)=>{
-      
+        this.status = "erro"
         console.log("Status "+error.status)
         console.log("Body "+error.error.message)
+        this.fecharPopUp()
       }
     })
   }
@@ -150,6 +160,10 @@ export class AgendamentoComponent implements OnInit {
     })
   
   
+  }
+
+  fecharPopUp(){
+    this.isOpen = !this.isOpen;
   }
 
 }
