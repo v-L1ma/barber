@@ -1,5 +1,9 @@
 main{
-    nav{
+    #mobile{
+        display: none;
+    }
+
+    #desktop{
         display: flex;
         justify-content: space-between;
         padding: 1em 3em;
@@ -127,6 +131,7 @@ main{
         justify-content: center;
         text-align: center;
         padding: 5em 10vw;
+        background-color: white;
 
         .galery{
             display: flex;
@@ -208,5 +213,132 @@ main{
             }
             
         }
+    }
+}
+
+
+@media screen and (max-width:950px){
+    main{
+        #desktop{
+            display: none;
+        }
+
+        #header{
+            padding: 1em 2em;
+            display: flex;
+            justify-content: end;
+            button{
+                appearance: none;
+                background-color: transparent;
+                border: none;
+                color: white;
+                font-size: 2em;
+            }
+        }
+
+        #mobile{
+            display: flex;
+            position: fixed;
+            top: 0;
+            justify-content: end;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            background-color: #070a1449;
+            transition: transform 0.3s ease;
+        
+
+            #container{
+
+                #closeBtn{
+                    appearance: none;
+                    border: none;
+                    background-color: transparent;
+                    color: #B8952E;
+                    font-size: 2em;
+                }
+            z-index: 2;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            padding: 5em 3em;
+            align-items: end;
+            background-color: #070A14;
+            color: white;
+            justify-content: space-between;
+
+            div{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 1em;
+    
+                button{
+                    padding: 1em;
+                    appearance: none;
+                    border: none;
+                    border-radius: .5em;
+                    background-color: #B8952E;
+                    font-weight: bold;
+                    cursor: pointer;
+    
+                    &:hover{
+                        opacity: .9;
+                    }
+                }
+    
+                #agenda{
+                    background-color: transparent;
+                    border: 2px solid #B8952E;
+                    color: #B8952E;
+                }
+    
+                #agenda:hover{
+                    background-color: #B8952E;
+                    transition: all 200ms ease;
+                    color: black;
+                }
+            }
+            ul{
+                display: flex;
+                flex-direction: column;
+                text-align: right;
+                list-style: none;
+                font-size: 1.5em;
+                gap: 3em;
+    
+                li{
+                    cursor: pointer;
+                }
+    
+                li:hover{
+                    color: #B8952E;
+                }
+            }
+
+            }
+            
+        }
+        
+        #servicos, #unidades{
+    
+            .galery{
+                display: flex;
+                flex-direction: column;
+            }
+    
+        }
+
+        #sobre{
+            flex-direction: column;
+            height: fit-content;
+            padding-bottom: 5em;
+            
+            #texto{
+                margin: 0;
+                text-align: center;
+            }
+        }
+
     }
 }

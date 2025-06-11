@@ -1,5 +1,5 @@
 <main>
-    <nav>
+    <nav id="desktop">
         <ul>
             <li>Sobre</li>
             <li>Serviços</li>
@@ -15,6 +15,42 @@
                 Agendar horário
             </button>
         </div>
+    </nav>
+
+    <nav>
+        <div id="header">
+            <button (click)="openMenu()">
+                <img src="menuIcon.svg" alt="">
+            </button>
+        </div>
+
+        @if(isOpen){
+            <div id="mobile">
+                <div id="container">
+                    <button id="closeBtn" (click)="openMenu()">
+                        <img src="closeIcon.svg" alt="">
+                    </button>
+                    <ul>
+                        <li>Sobre</li>
+                        <li>Serviços</li>
+                        <li>Quem somos</li>
+                        <li>Contatos</li>
+                    </ul>
+                    <div>
+                        <button id="agenda" [routerLink]="'agenda'">
+                            Minha agenda
+                        </button>
+                        <button [routerLink]="'servicos/lista'">
+                            Agendar horário
+                        </button>
+                    </div>
+                </div>
+    
+            </div>
+        }
+
+        
+        
     </nav>
     
     <body>
