@@ -1,6 +1,10 @@
 package com.barber.barber.controller;
 
+import com.barber.barber.DTOs.CadastrarAgendamentoDto;
+import com.barber.barber.DTOs.CadastrarAgendamentoResponseDto;
+import com.barber.barber.DTOs.ListarAgendamentoResponseDTO;
 import com.barber.barber.model.Agendamento.*;
+import com.barber.barber.services.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")

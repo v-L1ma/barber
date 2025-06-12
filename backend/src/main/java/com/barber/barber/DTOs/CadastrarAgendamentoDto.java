@@ -1,4 +1,4 @@
-package com.barber.barber.model.Agendamento;
+package com.barber.barber.DTOs;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

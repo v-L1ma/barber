@@ -1,4 +1,6 @@
-package com.barber.barber.model.Agendamento;
+package com.barber.barber.DTOs;
+
+import com.barber.barber.model.Agendamento.Agendamento;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
-package com.barber.barber.model.Agendamento;
+package com.barber.barber.services;
 
-import com.barber.barber.model.Cliente.Cliente;
+import com.barber.barber.DAOs.AgendamentoDAO;
+import com.barber.barber.DTOs.CadastrarAgendamentoDto;
+import com.barber.barber.model.Agendamento.Agendamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class AgendamentoService {

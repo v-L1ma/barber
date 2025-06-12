@@ -1,4 +1,4 @@
-package com.barber.barber.model.Agendamento;
+package com.barber.barber.DTOs;
 
 public record CadastrarAgendamentoResponseDto(String message) {
 }
