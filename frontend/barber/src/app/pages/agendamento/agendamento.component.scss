@@ -5,7 +5,6 @@ main{
     color: white;
     box-sizing: border-box;
     gap: 1em;
-    height: 150vh;
 
     .erro{
         color: red;
@@ -171,7 +170,13 @@ main{
     main{
         #container{
             width: 100%;
+            form{
+                .horariosLista{
+                    gap: .3em;
+                }
+            }
         }
+
 
         #imagem{
             display: none;

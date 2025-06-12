@@ -43,3 +43,17 @@
         }
     }
 }
+
+@media screen and (max-width:950px){
+
+    .card{
+        
+    
+        div:nth-child(2){
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+}
