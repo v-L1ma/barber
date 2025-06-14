@@ -1,8 +1,6 @@
 package com.barber.barber.model.Agendamento;
 
 
-import org.springframework.cglib.core.Local;
-
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -83,7 +81,7 @@ public class Agendamento {
     }
 
     public static List<Agendamento> converterVarios(List<Map<String,Object>> registro){
-        ArrayList<Agendamento> lista = new ArrayList<Agendamento>();
+        ArrayList<Agendamento> lista = new ArrayList<>();
         for(Map<String,Object> reg : registro){
             lista.add(converter(reg));
         }

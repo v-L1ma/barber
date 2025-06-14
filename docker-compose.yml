@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend/barber
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+
+  api:
+    build: ./backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/barberbooking
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
+      SPRING_SQL_INIT_SCHEMA-LOCATIONS: classpath:/schema-postgresql.sql
+      SPRING_SQL_INIT_MODE: always
+      SPRING_SQL_INIT_PLATFORM: postgres
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: barberbooking
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
