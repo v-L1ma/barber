@@ -4,10 +4,10 @@ server:
 spring:
   datasource:
     platform: postgres
-    url: jdbc:${SPRING_DATASOURCE_URL}
+    url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-    diverClassName: org.postgresql.Driver
+    driverClassName: org.postgresql.Driver
     initialize: true
   sql:
     init:
