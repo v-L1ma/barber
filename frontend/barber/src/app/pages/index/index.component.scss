@@ -94,7 +94,7 @@ main{
 
     #sobre{
         display: flex;
-        padding: 0 10vw;
+        padding: 0 5em 10vw;
         background-color: #0D121E;
         color: white;
         height: 100vh;
@@ -139,7 +139,8 @@ main{
 
         .galery{
             display: flex;
-            gap: 2em;
+            gap: 1em;
+            justify-content: space-between;
         }
 
         .card{
