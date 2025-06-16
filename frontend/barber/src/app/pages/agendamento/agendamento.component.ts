@@ -8,6 +8,7 @@ import { NovoAgendamentoService } from '../../services/agendar/novo-agendamento.
 import { CarregarTodosAgendamentosService } from '../../services/agendametosTodos/carregar-todos-agendamentos.service';
 import { EditarAgendamentoService } from '../../services/editarAgendamento/editar-agendamento.service';
 import { SucessoAgendamentoComponent } from "../../components/sucesso-agendamento/sucesso-agendamento.component";
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-agendamento',
@@ -27,6 +28,7 @@ export class AgendamentoComponent implements OnInit {
   agendamentoEditar?: TAgendamento;
 
   status:string = "";
+  responseMessage:string = "";
 
   constructor(
     private router: Router,
@@ -117,23 +119,32 @@ export class AgendamentoComponent implements OnInit {
       this.editarAgendamentoService.editar(Number(this.agendamentoId),this.agendamentoForm.value).subscribe({
         next: (response)=>{
           this.status = "sucesso"
+          this.responseMessage = "Agendamento atualizado com sucesso"
           this.fecharPopUp()
           console.log(response)
-          this.router.navigate(['servicos/meus-agendamentos'])
         },
         error: (error)=>{
           console.log("Status "+error.status)
           console.log("Body "+error.error.message)
           this.status = "erro"
+          this.responseMessage = error.error.message
+
+          if(error.status=='0' || error.status=='500'){
+            this.responseMessage = "Houve um erro ao se conectar com o servidor."
+          }
+          
           this.fecharPopUp()
         }
       })
+
+      this.router.navigate(['servicos/meus-agendamentos'])
       return;
     }
 
     this.novoAgendamentoService.agendar(this.agendamentoForm.value).subscribe({
       next: (response)=>{
         this.status = "sucesso"
+        this.responseMessage = response.body.message
         console.log("Status "+response.status)
         console.log("Body "+response.body.message)
         console.log(response)
@@ -141,6 +152,11 @@ export class AgendamentoComponent implements OnInit {
       },
       error: (error)=>{
         this.status = "erro"
+        this.responseMessage = error.error.message
+
+        if(error.status=='0' || error.status=='500'){
+          this.responseMessage = "Houve um erro ao se conectar com o servidor."
+        }
         console.log("Status "+error.status)
         console.log("Body "+error.error.message)
         this.fecharPopUp()

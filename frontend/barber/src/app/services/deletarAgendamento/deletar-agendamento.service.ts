@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DeletarAgendamentoService {
 
-  private baseUrl = "https://barberbookingapi.onrender.com"
+  private baseUrl = "http://localhost:8080"
 
   constructor(private readonly http: HttpClient) { }
 

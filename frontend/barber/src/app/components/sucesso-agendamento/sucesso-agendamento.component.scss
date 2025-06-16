@@ -2,6 +2,7 @@ main{
     height: 100vh;
     width: 100vw;
     position: fixed;
+    top: 0;
     left: 0;
     z-index: 2;
     overflow: hidden;
@@ -23,6 +24,11 @@ main{
         border-radius: 1em;
         box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.5);
         gap: 2em;
+
+        h1{
+          width: 15em;
+          text-align: center;
+        }
 
 
         button{
@@ -71,7 +77,7 @@ main{
     
       .line2 {
         animation: drawLine2 0.5s ease forwards;
-        animation-delay: 1.5s;
+        animation-delay: 1s;
       }
     
       @keyframes drawCircle {

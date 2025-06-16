@@ -5,6 +5,7 @@ main{
     color: white;
     box-sizing: border-box;
     gap: 1em;
+    min-height: 100vh;
 
     .erro{
         color: red;
@@ -50,6 +51,7 @@ main{
             justify-content: space-between;
             gap: .5em;
             box-sizing: content-box;
+            height: 100%;
             
             .horariosLista{
                 display: flex;
