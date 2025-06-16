@@ -1,9 +1,11 @@
 package com.barber.barber.DAOs;
 
 import com.barber.barber.DTOs.CadastrarAgendamentoDto;
+import com.barber.barber.interfaces.IAgendamentoDAO;
 import com.barber.barber.model.Agendamento.Agendamento;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class AgendamentoDAO {
+public class AgendamentoDAO implements IAgendamentoDAO {
 
     @Autowired
     DataSource dataSource;
@@ -47,7 +49,11 @@ public class AgendamentoDAO {
 
     public Map<String,Object> listarAgendamentoPorId(int id){
         String sql = "SELECT * FROM agendamento where agendamento.id = ?";
-        return jdbc.queryForMap(sql, id);
+        try {
+            return jdbc.queryForMap(sql, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public void atualizarAgendamento(int id, Agendamento novo){

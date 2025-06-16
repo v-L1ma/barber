@@ -3,6 +3,7 @@ package com.barber.barber.controller;
 import com.barber.barber.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.DTOs.CadastrarAgendamentoResponseDto;
 import com.barber.barber.DTOs.ListarAgendamentoResponseDTO;
+import com.barber.barber.interfaces.IAgendamentoService;
 import com.barber.barber.model.Agendamento.*;
 import com.barber.barber.services.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,15 @@ import java.util.List;
 @RequestMapping("/agendamento")
 public class AgendamentoController {
 
+    private final IAgendamentoService agendamentoService;
+
     @Autowired
-    ApplicationContext ctx;
+    public AgendamentoController(IAgendamentoService agendamentoService) {
+        this.agendamentoService = agendamentoService;
+    }
 
     @GetMapping
     public ResponseEntity<ListarAgendamentoResponseDTO> listarAgendamentos(){
-        AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
         var agendamentos = agendamentoService.listarAgendamentos();
 
         if (agendamentos.isEmpty()){
@@ -39,7 +43,6 @@ public class AgendamentoController {
 
     @GetMapping("/{data}")
     public ResponseEntity<ListarAgendamentoResponseDTO> listaPorData(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data){
-        AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
         var agendamentos = agendamentoService.listarAgendamentosPorData(data);
 
         var response = new ListarAgendamentoResponseDTO("Listagem dos agendamentos do dia " + data + "feita com sucesso!", agendamentos);
@@ -55,8 +58,6 @@ public class AgendamentoController {
             var response = new CadastrarAgendamentoResponseDto("Todos os campos são obrigatórios.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-
-        AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
 
         List<Agendamento> agendamentos = agendamentoService.listarAgendamentos();
 
@@ -74,11 +75,16 @@ public class AgendamentoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CadastrarAgendamentoResponseDto> atualizarAgendamento(@PathVariable int id, @RequestBody Agendamento agendamento){
+    public ResponseEntity<CadastrarAgendamentoResponseDto> atualizarAgendamento(@PathVariable int id, @RequestBody Agendamento agendamentoNovo){
 
-        AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
+        Agendamento agendamento = agendamentoService.listarAgendamentoPorId(id);
 
-        agendamentoService.atualizarAgendamento(id, agendamento);
+        if(agendamento == null){
+            CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Nenhum agendamento encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
+        agendamentoService.atualizarAgendamento(id, agendamentoNovo);
 
         var response = new CadastrarAgendamentoResponseDto("Agendamento atualizado com sucesso.");
         return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -87,10 +93,16 @@ public class AgendamentoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<CadastrarAgendamentoResponseDto> deletarAgendamento(@PathVariable int id){
 
-        AgendamentoService agendamentoService = ctx.getBean(AgendamentoService.class);
+        Agendamento agendamento = agendamentoService.listarAgendamentoPorId(id);
+
+        if(agendamento == null){
+            CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Nenhum agendamento encontrado.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
         agendamentoService.deletarAgendamento(id);
 
-        var response = new CadastrarAgendamentoResponseDto("Usuário excluido com sucesso");
+        CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Agendamento excluído com sucesso");
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
