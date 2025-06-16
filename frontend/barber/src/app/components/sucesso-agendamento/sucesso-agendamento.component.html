@@ -26,7 +26,7 @@
             class="check"
           />
         </svg>  
-        <h1>Agendamento feito com sucesso</h1>
+        <h1>{{responseMessage}}</h1>
 
       } @else{
 
@@ -68,7 +68,7 @@
           />
         </svg>
 
-        <h1>Houve um erro ao agendar.</h1>
+        <h1>{{responseMessage}}</h1>
       }
         <button (click)="fecharPopUp()">Fechar</button>
     </div>
