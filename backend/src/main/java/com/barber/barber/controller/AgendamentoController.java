@@ -30,22 +30,22 @@ public class AgendamentoController {
 
     @GetMapping
     public ResponseEntity<ListarAgendamentoResponseDTO> listarAgendamentos(){
-        var agendamentos = agendamentoService.listarAgendamentos();
+        List<Agendamento>  agendamentos = agendamentoService.listarAgendamentos();
 
         if (agendamentos.isEmpty()){
-            var response = new ListarAgendamentoResponseDTO("Nenhum agendamento encontrado.",agendamentos);
+            ListarAgendamentoResponseDTO response = new ListarAgendamentoResponseDTO("Nenhum agendamento encontrado.",agendamentos);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
 
-        var response = new ListarAgendamentoResponseDTO("Listagem feita com sucesso!", agendamentos);
+        ListarAgendamentoResponseDTO response = new ListarAgendamentoResponseDTO("Listagem feita com sucesso!", agendamentos);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{data}")
     public ResponseEntity<ListarAgendamentoResponseDTO> listaPorData(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data){
-        var agendamentos = agendamentoService.listarAgendamentosPorData(data);
+        List<Agendamento>  agendamentos = agendamentoService.listarAgendamentosPorData(data);
 
-        var response = new ListarAgendamentoResponseDTO("Listagem dos agendamentos do dia " + data + "feita com sucesso!", agendamentos);
+        ListarAgendamentoResponseDTO response = new ListarAgendamentoResponseDTO("Listagem dos agendamentos do dia " + data + "feita com sucesso!", agendamentos);
         return ResponseEntity.ok(response);
     }
 
@@ -55,7 +55,7 @@ public class AgendamentoController {
                 agendamentoDto.data() == null ||
                 agendamentoDto.horario() == null||
                 agendamentoDto.servico() == null){
-            var response = new CadastrarAgendamentoResponseDto("Todos os campos são obrigatórios.");
+            CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Todos os campos são obrigatórios.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
 
@@ -64,13 +64,13 @@ public class AgendamentoController {
         for (Agendamento item : agendamentos){
             if (item.getData().equals(agendamentoDto.data()) && item.getHorario().equals(agendamentoDto.horario())){
 
-                var response = new CadastrarAgendamentoResponseDto("Já existe um agendamento nessa data e nesse horário.");
+                CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Já existe um agendamento nessa data e nesse horário.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
         }
 
         agendamentoService.inserirAgendamento(agendamentoDto);
-        var response = new CadastrarAgendamentoResponseDto("Agendamento feito com sucesso");
+        CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Agendamento feito com sucesso");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -86,7 +86,7 @@ public class AgendamentoController {
 
         agendamentoService.atualizarAgendamento(id, agendamentoNovo);
 
-        var response = new CadastrarAgendamentoResponseDto("Agendamento atualizado com sucesso.");
+        CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Agendamento atualizado com sucesso.");
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
