@@ -8,7 +8,7 @@ import { TFetchAgendamentosResponse } from '../../types/TFetchAgendamentosRespon
 })
 export class CarregarAgendamentosPorDataService {
 
-  private readonly baseUrl = 'http://localhost:8080';
+  private readonly baseUrl = 'https://barberbookingapi.onrender.com';
 
   constructor(private http: HttpClient) { }
 
