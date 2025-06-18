@@ -45,6 +45,11 @@ public class AgendamentoController {
     public ResponseEntity<ListarAgendamentoResponseDTO> listaPorData(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate data){
         List<Agendamento>  agendamentos = agendamentoService.listarAgendamentosPorData(data);
 
+        if (agendamentos.isEmpty()){
+            ListarAgendamentoResponseDTO response = new ListarAgendamentoResponseDTO("Nenhum agendamento encontrado.",agendamentos);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+
         ListarAgendamentoResponseDTO response = new ListarAgendamentoResponseDTO("Listagem dos agendamentos do dia " + data + "feita com sucesso!", agendamentos);
         return ResponseEntity.ok(response);
     }
