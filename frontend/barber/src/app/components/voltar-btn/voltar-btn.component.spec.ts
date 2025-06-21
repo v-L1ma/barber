@@ -10,8 +10,7 @@ describe('VoltarBtnComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [VoltarBtnComponent],
-      imports: [RouterTestingModule]
+      imports: [VoltarBtnComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(VoltarBtnComponent);

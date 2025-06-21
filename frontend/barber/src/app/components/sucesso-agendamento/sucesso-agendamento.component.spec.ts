@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SucessoAgendamentoComponent } from './sucesso-agendamento.component';
 import { By } from '@angular/platform-browser';
 
-fdescribe('SucessoAgendamentoComponent', () => {
+describe('SucessoAgendamentoComponent', () => {
   let component: SucessoAgendamentoComponent;
   let fixture: ComponentFixture<SucessoAgendamentoComponent>;
 

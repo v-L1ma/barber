@@ -6,7 +6,7 @@ import { AgendamentoComponent } from '../../pages/agendamento/agendamento.compon
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouterLink, RouterLinkWithHref } from '@angular/router';
 
-fdescribe('CardServicosComponent', () => {
+describe('CardServicosComponent', () => {
   let component: CardServicosComponent;
   let fixture: ComponentFixture<CardServicosComponent>;
 
