@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-voltar-btn',
@@ -9,7 +9,13 @@ import { RouterModule } from '@angular/router';
 })
 export class VoltarBtnComponent {
 
-  @Input() go : string="/";
+  @Input() go! : string;
+
+  constructor(private router: Router){}
+
+  navigate(){
+    this.router.navigate([`/${this.go}`])
+  }
 
 
 }

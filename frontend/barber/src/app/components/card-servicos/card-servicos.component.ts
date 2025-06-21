@@ -13,9 +13,9 @@ export class CardServicosComponent {
   @Input() preco:string = "";
 
 
-//   <div class="card">
+// <div class="card">
 //     <div>
-//         <h2>Corte + barba</h2>
+//         <h2>{{titulo}}</h2>
 //         <div class="lista">
 //             <img src="homem.png" alt="">
 //             <img src="mulher.png" alt="">
@@ -23,8 +23,8 @@ export class CardServicosComponent {
 //         </div>
 //     </div>
 //     <div>
-//         <p>R$ 80,00</p>
-//         <button [routerLink]="['/agendamento']" [state]="{servico: 'Corte + Barba'}">
+//         <p>R$ {{preco}}</p>
+//         <button [routerLink]="['/agendamento']" [state]="{servico: titulo}">
 //             Reservar
 //         </button>
 //     </div>
