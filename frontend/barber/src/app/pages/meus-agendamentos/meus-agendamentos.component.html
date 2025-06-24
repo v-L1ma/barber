@@ -2,7 +2,7 @@
     <div class="card">
         <ul>
             @for (agendamento of agendamentos; track agendamento.id) {
-            <li>
+            <li id="item">
                 <div>
                     <h3>{{agendamento.data.replaceAll("-","/")}}</h3>
                     <h3>{{agendamento.horario.slice(0,5)}}</h3>
