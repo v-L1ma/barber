@@ -1,4 +1,4 @@
-package com.barber.barber.DTOs;
+package com.barber.barber.infra.web.DTOs;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

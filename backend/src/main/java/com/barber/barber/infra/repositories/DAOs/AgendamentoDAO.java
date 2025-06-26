@@ -1,8 +1,8 @@
-package com.barber.barber.DAOs;
+package com.barber.barber.infra.repositories.DAOs;
 
-import com.barber.barber.DTOs.CadastrarAgendamentoDto;
-import com.barber.barber.interfaces.IAgendamentoDAO;
-import com.barber.barber.model.Agendamento.Agendamento;
+import com.barber.barber.domain.repositories.IAgendamentoDAO;
+import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
+import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

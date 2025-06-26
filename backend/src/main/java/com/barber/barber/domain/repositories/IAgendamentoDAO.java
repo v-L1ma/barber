@@ -1,7 +1,7 @@
-package com.barber.barber.interfaces;
+package com.barber.barber.domain.repositories;
 
-import com.barber.barber.DTOs.CadastrarAgendamentoDto;
-import com.barber.barber.model.Agendamento.Agendamento;
+import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
+import com.barber.barber.domain.entities.Agendamento.Agendamento;
 
 import java.time.LocalDate;
 import java.util.List;

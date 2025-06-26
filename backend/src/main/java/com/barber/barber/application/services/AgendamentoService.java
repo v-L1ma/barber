@@ -1,9 +1,8 @@
-package com.barber.barber.services;
+package com.barber.barber.application.services;
 
-import com.barber.barber.DTOs.CadastrarAgendamentoDto;
-import com.barber.barber.interfaces.IAgendamentoDAO;
-import com.barber.barber.interfaces.IAgendamentoService;
-import com.barber.barber.model.Agendamento.Agendamento;
+import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
+import com.barber.barber.domain.repositories.IAgendamentoDAO;
+import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

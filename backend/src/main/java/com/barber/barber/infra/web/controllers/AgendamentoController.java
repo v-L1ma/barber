@@ -1,13 +1,12 @@
-package com.barber.barber.controller;
+package com.barber.barber.infra.web.controllers;
 
-import com.barber.barber.DTOs.CadastrarAgendamentoDto;
-import com.barber.barber.DTOs.CadastrarAgendamentoResponseDto;
-import com.barber.barber.DTOs.ListarAgendamentoResponseDTO;
-import com.barber.barber.interfaces.IAgendamentoService;
-import com.barber.barber.model.Agendamento.*;
-import com.barber.barber.services.AgendamentoService;
+import com.barber.barber.application.usecases.listarAgendamento.IListarAgendamentoUseCase;
+import com.barber.barber.domain.entities.Agendamento.Agendamento;
+import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
+import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
+import com.barber.barber.infra.web.DTOs.ListarAgendamentoResponseDTO;
+import com.barber.barber.application.services.IAgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,29 +15,26 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@CrossOrigin(origins = "https://time4barber.netlify.app")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/agendamento")
 public class AgendamentoController {
 
     private final IAgendamentoService agendamentoService;
+    private final IListarAgendamentoUseCase agendamentoUseCase;
 
     @Autowired
-    public AgendamentoController(IAgendamentoService agendamentoService) {
+    public AgendamentoController(
+            IAgendamentoService agendamentoService,
+            IListarAgendamentoUseCase agendamentoUseCase
+    ) {
         this.agendamentoService = agendamentoService;
+        this.agendamentoUseCase = agendamentoUseCase;
     }
 
     @GetMapping
     public ResponseEntity<ListarAgendamentoResponseDTO> listarAgendamentos(){
-        List<Agendamento>  agendamentos = agendamentoService.listarAgendamentos();
-
-        if (agendamentos.isEmpty()){
-            ListarAgendamentoResponseDTO response = new ListarAgendamentoResponseDTO("Nenhum agendamento encontrado.",agendamentos);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-
-        ListarAgendamentoResponseDTO response = new ListarAgendamentoResponseDTO("Listagem feita com sucesso!", agendamentos);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(agendamentoUseCase.executar());
     }
 
     @GetMapping("/{data}")
