@@ -12,8 +12,25 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler()
+    @ExceptionHandler(NenhumAgendamentoEncontradoException.class)
     public ResponseEntity<ListarAgendamentoResponseDTO> handlerNenhumAgendamentoEncontrado(NenhumAgendamentoEncontradoException ex){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ListarAgendamentoResponseDTO(ex.getMessage(), List.of()));
+        return ResponseEntity
+        .status(HttpStatus.NOT_FOUND)
+        .body(new ListarAgendamentoResponseDTO(ex.getMessage(), List.of()));
     }
+
+    @ExceptionHandler(AgendamentoNaoEncontradoException.class)
+    public ResponseEntity<CadastrarAgendamentoResponseDto> handlerAgendamentoNaoEncontrado(AgendamentoNaoEncontradoException ex){
+            return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(new CadastrarAgendamentoResponseDto("Agendamento fornecido não encontrado."));
+    }
+
+    @ExceptionHandler(AgendamentoNaoEncontradoException.class)
+    public ResponseEntity<CadastrarAgendamentoResponseDto> handlerAgendamentoNaoEncontrado(AgendamentoNaoEncontradoException ex){
+            return ResponseEntity
+            .status(HttpStatus.BAD_REQUEST)
+            .body(new CadastrarAgendamentoResponseDto("Todos os campos são obrigatórios."));
+    }
+     
 }
