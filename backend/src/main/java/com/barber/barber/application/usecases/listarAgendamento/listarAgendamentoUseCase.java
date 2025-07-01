@@ -4,8 +4,6 @@ import com.barber.barber.application.services.IAgendamentoService;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.NenhumAgendamentoEncontradoException;
 import com.barber.barber.infra.web.DTOs.ListarAgendamentoResponseDTO;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

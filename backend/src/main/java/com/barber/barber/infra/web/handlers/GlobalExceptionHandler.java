@@ -1,7 +1,10 @@
 package com.barber.barber.infra.web.handlers;
 
-import com.barber.barber.domain.exceptions.NenhumAgendamentoEncontradoException;
+import com.barber.barber.domain.exceptions.*;
+import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
 import com.barber.barber.infra.web.DTOs.ListarAgendamentoResponseDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,8 +15,11 @@ import java.util.List;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler(NenhumAgendamentoEncontradoException.class)
     public ResponseEntity<ListarAgendamentoResponseDTO> handlerNenhumAgendamentoEncontrado(NenhumAgendamentoEncontradoException ex){
+        logger.warn("Nenhum agendamento encontrado");
         return ResponseEntity
         .status(HttpStatus.NOT_FOUND)
         .body(new ListarAgendamentoResponseDTO(ex.getMessage(), List.of()));
@@ -21,16 +27,34 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AgendamentoNaoEncontradoException.class)
     public ResponseEntity<CadastrarAgendamentoResponseDto> handlerAgendamentoNaoEncontrado(AgendamentoNaoEncontradoException ex){
+        logger.warn(ex.getMessage());
             return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
-            .body(new CadastrarAgendamentoResponseDto("Agendamento fornecido não encontrado."));
+            .body(new CadastrarAgendamentoResponseDto(ex.getMessage()));
     }
 
-    @ExceptionHandler(AgendamentoNaoEncontradoException.class)
-    public ResponseEntity<CadastrarAgendamentoResponseDto> handlerAgendamentoNaoEncontrado(AgendamentoNaoEncontradoException ex){
+    @ExceptionHandler(CamposObrigatoriosException.class)
+    public ResponseEntity<CadastrarAgendamentoResponseDto> handlerCamposObrigatorios(CamposObrigatoriosException ex){
+        logger.warn(ex.getMessage());
             return ResponseEntity
             .status(HttpStatus.BAD_REQUEST)
-            .body(new CadastrarAgendamentoResponseDto("Todos os campos são obrigatórios."));
+            .body(new CadastrarAgendamentoResponseDto(ex.getMessage()));
+    }
+
+    @ExceptionHandler(AgendamentoJaExisteException.class)
+    public ResponseEntity<CadastrarAgendamentoResponseDto> handlerAgendamentoJaExiste(AgendamentoJaExisteException ex){
+        logger.warn(ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new CadastrarAgendamentoResponseDto(ex.getMessage()));
+    }
+
+    @ExceptionHandler(AgendamentoNaoPodeSerNoPassadoException.class)
+    public ResponseEntity<CadastrarAgendamentoResponseDto> handlerAgendamentoNaoPodeSerNoPassado(AgendamentoNaoPodeSerNoPassadoException ex){
+        logger.warn(ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new CadastrarAgendamentoResponseDto(ex.getMessage()));
     }
      
 }
