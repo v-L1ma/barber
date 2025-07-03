@@ -8,6 +8,7 @@ import com.barber.barber.application.usecases.listarAgendamentoPorData.listarAge
 import com.barber.barber.application.services.AgendamentoService;
 import com.barber.barber.domain.exceptions.*;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
+import com.barber.barber.infra.web.controllers.AgendamentoController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ import java.time.LocalTime;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(GlobalExceptionHandler.class)
+@WebMvcTest(AgendamentoController.class)
 class GlobalExceptionHandlerTest {
 
     @Autowired
@@ -87,11 +88,11 @@ class GlobalExceptionHandlerTest {
     void handlerCamposObrigatorios() {
         CadastrarAgendamentoDto dtoInvalido = new CadastrarAgendamentoDto(
                 "",
-                null,
-                null,
+                LocalDate.now(),
+                LocalTime.of(13,0),
                 "");
 
-        Mockito.when(criarAgendamentoUseCase.executar(Mockito.any()))
+        Mockito.when(criarAgendamentoUseCase.executar(dtoInvalido))
                 .thenThrow(new CamposObrigatoriosException("Campos obrigatórios não preenchidos"));
 
         try {
