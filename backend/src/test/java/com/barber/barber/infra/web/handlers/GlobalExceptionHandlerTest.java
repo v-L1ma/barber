@@ -1,11 +1,13 @@
 package com.barber.barber.infra.web.handlers;
 
+import com.barber.barber.application.services.IAgendamentoService;
 import com.barber.barber.application.usecases.atualizarAgendamento.atualizarAgendamentoUseCase;
 import com.barber.barber.application.usecases.criarAgendamento.criarAgendamentoUseCase;
 import com.barber.barber.application.usecases.deletarAgendamento.deletarAgendamentoUseCase;
 import com.barber.barber.application.usecases.listarAgendamento.listarAgendamentoUseCase;
 import com.barber.barber.application.usecases.listarAgendamentoPorData.listarAgendamentoPorDataUseCase;
 import com.barber.barber.application.services.AgendamentoService;
+import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.*;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.infra.web.controllers.AgendamentoController;
@@ -44,7 +46,7 @@ class GlobalExceptionHandlerTest {
     private listarAgendamentoPorDataUseCase listarAgendamentoPorDataUseCase;
 
     @MockitoBean
-    private AgendamentoService agendamentoService;
+    private IAgendamentoService agendamentoService;
 
     @MockitoBean
     private criarAgendamentoUseCase criarAgendamentoUseCase;
@@ -67,15 +69,22 @@ class GlobalExceptionHandlerTest {
 
     @Test
     @DisplayName("Deve retornar 404 quando agendamento não for encontrado")
-    void handlerAgendamentoNaoEncontrado() {
+    void handlerAgendamentoNaoEncontrado() throws Exception{
 
-        int agendamentoId = 999;
+        Agendamento agendamentoNovo = new Agendamento(
+                1,
+                "dasdas",
+                LocalDate.now(),
+                LocalTime.of(13,0),
+                "dasdasdsa");
 
-        Mockito.when(agendamentoService.listarAgendamentoPorId(agendamentoId))
-                .thenThrow(new AgendamentoNaoEncontradoException("Agendamento não encontrado"));
+        Mockito.when(atualizarAgendamentoUseCase.executar(Mockito.eq(999), Mockito.any()))
+                .thenThrow(new AgendamentoNaoEncontradoException());
 
         try{
-            mockMvc.perform(get("/agendamento/" + agendamentoId))
+            mockMvc.perform(put("/agendamento/" + 999)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsString(agendamentoNovo)))
                     .andExpect(status().isNotFound());
         } catch (Exception e) {
             throw new RuntimeException(e);
