@@ -9,5 +9,5 @@ import { IndexComponent } from "./pages/index/index.component";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'barber';
+  title = 'Barber';
 }

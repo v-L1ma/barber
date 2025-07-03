@@ -10,6 +10,7 @@ export class CarregarTodosAgendamentosService {
 
   private baseUrl:string = "https://barberbookingapi.onrender.com"
 
+
   constructor(private http: HttpClient) { }
 
   fetch():Observable<any>{
