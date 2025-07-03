@@ -24,7 +24,6 @@ import java.util.List;
 @RequestMapping("/agendamento")
 public class AgendamentoController {
 
-    private final IAgendamentoService agendamentoService;
     private final IListarAgendamentoUseCase listarAgendamentoUseCase;
     private final IAtualizarAgendamentoUseCase atualizarAgendamentoUseCase;
     private final IDeletarAgendamentoUseCase deletarAgendamentoUseCase;
@@ -33,14 +32,12 @@ public class AgendamentoController {
 
     @Autowired
     public AgendamentoController(
-            IAgendamentoService agendamentoService,
             IListarAgendamentoUseCase listarAgendamentoUseCase,
             IAtualizarAgendamentoUseCase atualizarAgendamentoUseCase,
             IDeletarAgendamentoUseCase deletarAgendamentoUseCase,
             IListarAgendamentoPorDataUseCase listarAgendamentoPorDataUseCase,
             ICriarAgendamentoUseCase criarAgendamentoUseCase
     ) {
-        this.agendamentoService = agendamentoService;
         this.listarAgendamentoUseCase = listarAgendamentoUseCase;
         this.atualizarAgendamentoUseCase = atualizarAgendamentoUseCase;
         this.deletarAgendamentoUseCase = deletarAgendamentoUseCase;
