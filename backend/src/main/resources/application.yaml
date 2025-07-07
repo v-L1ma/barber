@@ -4,13 +4,17 @@ server:
 spring:
   datasource:
     platform: postgres
-    url: jdbc:postgresql://localhost:5432/barberbooking
+    url: jdbc:postgresql://postgres:5432/barberbooking
     username: postgres
     password: root
     driverClassName: org.postgresql.Driver
-    initialize: true
   sql:
     init:
       schema-locations: classpath:/schema-postgresql.sql
       mode: always
       platform: postgres
+  rabbitmq:
+    host: "rabbitmq"
+    port: 5672
+    username: "admin"
+    password: "123456"

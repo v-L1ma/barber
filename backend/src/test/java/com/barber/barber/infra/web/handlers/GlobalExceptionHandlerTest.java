@@ -95,13 +95,13 @@ class GlobalExceptionHandlerTest {
     @Test
     @DisplayName("Deve retornar 400 quando campos obrigatórios estiverem ausentes")
     void handlerCamposObrigatorios() {
-        CadastrarAgendamentoDto dtoInvalido = new CadastrarAgendamentoDto(
-                "",
-                LocalDate.now(),
-                LocalTime.of(13,0),
-                "");
+        CadastrarAgendamentoDto dtoInvalido = new CadastrarAgendamentoDto();
+        dtoInvalido.setCliente("");
+        dtoInvalido.setData(LocalDate.now());
+        dtoInvalido.setHorario(LocalTime.of(13,0));
+        dtoInvalido.setServico("");
 
-        Mockito.when(criarAgendamentoUseCase.executar(dtoInvalido))
+        Mockito.when(criarAgendamentoUseCase.executar(Mockito.any()))
                 .thenThrow(new CamposObrigatoriosException("Campos obrigatórios não preenchidos"));
 
         try {
@@ -117,11 +117,11 @@ class GlobalExceptionHandlerTest {
     @Test
     @DisplayName("Deve retornar 400 quando o agendamento já existir")
     void handlerAgendamentoJaExiste() {
-        CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto(
-                "Vinicius",
-                LocalDate.now().plusDays(1),
-                LocalTime.of(10, 0),
-                "Corte");
+        CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
+        dto.setCliente("Vinicius");
+        dto.setData(LocalDate.now().plusDays(1));
+        dto.setHorario(LocalTime.of(10,0));
+        dto.setServico("Corte");
 
         Mockito.when(criarAgendamentoUseCase.executar(Mockito.any()))
                 .thenThrow(new AgendamentoJaExisteException("Agendamento já existe para esse horário"));
@@ -139,14 +139,16 @@ class GlobalExceptionHandlerTest {
     @Test
     @DisplayName("Deve retornar 400 quando agendamento for no passado")
     void handlerAgendamentoNaoPodeSerNoPassado() {
-        CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto(
-                "Vinicius",
-                LocalDate.now().minusMonths(2),
-                LocalTime.of(10, 0),
-                "Barba");
+        CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
 
-        Mockito.when(criarAgendamentoUseCase.executar(dto))
+        dto.setCliente("Vinicius");
+        dto.setData(LocalDate.now().minusMonths(4).minusDays(2));
+        dto.setHorario(LocalTime.of(10,0));
+        dto.setServico("Corte");
+
+        Mockito.when(criarAgendamentoUseCase.executar(Mockito.any()))
                 .thenThrow(new AgendamentoNaoPodeSerNoPassadoException("Não é possível agendar datas no passado"));
+
 
         try {
             mockMvc.perform(post("/agendamento")

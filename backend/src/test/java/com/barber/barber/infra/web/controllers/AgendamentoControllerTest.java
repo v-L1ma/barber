@@ -115,12 +115,11 @@ class AgendamentoControllerTest {
                 LocalTime.of(13,0), "Barba"
         );
 
-        CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto(
-                "Vinicius",
-                LocalDate.now().plusDays(2),
-                LocalTime.of(13,0),
-                "Barba"
-        );
+        CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
+        dto.setCliente("Vinicius");
+        dto.setData(LocalDate.now().plusDays(2));
+        dto.setHorario(LocalTime.of(13,0));
+        dto.setServico("Corte");
 
         CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Agendamento feito com sucesso");
 
@@ -148,12 +147,11 @@ class AgendamentoControllerTest {
 
         int agendamentoId = 1;
 
-        CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto(
-                "Vinicius",
-                LocalDate.now().plusDays(2),
-                LocalTime.of(13,0),
-                "Barba"
-        );
+        CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
+        dto.setCliente("Vinicius");
+        dto.setData(LocalDate.now().plusDays(2));
+        dto.setHorario(LocalTime.of(13,0));
+        dto.setServico("Corte");
 
         CadastrarAgendamentoResponseDto response = new CadastrarAgendamentoResponseDto("Agendamento atualizado com sucesso.");
 

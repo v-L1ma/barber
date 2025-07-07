@@ -30,10 +30,10 @@ public class AgendamentoDAO implements IAgendamentoDAO {
     public void inserirAgendamento(CadastrarAgendamentoDto dto){
         String sql = "INSERT INTO agendamento(cliente, data, horario, servico) VALUES(?,?,?,?)";
         Object[] parametros = new Object[4];
-        parametros[0] = dto.cliente();
-        parametros[1] = dto.data();
-        parametros[2] = dto.horario();
-        parametros[3] = dto.servico();
+        parametros[0] = dto.getCliente();
+        parametros[1] = dto.getData();
+        parametros[2] = dto.getHorario();
+        parametros[3] = dto.getServico();
         jdbc.update(sql,parametros);
     }
 

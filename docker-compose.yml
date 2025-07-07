@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   frontend:
     build: ./frontend/barber
@@ -14,11 +12,12 @@ services:
       - "8080:8080"
     depends_on:
       - postgres
+      - rabbitmq
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/barberbooking
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root
-      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
       SPRING_SQL_INIT_SCHEMA-LOCATIONS: classpath:/schema-postgresql.sql
       SPRING_SQL_INIT_MODE: always
       SPRING_SQL_INIT_PLATFORM: postgres
@@ -34,5 +33,19 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  rabbitmq:
+        image: rabbitmq:3-management
+        container_name: rabbitmq
+        restart: always
+        ports:
+            - 5672:5672
+            - 15672:15672
+        volumes:
+            - ./backend/dados:/var/lib/rabbitmq/
+        environment:
+            - RABBITMQ_DEFAULT_USER=admin
+            - RABBITMQ_DEFAULT_PASS=123456
+
 volumes:
   postgres_data:
+  dados:
