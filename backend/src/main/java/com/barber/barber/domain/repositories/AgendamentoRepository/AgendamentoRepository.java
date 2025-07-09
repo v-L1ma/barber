@@ -1,6 +1,5 @@
-package com.barber.barber.infra.repositories.DAOs;
+package com.barber.barber.domain.repositories.AgendamentoRepository;
 
-import com.barber.barber.domain.repositories.IAgendamentoDAO;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import jakarta.annotation.PostConstruct;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class AgendamentoDAO implements IAgendamentoDAO {
+public class AgendamentoRepository implements IAgendamentoRepository {
 
     @Autowired
     DataSource dataSource;
@@ -28,9 +27,9 @@ public class AgendamentoDAO implements IAgendamentoDAO {
     }
 
     public void inserirAgendamento(CadastrarAgendamentoDto dto){
-        String sql = "INSERT INTO agendamento(cliente, data, horario, servico) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO agendamento(clienteId, data, horario, servico) VALUES(?,?,?,?)";
         Object[] parametros = new Object[4];
-        parametros[0] = dto.getCliente();
+        parametros[0] = dto.getClienteId();
         parametros[1] = dto.getData();
         parametros[2] = dto.getHorario();
         parametros[3] = dto.getServico();
@@ -59,7 +58,7 @@ public class AgendamentoDAO implements IAgendamentoDAO {
     public void atualizarAgendamento(int id, Agendamento novo){
         String sql = "UPDATE agendamento SET cliente = ?, data = ?, horario = ?, servico = ? WHERE id = ?";
         Object[] parametros = new Object[5];
-        parametros[0] = novo.getCliente();
+        parametros[0] = novo.getClienteId();
         parametros[1] = novo.getData();
         parametros[2] = novo.getHorario();
         parametros[3] = novo.getServico();

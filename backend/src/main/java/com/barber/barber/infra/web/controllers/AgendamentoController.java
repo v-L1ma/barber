@@ -9,7 +9,6 @@ import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
 import com.barber.barber.infra.web.DTOs.ListarAgendamentoResponseDTO;
-import com.barber.barber.application.services.IAgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;

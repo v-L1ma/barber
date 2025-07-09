@@ -1,12 +1,11 @@
 package com.barber.barber.infra.web.handlers;
 
-import com.barber.barber.application.services.IAgendamentoService;
+import com.barber.barber.application.services.AgendamentoService.IAgendamentoService;
 import com.barber.barber.application.usecases.atualizarAgendamento.atualizarAgendamentoUseCase;
 import com.barber.barber.application.usecases.criarAgendamento.criarAgendamentoUseCase;
 import com.barber.barber.application.usecases.deletarAgendamento.deletarAgendamentoUseCase;
 import com.barber.barber.application.usecases.listarAgendamento.listarAgendamentoUseCase;
 import com.barber.barber.application.usecases.listarAgendamentoPorData.listarAgendamentoPorDataUseCase;
-import com.barber.barber.application.services.AgendamentoService;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.*;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
@@ -96,7 +95,7 @@ class GlobalExceptionHandlerTest {
     @DisplayName("Deve retornar 400 quando campos obrigatórios estiverem ausentes")
     void handlerCamposObrigatorios() {
         CadastrarAgendamentoDto dtoInvalido = new CadastrarAgendamentoDto();
-        dtoInvalido.setCliente("");
+        dtoInvalido.setClienteId("");
         dtoInvalido.setData(LocalDate.now());
         dtoInvalido.setHorario(LocalTime.of(13,0));
         dtoInvalido.setServico("");
@@ -118,7 +117,7 @@ class GlobalExceptionHandlerTest {
     @DisplayName("Deve retornar 400 quando o agendamento já existir")
     void handlerAgendamentoJaExiste() {
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setCliente("Vinicius");
+        dto.setClienteId("Vinicius");
         dto.setData(LocalDate.now().plusDays(1));
         dto.setHorario(LocalTime.of(10,0));
         dto.setServico("Corte");
@@ -141,7 +140,7 @@ class GlobalExceptionHandlerTest {
     void handlerAgendamentoNaoPodeSerNoPassado() {
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
 
-        dto.setCliente("Vinicius");
+        dto.setClienteId("Vinicius");
         dto.setData(LocalDate.now().minusMonths(4).minusDays(2));
         dto.setHorario(LocalTime.of(10,0));
         dto.setServico("Corte");

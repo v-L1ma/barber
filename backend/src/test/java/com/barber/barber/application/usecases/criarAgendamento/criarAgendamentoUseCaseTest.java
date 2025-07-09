@@ -1,12 +1,11 @@
 package com.barber.barber.application.usecases.criarAgendamento;
 
-import com.barber.barber.application.services.IAgendamentoService;
+import com.barber.barber.application.services.AgendamentoService.IAgendamentoService;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.AgendamentoJaExisteException;
 import com.barber.barber.domain.exceptions.AgendamentoNaoPodeSerNoPassadoException;
 import com.barber.barber.domain.exceptions.CamposObrigatoriosException;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
-import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,7 +33,7 @@ class criarAgendamentoUseCaseTest {
     @DisplayName("Deve lançar uma exception de Campos obrigatórios")
     void deveLancarExceptionCamposObrigatorios() {
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setCliente("Vinicius");
+        dto.setClienteId("Vinicius");
         dto.setData(null);
         dto.setHorario(null);
         dto.setServico("Corte");
@@ -50,7 +48,7 @@ class criarAgendamentoUseCaseTest {
     @DisplayName("Deve lançar uma exception se a data do agendamento for no passado")
     void deveLancarExceptionAgendamentoNaoPodeSerNoPassado(){
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setCliente("Vinicius");
+        dto.setClienteId("Vinicius");
         dto.setData(LocalDate.now().minusMonths(2));
         dto.setHorario(LocalTime.of(10,0));
         dto.setServico("Corte");
@@ -64,7 +62,7 @@ class criarAgendamentoUseCaseTest {
     @DisplayName("Deve lançar uma exception se já existir um agendamento na mesma data e hora")
     void deveLancarExceptionAgendamentoJaExiste(){
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setCliente("Vinicius");
+        dto.setClienteId("Vinicius");
         dto.setData(LocalDate.now().plusDays(2));
         dto.setHorario(LocalTime.of(13,0));
         dto.setServico("Corte");

@@ -1,4 +1,4 @@
-package com.barber.barber.application.services;
+package com.barber.barber.application.services.AgendamentoService;
 
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;

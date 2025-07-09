@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class CadastrarAgendamentoDto {
-    String cliente;
+    String clienteId;
     LocalDate data;
     LocalTime horario;
     String servico;
 
-    public String getCliente() {
-        return cliente;
+    public String getClienteId() {
+        return clienteId;
     }
 
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
+    public void setClienteId(String cliente) {
+        this.clienteId = cliente;
     }
 
     public LocalDate getData() {

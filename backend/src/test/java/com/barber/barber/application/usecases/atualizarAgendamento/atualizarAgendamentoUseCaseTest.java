@@ -1,11 +1,10 @@
 package com.barber.barber.application.usecases.atualizarAgendamento;
 
-import com.barber.barber.application.services.IAgendamentoService;
+import com.barber.barber.application.services.AgendamentoService.IAgendamentoService;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.AgendamentoJaExisteException;
 import com.barber.barber.domain.exceptions.AgendamentoNaoEncontradoException;
 import com.barber.barber.domain.exceptions.AgendamentoNaoPodeSerNoPassadoException;
-import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,8 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

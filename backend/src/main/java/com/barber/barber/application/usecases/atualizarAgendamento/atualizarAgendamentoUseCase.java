@@ -1,6 +1,6 @@
 package com.barber.barber.application.usecases.atualizarAgendamento;
 
-import com.barber.barber.application.services.IAgendamentoService;
+import com.barber.barber.application.services.AgendamentoService.IAgendamentoService;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.AgendamentoJaExisteException;
 import com.barber.barber.domain.exceptions.AgendamentoNaoEncontradoException;

@@ -1,6 +1,6 @@
 package com.barber.barber.application.usecases.criarAgendamento;
 
-import com.barber.barber.application.services.IAgendamentoService;
+import com.barber.barber.application.services.AgendamentoService.IAgendamentoService;
 import com.barber.barber.application.services.rabbitMQService.RabbitmqService;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.AgendamentoJaExisteException;
@@ -29,7 +29,7 @@ public class criarAgendamentoUseCase implements ICriarAgendamentoUseCase {
     @Override
      public CadastrarAgendamentoResponseDto executar(CadastrarAgendamentoDto agendamentoDto){
 
-        if (agendamentoDto.getCliente() == null ||
+        if (agendamentoDto.getClienteId() == null ||
                 agendamentoDto.getData() == null ||
                 agendamentoDto.getHorario() == null||
                 agendamentoDto.getServico() == null){

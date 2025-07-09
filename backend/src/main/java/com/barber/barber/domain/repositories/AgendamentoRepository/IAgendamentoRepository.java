@@ -1,4 +1,4 @@
-package com.barber.barber.domain.repositories;
+package com.barber.barber.domain.repositories.AgendamentoRepository;
 
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-public interface IAgendamentoDAO {
+public interface IAgendamentoRepository {
 
     void inserirAgendamento(CadastrarAgendamentoDto dto);
 

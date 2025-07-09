@@ -1,14 +1,12 @@
 package com.barber.barber.infra.web.controllers;
 
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
-import com.barber.barber.domain.exceptions.NenhumAgendamentoEncontradoException;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
 import com.barber.barber.infra.web.DTOs.ListarAgendamentoResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,7 +19,6 @@ import com.barber.barber.application.usecases.listarAgendamentoPorData.listarAge
 import com.barber.barber.application.usecases.deletarAgendamento.deletarAgendamentoUseCase;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.springframework.http.MediaType;
@@ -116,7 +113,7 @@ class AgendamentoControllerTest {
         );
 
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setCliente("Vinicius");
+        dto.setClienteId("Vinicius");
         dto.setData(LocalDate.now().plusDays(2));
         dto.setHorario(LocalTime.of(13,0));
         dto.setServico("Corte");
@@ -148,7 +145,7 @@ class AgendamentoControllerTest {
         int agendamentoId = 1;
 
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setCliente("Vinicius");
+        dto.setClienteId("Vinicius");
         dto.setData(LocalDate.now().plusDays(2));
         dto.setHorario(LocalTime.of(13,0));
         dto.setServico("Corte");
