@@ -7,6 +7,7 @@ import com.barber.barber.domain.exceptions.AgendamentoNaoPodeSerNoPassadoExcepti
 import com.barber.barber.domain.exceptions.CamposObrigatoriosException;
 import com.barber.barber.infra.web.DTOs.CadastrarClienteDto;
 import com.barber.barber.infra.web.DTOs.CadastrarClienteResponseDto;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,9 +16,12 @@ import java.time.LocalDate;
 public class CadastrarClienteUseCase implements ICadastrarClienteUseCase{
 
     private final IClienteService clienteService;
+    private final PasswordEncoder passwordEncoder;
 
-    public CadastrarClienteUseCase(IClienteService clienteService){
+    public CadastrarClienteUseCase(IClienteService clienteService, PasswordEncoder passwordEncoder){
+
         this.clienteService = clienteService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -41,6 +45,8 @@ public class CadastrarClienteUseCase implements ICadastrarClienteUseCase{
             throw new AgendamentoJaExisteException();
             //criar contaJaCadastradaException
         }
+
+        dto.setSenha(passwordEncoder.encode(dto.getSenha()));
 
         clienteService.cadastrarCliente(dto);
         return new CadastrarClienteResponseDto("Cliente cadastrado com sucesso");
