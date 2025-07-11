@@ -34,6 +34,9 @@ public class SecurityFilter extends OncePerRequestFilter {
 
         if(login != null){
             Cliente cliente = clienteService.buscarClientePorEmail(login);
+            if(cliente==null){
+                throw new RuntimeException("Email não cadastrado");
+            }
             var authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
             var authentication = new UsernamePasswordAuthenticationToken(cliente, null, authorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);

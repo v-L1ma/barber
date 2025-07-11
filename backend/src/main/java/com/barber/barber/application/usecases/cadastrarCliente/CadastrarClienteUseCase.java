@@ -5,6 +5,7 @@ import com.barber.barber.domain.entities.Cliente.Cliente;
 import com.barber.barber.domain.exceptions.AgendamentoJaExisteException;
 import com.barber.barber.domain.exceptions.AgendamentoNaoPodeSerNoPassadoException;
 import com.barber.barber.domain.exceptions.CamposObrigatoriosException;
+import com.barber.barber.domain.exceptions.ContaJaCadastradaException;
 import com.barber.barber.infra.web.DTOs.CadastrarClienteDto;
 import com.barber.barber.infra.web.DTOs.CadastrarClienteResponseDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,14 +37,13 @@ public class CadastrarClienteUseCase implements ICadastrarClienteUseCase{
 
         LocalDate yesterday = LocalDate.now().minusDays(1);
         if (dto.getDataNascimento().isAfter(yesterday)){
-            throw new AgendamentoNaoPodeSerNoPassadoException();
+            throw new AgendamentoNaoPodeSerNoPassadoException("A data de nascimento não pode ser no futuro");
         }
 
         Cliente isClienteJaCadastrado = clienteService.buscarClientePorEmail(dto.getEmail());
 
         if (isClienteJaCadastrado!=null){
-            throw new AgendamentoJaExisteException();
-            //criar contaJaCadastradaException
+            throw new ContaJaCadastradaException();
         }
 
         dto.setSenha(passwordEncoder.encode(dto.getSenha()));

@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS cliente(
     dataNascimento DATE,
     email VARCHAR(50),
     celular VARCHAR(13),
-    senha VARCHAR(25)
+    senha VARCHAR(100)
 );
