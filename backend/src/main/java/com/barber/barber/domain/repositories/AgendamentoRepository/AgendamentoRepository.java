@@ -27,7 +27,7 @@ public class AgendamentoRepository implements IAgendamentoRepository {
     }
 
     public void inserirAgendamento(CadastrarAgendamentoDto dto){
-        String sql = "INSERT INTO agendamento(clienteId, data, horario, servico) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO agendamento(cliente_id, data, horario, servico) VALUES(?,?,?,?)";
         Object[] parametros = new Object[4];
         parametros[0] = dto.getClienteId();
         parametros[1] = dto.getData();
@@ -56,7 +56,7 @@ public class AgendamentoRepository implements IAgendamentoRepository {
     }
 
     public void atualizarAgendamento(int id, Agendamento novo){
-        String sql = "UPDATE agendamento SET cliente = ?, data = ?, horario = ?, servico = ? WHERE id = ?";
+        String sql = "UPDATE agendamento SET cliente_id = ?, data = ?, horario = ?, servico = ? WHERE id = ?";
         Object[] parametros = new Object[5];
         parametros[0] = novo.getClienteId();
         parametros[1] = novo.getData();

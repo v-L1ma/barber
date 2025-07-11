@@ -29,7 +29,7 @@ public class criarAgendamentoUseCase implements ICriarAgendamentoUseCase {
     @Override
      public CadastrarAgendamentoResponseDto executar(CadastrarAgendamentoDto agendamentoDto){
 
-        if (agendamentoDto.getClienteId() == null ||
+        if (agendamentoDto.getClienteId() == 0 ||
                 agendamentoDto.getData() == null ||
                 agendamentoDto.getHorario() == null||
                 agendamentoDto.getServico() == null){

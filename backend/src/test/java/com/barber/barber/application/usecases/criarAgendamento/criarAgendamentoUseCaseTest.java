@@ -33,7 +33,7 @@ class criarAgendamentoUseCaseTest {
     @DisplayName("Deve lançar uma exception de Campos obrigatórios")
     void deveLancarExceptionCamposObrigatorios() {
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setClienteId("Vinicius");
+        dto.setClienteId(1);
         dto.setData(null);
         dto.setHorario(null);
         dto.setServico("Corte");
@@ -48,7 +48,7 @@ class criarAgendamentoUseCaseTest {
     @DisplayName("Deve lançar uma exception se a data do agendamento for no passado")
     void deveLancarExceptionAgendamentoNaoPodeSerNoPassado(){
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setClienteId("Vinicius");
+        dto.setClienteId(1);
         dto.setData(LocalDate.now().minusMonths(2));
         dto.setHorario(LocalTime.of(10,0));
         dto.setServico("Corte");
@@ -62,7 +62,7 @@ class criarAgendamentoUseCaseTest {
     @DisplayName("Deve lançar uma exception se já existir um agendamento na mesma data e hora")
     void deveLancarExceptionAgendamentoJaExiste(){
         CadastrarAgendamentoDto dto = new CadastrarAgendamentoDto();
-        dto.setClienteId("Vinicius");
+        dto.setClienteId(1);
         dto.setData(LocalDate.now().plusDays(2));
         dto.setHorario(LocalTime.of(13,0));
         dto.setServico("Corte");
