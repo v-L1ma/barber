@@ -2,10 +2,7 @@ package com.barber.barber.application.usecases.cadastrarCliente;
 
 import com.barber.barber.application.services.ClienteService.IClienteService;
 import com.barber.barber.domain.entities.Cliente.Cliente;
-import com.barber.barber.domain.exceptions.AgendamentoJaExisteException;
-import com.barber.barber.domain.exceptions.AgendamentoNaoPodeSerNoPassadoException;
-import com.barber.barber.domain.exceptions.CamposObrigatoriosException;
-import com.barber.barber.domain.exceptions.ContaJaCadastradaException;
+import com.barber.barber.domain.exceptions.*;
 import com.barber.barber.infra.web.DTOs.CadastrarClienteDto;
 import com.barber.barber.infra.web.DTOs.CadastrarClienteResponseDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,8 +28,17 @@ public class CadastrarClienteUseCase implements ICadastrarClienteUseCase{
             dto.getDataNascimento() == null ||
             dto.getEmail() == null ||
             dto.getCelular() == null||
-            dto.getSenha() == null){
+            dto.getSenha() == null ||
+            dto.getConfirmarSenha() == null){
             throw new CamposObrigatoriosException();
+        }
+
+        if (!dto.getConfirmarSenha().equals(dto.getSenha())){
+            throw new SenhaInvalidaException("As senhas não conferem.");
+        }
+
+        if (dto.getSenha().length()<5){
+            throw new CamposObrigatoriosException("A senha deve ter no minimo 5 caracteres");
         }
 
         LocalDate yesterday = LocalDate.now().minusDays(1);

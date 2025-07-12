@@ -1,0 +1,38 @@
+<div id="background">
+    <div class="container">
+      <div class="box">
+
+          <app-voltar-btn go="/"></app-voltar-btn>
+
+        
+          <h2 class="title">Seja bem-vindo(a) novamente!</h2>
+    
+        <form [formGroup]="loginForm" (ngSubmit)="login()" #formDir="ngForm">
+          <div class="input">
+              <label for="email">Email</label>
+              <input type="email" id="email" formControlName="email" placeholder="seuemail@email.com" />
+          </div>
+    
+          <div class="input">
+              <label for="senha">Senha</label>
+              <input type="password" id="senha" formControlName="senha" placeholder="********" />
+          </div>
+
+          <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+        </form>
+
+        <div></div>
+      </div>
+    
+      <aside>
+
+        <h1 class="register-text">Sua primeria vez por aqui?</h1>
+        <p class="register-text">
+          Não se preocupe, crie uma conta e em menos de um minuto você já estará usando todos os nossos serviços
+        </p>
+
+        <a href="/cadastro">Cadastre-se</a>
+        
+      </aside>
+    </div>
+</div>

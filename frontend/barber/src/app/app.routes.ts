@@ -5,6 +5,9 @@ import { ServicosComponent } from './pages/servicos/servicos.component';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { ListaComponent } from './pages/lista/lista.component';
 import { MeusAgendamentosComponent } from './pages/meus-agendamentos/meus-agendamentos.component';
+import { LoginComponent } from './pages/login/login.component';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -13,11 +16,13 @@ export const routes: Routes = [
     },
     {
         path: "agendamento",
-        component: AgendamentoComponent
+        component: AgendamentoComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: "servicos",
         component: ServicosComponent,
+        canActivateChild: [AuthGuard],
         children:[
             {
                 path:"lista",
@@ -27,14 +32,24 @@ export const routes: Routes = [
                 path:"meus-agendamentos",
                 component: MeusAgendamentosComponent
             }
-        ]
+        ],
     },
     {
         path: "agenda",
-        component: AgendaComponent
+        component: AgendaComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: "agendamento/editar/:id",
-        component: AgendamentoComponent
+        component: AgendamentoComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: "login",
+        component: LoginComponent
+    },
+    {
+        path: "cadastro",
+        component: CadastroComponent
     }
 ];

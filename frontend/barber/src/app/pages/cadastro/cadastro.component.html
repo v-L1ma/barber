@@ -1,0 +1,49 @@
+<div id="background">
+    <div class="container">
+      <div class="box">
+        <header>
+            <app-voltar-btn go="/"></app-voltar-btn>
+            <h2 class="title">Primeira vez aqui?<br>Crie sua conta!</h2>   
+        </header>      
+    
+        <form [formGroup]="signupForm" (ngSubmit)="signUp()" #formDir="ngForm">
+          <div class="input">
+              <label for="nome">Nome completo</label>
+              <input type="nome" id="nome" formControlName="nome" placeholder="Seu nome" />
+          </div>
+
+          <div class="input">
+              <label for="email">Email</label>
+              <input type="email" id="email" formControlName="email" placeholder="seuemail@email.com" />
+          </div>
+
+          <div class="input">
+              <label for="celular">Celular</label>
+              <input type="celular" id="celular" formControlName="celular" placeholder="(xx)xxxxxxxxx" />
+          </div>
+    
+          <div class="input">
+              <label for="senha">Senha</label>
+              <input type="password" id="senha" formControlName="senha" placeholder="********" />
+          </div>
+
+          <div class="input">
+              <label for="senha">Confirme a sua senha</label>
+              <input type="password" id="senha" formControlName="confirmarSenha" placeholder="********" />
+          </div>
+
+          <button type="submit" [disabled]="signupForm.invalid">Entrar</button>
+        </form>
+    
+       
+      </div>
+    
+      <aside>
+        <h1 class="register-text">Seja bem-vindo de volta!</h1>
+         <p class="register-text">
+          Se você já possuí uma conta basta clicar no botão abaixo e fazer login
+        </p>
+        <a href="/login">Faça login</a>
+      </aside>
+    </div>
+</div>

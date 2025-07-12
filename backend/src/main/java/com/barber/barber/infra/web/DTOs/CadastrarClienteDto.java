@@ -8,13 +8,15 @@ public class CadastrarClienteDto {
     private String email;
     private String celular;
     private String senha;
+    private String confirmarSenha;
 
-    public CadastrarClienteDto(String nome, LocalDate dataNascimento, String email, String celular, String senha) {
+    public CadastrarClienteDto(String nome, LocalDate dataNascimento, String email, String celular, String senha, String confirmarSenha) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.email = email;
         this.celular = celular;
         this.senha = senha;
+        this.confirmarSenha = confirmarSenha;
     }
 
     public String getNome() {
@@ -55,5 +57,13 @@ public class CadastrarClienteDto {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public String getConfirmarSenha() {
+        return confirmarSenha;
+    }
+
+    public void setConfirmarSenha(String confirmarSenha) {
+        this.confirmarSenha = confirmarSenha;
     }
 }
