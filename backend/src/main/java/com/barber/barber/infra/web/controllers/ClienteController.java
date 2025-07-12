@@ -38,4 +38,11 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cadastrarClienteUseCase.executar(dto));
     }
 
+    @GetMapping("/validar-token")
+    public ResponseEntity<Boolean> validarToken(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        String subject = tokenService.validateToken(token);
+        return ResponseEntity.ok(subject != null);
+    }
+
 }

@@ -1,6 +1,9 @@
+@use "../../styles/variables.scss";
+
+
 button{
     appearance: none;
-    background-color: #ffac2f;
+    background-color: variables.$Primary;
     border: none;
     height: 3em;
     width: 3em;

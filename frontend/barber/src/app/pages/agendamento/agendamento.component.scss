@@ -1,7 +1,9 @@
+@use "../../styles/variables.scss";
+
 main{
     display: flex;
     padding: 1em;
-    background-color: #050505;
+    background-color: variables.$Background;
     color: white;
     box-sizing: border-box;
     gap: 1em;

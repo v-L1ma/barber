@@ -1,5 +1,7 @@
+@use "../../styles/variables.scss";
+
 main{
-    background-color: #050505;
+    background-color: variables.$Background;
     padding: 1em;
     color: white;
     display: flex;

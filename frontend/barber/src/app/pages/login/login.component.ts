@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VoltarBtnComponent } from "../../components/voltar-btn/voltar-btn.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +10,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit{
+
+  constructor(private loginService: LoginService){}
 
   loginForm!: FormGroup;
   
@@ -28,6 +31,15 @@ export class LoginComponent implements OnInit{
   }
 
   login(){
+    this.loginService.login(this.loginForm.value).subscribe({
+      next: (response)=>{
+        localStorage.setItem("token", response.token)
+        console.log(response)
+      },
+      error:(error)=>{
+        console.log(error)
+      }
+    })
     console.log(this.loginForm.value)
   }
 
