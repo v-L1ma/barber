@@ -39,6 +39,6 @@ public class LoginClienteUseCase implements ILoginClienteUseCase{
         }
 
         String token = this.tokenService.generateToken(cliente);
-        return new LoginClienteResponseDTO("Login feito com sucesso!", token);
+        return new LoginClienteResponseDTO("Login feito com sucesso!", token, cliente);
     }
 }

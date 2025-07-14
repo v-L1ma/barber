@@ -9,6 +9,7 @@ import { CarregarTodosAgendamentosService } from '../../services/agendametosTodo
 import { EditarAgendamentoService } from '../../services/editarAgendamento/editar-agendamento.service';
 import { SucessoAgendamentoComponent } from "../../components/sucesso-agendamento/sucesso-agendamento.component";
 import { delay } from 'rxjs';
+import { TCliente } from '../../types/TCliente';
 
 @Component({
   selector: 'app-agendamento',
@@ -17,6 +18,7 @@ import { delay } from 'rxjs';
   styleUrl: './agendamento.component.scss'
 })
 export class AgendamentoComponent implements OnInit {
+  clienteInfo: TCliente;
   servico: string;
   today: string;
   agendamentoForm!: FormGroup;
@@ -40,6 +42,11 @@ export class AgendamentoComponent implements OnInit {
   ){
     const navigation = router.getCurrentNavigation();
     this.servico = navigation?.extras.state?.['servico'];
+
+    const localClienteInfo =localStorage.getItem("clienteInfo");
+
+    this.clienteInfo =JSON.parse(localClienteInfo!);
+
     console.log(this.servico);
 
     const data = new Date();
@@ -51,12 +58,12 @@ export class AgendamentoComponent implements OnInit {
     this.agendamentoId = Number(this.route.snapshot.paramMap.get('id'));
     this.isEditando = this.agendamentoId!=0;
 
+
     this.agendamentoForm = new FormGroup({
       data: new FormControl<string>(this.today, [Validators.required, Validators.nullValidator]),
       horario: new FormControl<string>("", [Validators.required, Validators.minLength(5)]),
-      cliente: new FormControl<string>("", [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
+      clienteId: new FormControl<number>(this.clienteInfo.id!, [Validators.required]),
       servico: new FormControl<string>(this.servico, [Validators.required])
-      //celular: new FormControl<string>("", [Validators.required, Validators.minLength(11), Validators.maxLength(11)])
     })
 
     this.carregarAgendamentos()
