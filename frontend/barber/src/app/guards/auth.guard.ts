@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   private isAuthenticated(): Observable<boolean> {
     const token = localStorage.getItem('token');
 
-    return this.httpCliente.get<boolean>('http://localhost:8080/auth/validar-token', {
+    return this.httpCliente.get<boolean>(`${environment.apiUrl}/auth/validar-token`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -14,7 +14,9 @@ public interface IAgendamentoService {
 
     List<Agendamento> listarAgendamentosPorData(LocalDate data);
 
-    void atualizarAgendamento(int id, Agendamento novo);
+    List<Agendamento> listarAgendamentosPorIdCliente(int id);
+
+    void atualizarAgendamento(int id, CadastrarAgendamentoDto novo);
 
     Agendamento listarAgendamentoPorId(int id);
 

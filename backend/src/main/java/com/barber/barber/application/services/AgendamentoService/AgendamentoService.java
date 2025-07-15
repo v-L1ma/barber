@@ -26,7 +26,11 @@ public class AgendamentoService implements IAgendamentoService {
         return Agendamento.converterVarios(agendamentoRepository.listarAgendamentoPorData(data));
     }
 
-    public void atualizarAgendamento(int id, Agendamento novo){
+    public List<Agendamento> listarAgendamentosPorIdCliente(int id){
+        return Agendamento.converterVarios(agendamentoRepository.listarAgendamentosPorIdCliente(id));
+    }
+
+    public void atualizarAgendamento(int id, CadastrarAgendamentoDto novo){
         agendamentoRepository.atualizarAgendamento(id, novo);
     }
 

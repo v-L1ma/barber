@@ -5,6 +5,7 @@ import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.AgendamentoJaExisteException;
 import com.barber.barber.domain.exceptions.AgendamentoNaoEncontradoException;
 import com.barber.barber.domain.exceptions.AgendamentoNaoPodeSerNoPassadoException;
+import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class atualizarAgendamentoUseCase implements IAtualizarAgendamentoUseCase
     }
 
     @Override
-    public CadastrarAgendamentoResponseDto executar(int id, Agendamento agendamentoNovo){
+    public CadastrarAgendamentoResponseDto executar(int id, CadastrarAgendamentoDto agendamentoNovo){
         Agendamento agendamento = agendamentoService.listarAgendamentoPorId(id);
 
         if(agendamento == null){

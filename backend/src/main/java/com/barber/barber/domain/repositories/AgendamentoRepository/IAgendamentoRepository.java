@@ -17,7 +17,9 @@ public interface IAgendamentoRepository {
 
     Map<String,Object> listarAgendamentoPorId(int id);
 
-    void atualizarAgendamento(int id, Agendamento novo);
+    List<Map<String,Object>> listarAgendamentosPorIdCliente(int id);
+
+    void atualizarAgendamento(int id, CadastrarAgendamentoDto novo);
 
     void deletarAgendamento(int id);
 

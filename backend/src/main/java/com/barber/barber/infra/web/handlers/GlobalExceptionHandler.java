@@ -1,5 +1,6 @@
 package com.barber.barber.infra.web.handlers;
 
+import com.barber.barber.domain.entities.Cliente.Cliente;
 import com.barber.barber.domain.exceptions.*;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
 import com.barber.barber.infra.web.DTOs.CadastrarClienteResponseDto;
@@ -64,7 +65,7 @@ public class GlobalExceptionHandler {
         logger.warn(ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new LoginClienteResponseDTO(ex.getMessage(), ""));
+                .body(new LoginClienteResponseDTO(ex.getMessage(), "", new Cliente(0, null, null, null, null, null)));
     }
 
     @ExceptionHandler(UsuarioNaoCadastradoException.class)
@@ -72,7 +73,7 @@ public class GlobalExceptionHandler {
         logger.warn(ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new LoginClienteResponseDTO(ex.getMessage(), ""));
+                .body(new LoginClienteResponseDTO(ex.getMessage(), "", new Cliente(0, null, null, null, null, null)));
     }
 
     @ExceptionHandler(ContaJaCadastradaException.class)

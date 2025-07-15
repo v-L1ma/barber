@@ -4,6 +4,7 @@ import { TAgendamento } from '../../types/TAgendamentos';
 import { DeletarAgendamentoService } from '../../services/deletarAgendamento/deletar-agendamento.service';
 import { CarregarTodosAgendamentosService } from '../../services/agendametosTodos/carregar-todos-agendamentos.service';
 import { Router, RouterModule } from '@angular/router';
+import { ListarAgendamentosPorClienteIdService } from '../../services/listarAgendamentosPorClienteId/listar-agendamentos-por-cliente-id.service';
 
 @Component({
   selector: 'app-meus-agendamentos',
@@ -15,8 +16,11 @@ export class MeusAgendamentosComponent implements OnInit{
 
   agendamentos: TAgendamento[] = [];
   isOpen:boolean = false;
+  
+  private clienteInfo = JSON.parse(localStorage.getItem("clienteInfo")!);
+  private clienteId:number = this.clienteInfo.id;
 
-  constructor(private carregarAgendamentosService: CarregarTodosAgendamentosService,
+  constructor(private listarAgendamentosPorClienteIdService: ListarAgendamentosPorClienteIdService,
     private deleteAgendamento: DeletarAgendamentoService,
     private router: Router
   ){}
@@ -25,8 +29,8 @@ export class MeusAgendamentosComponent implements OnInit{
     this.isOpen = !this.isOpen;
   }
 
-  carregarAgendamentos(){
-    this.carregarAgendamentosService.fetch().subscribe({
+  carregarAgendamentos(id:number){
+    this.listarAgendamentosPorClienteIdService.fetch(id).subscribe({
       next: (response)=>{
         console.log(response)
         this.agendamentos=response.agendamentos
@@ -39,7 +43,7 @@ export class MeusAgendamentosComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.carregarAgendamentos()
+    this.carregarAgendamentos(this.clienteId)
   }
 
   deletar(id:number){
@@ -47,7 +51,7 @@ export class MeusAgendamentosComponent implements OnInit{
     this.deleteAgendamento.delete(id).subscribe({
       next:(response)=>{
         console.log(response)
-        this.carregarAgendamentos()
+        this.carregarAgendamentos(this.clienteId)
       },
       error:(error)=>{
         console.log(error)

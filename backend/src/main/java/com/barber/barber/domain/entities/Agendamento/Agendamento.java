@@ -12,14 +12,14 @@ import java.util.Map;
 public class Agendamento {
 
     private int id;
-    private String clienteId;
+    private String cliente;
     private LocalDate data;
     private LocalTime horario;
     private String servico;
 
-    public Agendamento(int id, String clienteId, LocalDate data, LocalTime horario, String servico) {
+    public Agendamento(int id, String cliente, LocalDate data, LocalTime horario, String servico) {
         this.id = id;
-        this.clienteId = clienteId;
+        this.cliente = cliente;
         this.data = data;
         this.horario = horario;
         this.servico = servico;
@@ -33,12 +33,12 @@ public class Agendamento {
         this.id = id;
     }
 
-    public String getClienteId() {
-        return clienteId;
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(String clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
     public LocalDate getData() {
@@ -68,7 +68,7 @@ public class Agendamento {
     public static Agendamento converter(Map<String,Object> registro){
         int id = (Integer) registro.get("id");
 
-        String clienteId = (String) registro.get("clienteId");
+        String cliente = (String) registro.get("nome");
 
         Date dataSql = (Date) registro.get("data");
         LocalDate data = dataSql.toLocalDate();
@@ -78,7 +78,7 @@ public class Agendamento {
 
         String servico = (String) registro.get("servico");
 
-        return new Agendamento(id,clienteId,data,horario,servico);
+        return new Agendamento(id,cliente,data,horario,servico);
     }
 
     public static List<Agendamento> converterVarios(List<Map<String,Object>> registro){

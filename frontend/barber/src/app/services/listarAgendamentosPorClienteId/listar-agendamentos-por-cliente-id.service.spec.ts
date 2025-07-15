@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-
-import { CarregarTodosAgendamentosService } from './carregar-todos-agendamentos.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ListarAgendamentosPorClienteIdService } from '../listarAgendamentosPorClienteId/listar-agendamentos-por-cliente-id.service';
 
 describe('FetchTodosAgendamentosService', () => {
-  let service: CarregarTodosAgendamentosService;
+  let service: ListarAgendamentosPorClienteIdService;
   let httpMock: HttpTestingController;
 
 
@@ -12,7 +11,7 @@ describe('FetchTodosAgendamentosService', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule]
     });
-    service = TestBed.inject(CarregarTodosAgendamentosService);
+    service = TestBed.inject(ListarAgendamentosPorClienteIdService);
     httpMock = TestBed.inject(HttpTestingController)
   });
 
@@ -30,10 +29,10 @@ describe('FetchTodosAgendamentosService', () => {
       message: "Agendamentos listados com sucesso",
       agendamentos: []
     }
-    
-    service.fetch().subscribe(response => expect(response).toEqual(expectedResponse));
+    const id:number = 1;
+    service.fetch(id).subscribe(response => expect(response).toEqual(expectedResponse));
 
-    const req = httpMock.expectOne("https://barberbookingapi.onrender.com/agendamento");
+    const req = httpMock.expectOne(`https://barberbookingapi.onrender.com/agendamento/${id}`);
     expect(req.request.method).toBe('GET')
     req.flush(expectedResponse);
 
