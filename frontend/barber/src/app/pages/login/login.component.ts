@@ -15,12 +15,21 @@ export class LoginComponent implements OnInit{
   constructor(private loginService: LoginService, private router:Router){}
 
   loginForm!: FormGroup;
+  destino!: string;
   
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl("", Validators.required),
       senha: new FormControl("", [Validators.required, Validators.minLength(5)])
     });
+
+    const navigation = this.router.getCurrentNavigation();
+    console.log('[LoginComponent] getCurrentNavigation:', navigation);
+
+    console.log('[LoginComponent] history.state:', history.state);
+
+    this.destino = navigation?.extras.state?.['destino']
+              ?? history.state?.['destino']
   }
 
   get email(){
@@ -36,7 +45,7 @@ export class LoginComponent implements OnInit{
       next: (response)=>{
         localStorage.setItem("token", response.token)
         localStorage.setItem("clienteInfo", JSON.stringify(response.clienteInfo))
-        this.router.navigateByUrl("servicos/lista");
+        this.router.navigateByUrl(this.destino);
         console.log(response)
       },
       error:(error)=>{

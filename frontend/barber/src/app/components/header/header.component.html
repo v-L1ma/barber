@@ -1,0 +1,41 @@
+<div class="header">
+  <div class="logo">Olá, {{"Vinicius"}}</div>
+
+  <div class="profile-container">
+    <img src="https://img.icons8.com/ios-filled/100/ffffff/user-male-circle.png" alt="Perfil" class="avatar" />
+
+    <div class="dropdown">
+      <div class="user-info">
+        <img src="https://img.icons8.com/ios-filled/100/ffffff/user-male-circle.png" alt="Perfil" class="avatar" />
+        <div class="info">
+          <div class="nome">Vinicius</div>
+        </div>
+        <div class="status-indicator"></div>
+      </div>
+
+      <hr />
+
+      <div class="menu-item" (click)="navegar('/assinatura')">
+        <span class="icon">💳</span>
+        <span>Subscription</span>
+        <span class="tag">Free Trial</span>
+      </div>
+
+      <div class="menu-item" (click)="navegar('/configuracoes')">
+        <span class="icon">⚙️</span>
+        <span>Settings</span>
+      </div>
+
+      <div class="menu-item" (click)="navegar('/termos')">
+        <span class="icon">📄</span>
+        <span>Terms & Policies</span>
+        <span class="arrow">↗</span>
+      </div>
+
+      <div class="menu-item logout" (click)="logout()">
+        <span class="icon">↩️</span>
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
+</div>
