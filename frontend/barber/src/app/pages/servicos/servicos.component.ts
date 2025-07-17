@@ -5,7 +5,7 @@ import { HeaderComponent } from "../../components/header/header.component";
 
 @Component({
   selector: 'app-servicos',
-  imports: [VoltarBtnComponent, RouterModule, RouterModule, HeaderComponent],
+  imports: [RouterModule, RouterModule, HeaderComponent],
   templateUrl: './servicos.component.html',
   styleUrl: './servicos.component.scss'
 })

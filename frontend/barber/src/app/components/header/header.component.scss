@@ -5,11 +5,12 @@ $white: #e0e0e0;
 @use "../../styles/variables.scss";
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   background: variables.$Secondary;
   color: #fff;
-  padding: 1rem 15rem;
+  padding: .5rem 15rem;
+  border-bottom: 1px solid rgb(68, 68, 68);
   position: relative;
   font-family: 'Segoe UI', sans-serif;
 

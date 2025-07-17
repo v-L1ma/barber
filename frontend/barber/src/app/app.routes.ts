@@ -8,6 +8,7 @@ import { MeusAgendamentosComponent } from './pages/meus-agendamentos/meus-agenda
 import { LoginComponent } from './pages/login/login.component';
 import { CadastroComponent } from './pages/cadastro/cadastro.component';
 import { AuthGuard } from './guards/auth.guard';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 export const routes: Routes = [
     {
@@ -51,5 +52,9 @@ export const routes: Routes = [
     {
         path: "cadastro",
         component: CadastroComponent
+    },
+    {
+        path: "perfil",
+        component: PerfilComponent
     }
 ];

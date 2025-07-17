@@ -1,0 +1,50 @@
+<app-header></app-header>
+<div class="settings-wrapper">
+  <h2>Perfil</h2>
+  <p>Confira e e mantenha atualizadas as informações do seu perfil aqui!</p>
+
+  <section>
+
+  <form>
+    <div class="section">
+      <h3>Nome completo</h3>
+      <div class="row">
+        <input type="text" [value]="clienteInfo.nome" placeholder="Nome completo" formControlName="nome" />
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Email</h3>
+      <input type="email" [value]="clienteInfo.email" placeholder="Email" formControlName="email" />
+    </div>
+
+    <div class="section">
+      <h3>Celular</h3>
+      <div class="row">
+        <input type="text" [value]="clienteInfo.celular"  placeholder="(xx)xxxxxxxxx" formControlName="celular" />
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Senha</h3>
+      <div class="row">
+        <input type="password" placeholder="Senha Atual" formControlName="currentPassword" />
+        <input type="password" placeholder="Nova Senha" formControlName="newPassword" />
+      </div>
+    </div>
+
+    <div id="buttons">
+      <button type="submit" class="button save">Salvar alterações</button>
+      <button type="button" class="button " [routerLink]="'/servicos/lista'">Voltar</button>
+    </div>
+  </form>
+
+  <hr />
+
+  <div class="section">
+      <h3>Excluir conta</h3>
+      <p>Cuidado, essa opção não tem volta, ao prosseguir todos os seus dados serão apagados 
+      <strong>permanentemente</strong>.</p>
+      <button type="submit" class="button delete">Salvar alterações</button>
+    </div>
+</section>

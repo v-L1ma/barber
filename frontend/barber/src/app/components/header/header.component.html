@@ -1,5 +1,4 @@
 <div class="header">
-  <div class="logo">Olá, {{"Vinicius"}}</div>
 
   <div class="profile-container">
     <img src="https://img.icons8.com/ios-filled/100/ffffff/user-male-circle.png" alt="Perfil" class="avatar" />
@@ -15,23 +14,10 @@
 
       <hr />
 
-      <div class="menu-item" (click)="navegar('/assinatura')">
-        <span class="icon">💳</span>
-        <span>Subscription</span>
-        <span class="tag">Free Trial</span>
-      </div>
-
-      <div class="menu-item" (click)="navegar('/configuracoes')">
+      <div class="menu-item" (click)="navegar('/perfil')">
         <span class="icon">⚙️</span>
         <span>Settings</span>
       </div>
-
-      <div class="menu-item" (click)="navegar('/termos')">
-        <span class="icon">📄</span>
-        <span>Terms & Policies</span>
-        <span class="arrow">↗</span>
-      </div>
-
       <div class="menu-item logout" (click)="logout()">
         <span class="icon">↩️</span>
         <span>Logout</span>

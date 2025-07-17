@@ -1,0 +1,142 @@
+$bg: #232225b9;
+$card: #1c1c1c;
+$text: #e0e0e0;
+$input: #2a2a2aa9;
+$border: #444;
+$accent: #888;
+$danger: #c0392b;
+
+.settings-wrapper {
+  background-color: $bg;
+  color: $text;
+  width: 41vw;
+  margin: 2rem auto;
+  padding: 5rem 20rem;
+  border: 1px solid $border;
+  border-radius: 12px;
+
+  h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    color: $accent;
+  }
+
+  section{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    hr{
+    border: 1px solid rgba(184, 184, 184, 0.185);
+    }
+  }
+
+  .section {
+    margin-bottom: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    color: #ccc;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid $border;
+    }
+
+    .profile-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  .note {
+    color: #777;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 0.6rem;
+    background-color: $input;
+    border: 1px solid $border;
+    border-radius: 8px;
+    color: $text;
+    margin-bottom: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: $accent;
+    }
+  }
+
+  .row {
+    display: flex;
+    gap: 1rem;
+
+    input {
+      flex: 1;
+    }
+  }
+
+  #buttons{
+    display: flex;
+    gap: 1rem;
+  }
+  .button {
+    background-color: transparent;
+    border: 1px solid $border;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    width: 10rem;
+    color: $text;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: $input;
+    }
+
+    &.save {
+      border-color: $accent;
+
+      &:hover{
+        background-color: rgba(3, 179, 3, 0.051);
+      }
+    }
+
+    &.delete{
+      border: 1px solid #c0392b;
+      color: #c0392b;
+    }
+
+    &.danger {
+      border-color: $danger;
+      color: $danger;
+
+      &:hover {
+        background-color: rgba($danger, 0.1);
+      }
+    }
+  }
+}
