@@ -13,6 +13,6 @@ export class CadastroService {
   constructor(private httpClient: HttpClient) { }
 
   cadastrar(cliente: TCliente):Observable<TCadastrarClienteResponse>{
-    return this.httpClient.post<TCadastrarClienteResponse>(`${environment.apiUrl}/auth/cadastro`, cliente)
+    return this.httpClient.post<TCadastrarClienteResponse>(`${environment.apiUrl}/cliente/cadastro`, cliente)
   }
 }

@@ -13,6 +13,6 @@ export class LoginService {
    constructor(private httpClient: HttpClient) { }
 
   login(cliente: TCliente):Observable<TLoginClienteResponse>{
-    return this.httpClient.post<TLoginClienteResponse>(`${environment.apiUrl}/auth/login`, cliente)
+    return this.httpClient.post<TLoginClienteResponse>(`${environment.apiUrl}/cliente/login`, cliente)
   }
 }

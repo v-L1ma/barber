@@ -10,6 +10,8 @@ public interface IClienteRepository {
 
     Map<String,Object> listarClientePorEmail(String email);
 
+    Map<String, Object> listarClientePorId(int id);
+
     void atualizarDadosCliente(int id, Cliente novo);
 
     void deletarCliente(int id);

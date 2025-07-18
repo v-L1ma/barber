@@ -29,6 +29,15 @@ public class ClienteService implements IClienteService{
     }
 
     @Override
+    public Cliente buscarClientePorId(int id) {
+        if (clienteRepository.listarClientePorId(id)==null){
+            return null;
+        }
+
+        return Cliente.converter(clienteRepository.listarClientePorId(id));
+    }
+
+    @Override
     public void atualizarDadosCliente(int id, Cliente novo) {
         clienteRepository.atualizarDadosCliente(id,novo);
     }

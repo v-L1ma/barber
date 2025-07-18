@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   private isAuthenticated(): Observable<boolean> {
     const token = localStorage.getItem('token');
 
-    return this.httpCliente.get<boolean>(`${environment.apiUrl}/auth/validar-token`, {
+    return this.httpCliente.get<boolean>(`${environment.apiUrl}/cliente/validar-token`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -30,6 +30,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.isAuthenticated().pipe(
     tap(isAuth => {
       if (!isAuth) {
+        localStorage.clear();
         this.router.navigate(['/login'], {
           state: {destino: state.url}
         });

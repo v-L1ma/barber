@@ -5,7 +5,7 @@
 
   <section>
 
-  <form>
+  <form [formGroup]="form" (ngSubmit)="submit()" #formDir="ngForm">
     <div class="section">
       <h3>Nome completo</h3>
       <div class="row">
@@ -28,13 +28,13 @@
     <div class="section">
       <h3>Senha</h3>
       <div class="row">
-        <input type="password" placeholder="Senha Atual" formControlName="currentPassword" />
-        <input type="password" placeholder="Nova Senha" formControlName="newPassword" />
+        <input type="password" placeholder="Senha Atual" formControlName="senha" />
+        <input type="password" placeholder="Nova Senha" formControlName="confirmarSenha" />
       </div>
     </div>
 
     <div id="buttons">
-      <button type="submit" class="button save">Salvar alterações</button>
+      <button type="button" (click)="submit()" class="button save">Salvar alterações</button>
       <button type="button" class="button " [routerLink]="'/servicos/lista'">Voltar</button>
     </div>
   </form>

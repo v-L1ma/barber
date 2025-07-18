@@ -14,6 +14,8 @@ public interface IClienteService {
 
     Cliente buscarClientePorEmail(String email);
 
+    Cliente buscarClientePorId(int id);
+
     void atualizarDadosCliente(int id, Cliente novo);
 
     void deletarCliente(int id);

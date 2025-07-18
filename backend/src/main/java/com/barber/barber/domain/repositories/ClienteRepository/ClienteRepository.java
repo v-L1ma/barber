@@ -47,6 +47,14 @@ public class ClienteRepository implements IClienteRepository{
     }
 
     @Override
+    public Map<String, Object> listarClientePorId(int id) {
+        String sql = "SELECT * FROM cliente where cliente.email = ?";
+        Map<String, Object> resultado = jdbc.queryForMap(sql, id);
+
+        return resultado.isEmpty() ? null : resultado;
+    }
+
+    @Override
     public void atualizarDadosCliente(int id, Cliente novo) {
         String sql = "UPDATE agendamento SET cliente = ?, dataNascimento = ?, email = ?, celular = ?, senha = ? WHERE id = ?";
         Object[] parametros = new Object[6];
