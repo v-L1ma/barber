@@ -49,7 +49,7 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(atualizarDadosCadastraisUseCase.executar(id, dto));
     }
 
-    @DeleteMapping()
+    @DeleteMapping("{id}")
     public ResponseEntity<CadastrarClienteResponseDto> deletarContaCliente(@PathVariable int id){
         return ResponseEntity.status(HttpStatus.OK).body(deletarClienteUseCase.executar(id));
     }

@@ -18,7 +18,7 @@ export class PerfilComponent implements OnInit{
   clienteInfo!: TCliente;
   form!: FormGroup;
   isAlterarSenha: boolean = false;
-  isPopUpOpen: boolean = true;
+  isPopUpOpen: boolean = false;
 
   constructor(private router:Router, 
     private atualizarDadosService: AtualizarDadosCadastraisService,
@@ -59,6 +59,8 @@ export class PerfilComponent implements OnInit{
     this.deletarClienteService.executar(this.clienteInfo.id!).subscribe({
       next:(response)=>{
         console.log(response.message);
+        localStorage.clear();
+        this.router.navigate(['/']);
       },
       error:(error)=>{
         console.log(error);
@@ -67,7 +69,7 @@ export class PerfilComponent implements OnInit{
   }
   
   fecharPopup() {
-    this.isPopUpOpen = false;
+    this.isPopUpOpen = !this.isPopUpOpen;
   }
 
   

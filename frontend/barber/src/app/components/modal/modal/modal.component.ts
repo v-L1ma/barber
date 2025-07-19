@@ -11,8 +11,13 @@ export class ModalComponent {
   @Input() titulo:string = "";
   @Input() isOpen: boolean = false;
   @Output() fechar = new EventEmitter<void>();
+  @Output() function = new EventEmitter<void>();
 
   fecharPopup() {
     this.fechar.emit();
+  }
+
+  deletar(){
+    this.function.emit();
   }
 }
