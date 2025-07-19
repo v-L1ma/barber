@@ -37,21 +37,24 @@ public class AtualizarDadosCadastraisUseCase implements IAtualizarDadosCadastrai
             throw new UsuarioNaoCadastradoException("Usuário fornecido não existe.");
         }
 
-        boolean isSenhaValida = passwordEncoder.matches(dto.getSenha(), cliente.getSenha());
+        if(dto.getSenha()!=null) {
 
-        System.out.println(dto.getSenha());
-        System.out.println(cliente.getSenha());
+            boolean isSenhaValida = passwordEncoder.matches(dto.getSenha(), cliente.getSenha());
 
-        if (!isSenhaValida && !dto.getSenha().isEmpty()){
-            throw new SenhaInvalidaException();
-        }
+            System.out.println(dto.getSenha());
+            System.out.println(cliente.getSenha());
 
-        if (dto.getConfirmarSenha()!=null){
-            String senhaCriptografada = passwordEncoder.encode(dto.getConfirmarSenha());
-            Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail(), dto.getCelular(), senhaCriptografada);
-            this.clienteService.atualizarDadosCliente(id, clienteNovo);
+            if (!isSenhaValida && dto.getSenha() != null) {
+                throw new SenhaInvalidaException();
+            }
 
-            return new CadastrarClienteResponseDto("Dados atualizados com sucesso!");
+            if (dto.getConfirmarSenha() != null) {
+                String senhaCriptografada = passwordEncoder.encode(dto.getConfirmarSenha());
+                Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail(), dto.getCelular(), senhaCriptografada);
+                this.clienteService.atualizarDadosCliente(id, clienteNovo);
+
+                return new CadastrarClienteResponseDto("Dados atualizados com sucesso!");
+            }
         }
 
         Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail(), dto.getCelular(), cliente.getSenha());

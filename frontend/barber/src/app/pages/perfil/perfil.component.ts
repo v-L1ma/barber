@@ -4,10 +4,12 @@ import { TCliente } from '../../types/TCliente';
 import { Router, RouterModule } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AtualizarDadosCadastraisService } from '../../services/atualizarDadosCadastrais/atualizar-dados-cadastrais.service';
+import { DeletarClienteService } from '../../services/deletarCliente/deletar-cliente.service';
+import { ModalComponent } from "../../components/modal/modal/modal.component";
 
 @Component({
   selector: 'app-perfil',
-  imports: [HeaderComponent, RouterModule, ReactiveFormsModule],
+  imports: [HeaderComponent, RouterModule, ReactiveFormsModule, ModalComponent],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.scss'
 })
@@ -16,8 +18,11 @@ export class PerfilComponent implements OnInit{
   clienteInfo!: TCliente;
   form!: FormGroup;
   isAlterarSenha: boolean = false;
+  isPopUpOpen: boolean = true;
 
-  constructor(private router:Router, private atualizarDadosService: AtualizarDadosCadastraisService){}
+  constructor(private router:Router, 
+    private atualizarDadosService: AtualizarDadosCadastraisService,
+    private deletarClienteService: DeletarClienteService){}
 
   ngOnInit(): void {
     const local = localStorage.getItem("clienteInfo")
@@ -28,8 +33,8 @@ export class PerfilComponent implements OnInit{
       email: new FormControl(this.clienteInfo.email, [Validators.required]),
       dataNascimento: new FormControl("2004-04-06", [Validators.required]),
       celular: new FormControl(this.clienteInfo.celular, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-      senha: new FormControl("", [Validators.required, Validators.minLength(5)]),
-      confirmarSenha: new FormControl("", [Validators.required, Validators.minLength(5)])
+      senha: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+      confirmarSenha: new FormControl(null, [Validators.required, Validators.minLength(5)])
     });
 
   }
@@ -48,6 +53,21 @@ export class PerfilComponent implements OnInit{
         console.log(error.message);
       }
     })
+  }
+
+  deletar(){
+    this.deletarClienteService.executar(this.clienteInfo.id!).subscribe({
+      next:(response)=>{
+        console.log(response.message);
+      },
+      error:(error)=>{
+        console.log(error);
+      }
+    })
+  }
+  
+  fecharPopup() {
+    this.isPopUpOpen = false;
   }
 
   

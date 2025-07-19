@@ -1,0 +1,78 @@
+@use "../../../styles/variables.scss";
+
+$bg: #232225b9;
+$card: #1c1c1c;
+$text: #e0e0e0;
+$input: #2a2a2aa9;
+$border: #444;
+$accent: #888;
+$danger: #c0392b;
+
+#background{
+    background-color: rgba(0, 0, 0, 0.452);
+    position: fixed;
+    height: 100%;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    #container{
+        background-color: variables.$Secondary;
+        padding: 2em;
+        border-radius: .5em;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5em;
+
+        p{
+            width:18em;
+        }
+        
+        div{
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                background-color: transparent;
+                border: 1px solid white;
+                padding: 0.7rem 1rem;
+                border-radius: 6px;
+                width: 8rem;
+                font-weight: bold;
+                color: $text;
+                cursor: pointer;
+                transition: 0.2s;
+
+                &:hover {
+                background-color: $input;
+                }
+
+                &.confirm {
+                border-color: $accent;
+
+                &:hover{
+                    background-color: rgba(3, 179, 3, 0.178);
+                }
+                }
+
+                &.cancel{
+                border: 1px solid #c0392b;
+                color: #c0392b;
+                }
+
+                &.danger {
+                border-color: $danger;
+                color: $danger;
+
+                &:hover {
+                    background-color: rgba($danger, 0.1);
+                }
+            }
+        }
+
+        }
+    }
+}
