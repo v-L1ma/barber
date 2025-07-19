@@ -15,14 +15,13 @@ header{
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    padding: 3rem;
-    height: 100vh;
+    padding: 2rem;
 }
 
 .container {
     display: flex;
     width: 70vw;
-}
+  }
 
 .box {
   background-color: variables.$Secondary;
@@ -60,6 +59,29 @@ aside{
     }
 }
 
+p.error{
+  color: red;
+  font-weight: bold;
+  font-size: .8em;
+}
+
+p.status{
+  border-radius: .5rem;
+  padding: .8rem;
+  color: rgba(255, 255, 255, 0.87);
+  font-weight: bold;
+  text-align: center;
+  font-size: .8em;
+}
+
+.status.erro{
+  background-color: rgba(255, 0, 0, 0.781);
+}
+
+.status.sucess{
+  background-color: rgba(43, 255, 0, 0.781);
+}
+
 .title {
   color: variables.$Primary;
   text-align: center;
@@ -70,6 +92,18 @@ form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+     #link{
+        display: flex;
+        justify-content: end;
+        color: white;
+        gap: .3rem;
+
+        a{
+          font-weight: bold;
+          text-decoration: underline;
+        }
+     }
+  
 }
 
 .input{
@@ -126,3 +160,34 @@ h1.register-text{
   color: #000000;
 }
 
+@media screen and (max-width:1000px){
+  #background{
+    padding-top: 4em;
+  }
+  .container{
+    width: 90vw;
+    padding: 3em;
+  }
+
+  .box{
+    border-radius: 1em;
+    width: 100vw;
+
+    form{
+      p{
+        display: flex;
+        justify-content: end;
+        color: white;
+        gap: .3rem;
+
+        a{
+          font-weight: bold;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  aside{
+    display: none;
+  }
+  }

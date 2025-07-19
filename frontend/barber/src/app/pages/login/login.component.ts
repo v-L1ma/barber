@@ -16,10 +16,12 @@ export class LoginComponent implements OnInit{
 
   loginForm!: FormGroup;
   destino!: string;
+  status: string="";
+  responseMessage: string="";
   
   ngOnInit(): void {
     this.loginForm = new FormGroup({
-      email: new FormControl("", Validators.required),
+      email: new FormControl("", [Validators.required, Validators.email]),
       senha: new FormControl("", [Validators.required, Validators.minLength(5)])
     });
 
@@ -41,18 +43,26 @@ export class LoginComponent implements OnInit{
   }
 
   login(){
-    this.loginService.login(this.loginForm.value).subscribe({
+    if(!this.loginForm.invalid){
+      this.loginService.login(this.loginForm.value).subscribe({
       next: (response)=>{
+        this.status="sucess";
+        this.responseMessage=response.message;
         localStorage.setItem("token", response.token)
         localStorage.setItem("clienteInfo", JSON.stringify(response.clienteInfo))
         this.router.navigateByUrl(this.destino);
         console.log(response)
       },
       error:(error)=>{
+        this.status="erro";
+        this.responseMessage=error.error.message;
         console.log(error)
       }
     })
     console.log(this.loginForm.value)
   }
+    }
+
+    
 
 }

@@ -10,29 +10,54 @@
           <div class="input">
               <label for="nome">Nome completo</label>
               <input type="nome" id="nome" formControlName="nome" placeholder="Seu nome" />
+              @if (nome?.invalid && formDir.submitted) {
+                <p class="error">O nome deve ter entre 5 a 50 caracteres.</p>
+              }
           </div>
 
           <div class="input">
               <label for="email">Email</label>
               <input type="email" id="email" formControlName="email" placeholder="seuemail@email.com" />
+              @if (email?.invalid && formDir.submitted) {
+                <p class="error">Insira um email válido.</p>
+              }
           </div>
 
           <div class="input">
               <label for="celular">Celular</label>
               <input type="celular" id="celular" formControlName="celular" placeholder="(xx)xxxxxxxxx" />
+              @if (celular?.invalid && formDir.submitted) {
+                <p class="error">O celular deve ter 11 digitos, contando o DDD.</p>
+              }
           </div>
     
           <div class="input">
               <label for="senha">Senha</label>
               <input type="password" id="senha" formControlName="senha" placeholder="********" />
+              @if (senha?.invalid && formDir.submitted) {
+                <p class="error">A senha deve ter no minimo 6 caracteres.</p>
+              }
           </div>
 
           <div class="input">
               <label for="senha">Confirme a sua senha</label>
               <input type="password" id="senha" formControlName="confirmarSenha" placeholder="********" />
+              @if (confirmarSenha?.invalid && formDir.submitted) {
+                <p class="error">Deve conter no minimo 6 digitos.</p>
+              }
           </div>
 
-          <button type="submit" [disabled]="signupForm.invalid">Entrar</button>
+          <p id="link">
+            Já possui uma conta?<a href="/login"> Faça login</a>
+          </p>
+
+          <p>
+            @if (status) {
+              <p class="status {{status}}">{{responseMessage}}</p>
+            }
+          </p>
+
+          <button type="submit">Entrar</button>
         </form>
     
        

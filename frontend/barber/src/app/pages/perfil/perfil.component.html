@@ -55,11 +55,11 @@
       <h3>Excluir conta</h3>
       <p>Cuidado, essa opção não tem volta, ao prosseguir todos os seus dados serão apagados 
       <strong>permanentemente</strong>.</p>
-      <button type="button" (click)="fecharPopup()" class="button delete">Salvar alterações</button>
+      <button type="button" (click)="fecharPopup()" class="button delete">Excluir conta</button>
     </div>
 </section>
 
 @if (isPopUpOpen) {
-      <app-modal [mensagem]="'Deseja realmente deletar a sua contar? Ao confirmar a sua conta sera excluida e seus dados serão permanentemente excluidos dos bancos de dados.'" 
-      [titulo]="'Deletar sua conta'" [isOpen]="isPopUpOpen" (fechar)="fecharPopup()" (function)="deletar()"></app-modal>
+      <app-modal [mensagem]="'Deseja realmente Excluir a sua contar? Ao confirmar a sua conta sera excluida e seus dados serão permanentemente excluidos dos bancos de dados.'" 
+      [titulo]="'Excluir sua conta'" [isOpen]="isPopUpOpen" (fechar)="fecharPopup()" (function)="deletar()"></app-modal>
     }

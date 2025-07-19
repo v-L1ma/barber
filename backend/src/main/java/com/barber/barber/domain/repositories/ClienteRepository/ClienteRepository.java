@@ -71,7 +71,12 @@ public class ClienteRepository implements IClienteRepository{
 
     @Override
     public void deletarCliente(int id) {
-        String sql = "DELETE FROM cliente WHERE id = ?";
-        jdbc.update(sql,id);
+        String sql = "DELETE FROM agendamento WHERE cliente_id=?; DELETE FROM cliente WHERE id = ?";
+        Object[] parametros = new Object[2];
+
+        parametros[0]=id;
+        parametros[1]=id;
+
+        jdbc.update(sql,parametros);
     }
 }
