@@ -44,7 +44,7 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(cadastrarClienteUseCase.executar(dto));
     }
 
-    @PutMapping("/atualizar-dados")
+    @PutMapping("/atualizar-dados/{id}")
     public ResponseEntity<CadastrarClienteResponseDto> atualizarDadosCliente(@PathVariable int id, @RequestBody CadastrarClienteDto dto){
         return ResponseEntity.status(HttpStatus.CREATED).body(atualizarDadosCadastraisUseCase.executar(id, dto));
     }

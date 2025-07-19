@@ -27,8 +27,7 @@ public class AtualizarDadosCadastraisUseCase implements IAtualizarDadosCadastrai
         if (    dto.getNome() == null ||
                 dto.getEmail() == null ||
                 dto.getCelular() == null ||
-                dto.getDataNascimento() == null ||
-                dto.getSenha() == null){
+                dto.getDataNascimento() == null){
             throw new CamposObrigatoriosException();
         }
 
@@ -40,18 +39,22 @@ public class AtualizarDadosCadastraisUseCase implements IAtualizarDadosCadastrai
 
         boolean isSenhaValida = passwordEncoder.matches(dto.getSenha(), cliente.getSenha());
 
-        if (!isSenhaValida){
+        System.out.println(dto.getSenha());
+        System.out.println(cliente.getSenha());
+
+        if (!isSenhaValida && !dto.getSenha().isEmpty()){
             throw new SenhaInvalidaException();
         }
 
         if (dto.getConfirmarSenha()!=null){
-            Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail(), dto.getCelular(), dto.getConfirmarSenha());
+            String senhaCriptografada = passwordEncoder.encode(dto.getConfirmarSenha());
+            Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail(), dto.getCelular(), senhaCriptografada);
             this.clienteService.atualizarDadosCliente(id, clienteNovo);
 
             return new CadastrarClienteResponseDto("Dados atualizados com sucesso!");
         }
 
-        Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail(), dto.getCelular(), dto.getSenha());
+        Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail(), dto.getCelular(), cliente.getSenha());
         this.clienteService.atualizarDadosCliente(id, clienteNovo);
 
         return new CadastrarClienteResponseDto("Dados atualizados com sucesso!");

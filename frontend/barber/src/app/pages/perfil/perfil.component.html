@@ -9,28 +9,38 @@
     <div class="section">
       <h3>Nome completo</h3>
       <div class="row">
-        <input type="text" [value]="clienteInfo.nome" placeholder="Nome completo" formControlName="nome" />
+        <input type="text" placeholder="Nome completo" formControlName="nome" />
       </div>
     </div>
 
     <div class="section">
       <h3>Email</h3>
-      <input type="email" [value]="clienteInfo.email" placeholder="Email" formControlName="email" />
+      <input type="email" placeholder="Email" formControlName="email" />
     </div>
 
     <div class="section">
       <h3>Celular</h3>
       <div class="row">
-        <input type="text" [value]="clienteInfo.celular"  placeholder="(xx)xxxxxxxxx" formControlName="celular" />
+        <input type="text" placeholder="(xx)xxxxxxxxx" formControlName="celular" />
       </div>
     </div>
 
     <div class="section">
-      <h3>Senha</h3>
-      <div class="row">
-        <input type="password" placeholder="Senha Atual" formControlName="senha" />
-        <input type="password" placeholder="Nova Senha" formControlName="confirmarSenha" />
+      <div id="senha">
+        <h3>Alterar senha</h3>
+        <label class="toggle-switch">
+          <input type="checkbox" (click)="setIsAlterarSenha()">
+          <span class="slider"></span>
+        </label>
       </div>
+
+      @if (isAlterarSenha) {
+        <div class="row">
+          <input type="password" placeholder="Senha Atual" formControlName="senha" />
+          <input type="password" placeholder="Nova Senha" formControlName="confirmarSenha" />
+        </div>
+      }
+
     </div>
 
     <div id="buttons">
