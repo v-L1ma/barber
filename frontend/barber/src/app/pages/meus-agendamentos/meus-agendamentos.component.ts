@@ -5,17 +5,18 @@ import { DeletarAgendamentoService } from '../../services/deletarAgendamento/del
 import { CarregarTodosAgendamentosService } from '../../services/agendametosTodos/carregar-todos-agendamentos.service';
 import { Router, RouterModule } from '@angular/router';
 import { ListarAgendamentosPorClienteIdService } from '../../services/listarAgendamentosPorClienteId/listar-agendamentos-por-cliente-id.service';
+import { ModalComponent } from "../../components/modal/modal/modal.component";
 
 @Component({
   selector: 'app-meus-agendamentos',
-  imports: [RouterModule],
+  imports: [RouterModule, ModalComponent],
   templateUrl: './meus-agendamentos.component.html',
   styleUrl: './meus-agendamentos.component.scss'
 })
 export class MeusAgendamentosComponent implements OnInit{
 
   agendamentos: TAgendamento[] = [];
-  isOpen:boolean = false;
+  isPopUpOpen:boolean = false;
   
   private clienteInfo = JSON.parse(localStorage.getItem("clienteInfo")!);
   private clienteId:number = this.clienteInfo.id;
@@ -25,8 +26,8 @@ export class MeusAgendamentosComponent implements OnInit{
     private router: Router
   ){}
 
-  setMenuOpen(){
-    this.isOpen = !this.isOpen;
+  setPopUpOpen(){
+    this.isPopUpOpen = !this.isPopUpOpen;
   }
 
   carregarAgendamentos(id:number){
@@ -52,6 +53,7 @@ export class MeusAgendamentosComponent implements OnInit{
       next:(response)=>{
         console.log(response)
         this.carregarAgendamentos(this.clienteId)
+        this.setPopUpOpen();
       },
       error:(error)=>{
         console.log(error)

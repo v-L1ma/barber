@@ -85,12 +85,7 @@ section{
                         display: flex;
                     }
                 }
-
-                
-            }
-
-            
-            
+            }            
         }
     }
 
@@ -98,6 +93,7 @@ section{
 
 @media screen and (max-width:950px){
     section{
-        width: 83vw;
+        width: 90vw;
+        padding: 0;
     }
 }

@@ -17,7 +17,6 @@ main{
 
         #outlet{
             min-height: 30em;
-            display: flex;
         }
 
         #buttons{
@@ -70,7 +69,15 @@ main{
         }
 
         #banner{
-            width: 82vw;
+            width: 90vw;
+            height: 30vh;
+            padding: 0;
+        }
+
+        button{
+            p{
+                display: none;
+            }
         }
     }
 }

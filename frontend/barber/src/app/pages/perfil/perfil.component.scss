@@ -11,7 +11,7 @@ $danger: #c0392b;
   color: $text;
   width: 41vw;
   margin: 2rem auto;
-  padding: 5rem 20rem;
+  padding: 5rem 16%;
   border: 1px solid $border;
   border-radius: 12px;
 
@@ -209,4 +209,12 @@ div#senha{
 
     input:checked + .slider::before {
       transform: translateX(24px);
+    }
+
+
+    @media screen and (max-width:1000px){
+      .settings-wrapper{
+        width: 85vw;
+        padding: 5em 1em;
+      }
     }

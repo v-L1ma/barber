@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { TCliente } from '../../types/TCliente';
 
 @Component({
   selector: 'app-header',
@@ -8,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  clienteInfo: TCliente = JSON.parse(localStorage.getItem("clienteInfo")!)
   constructor(private router: Router) {}
 
   logout() {
