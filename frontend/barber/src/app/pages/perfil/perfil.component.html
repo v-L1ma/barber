@@ -43,6 +43,12 @@
 
     </div>
 
+    @if (status) {
+      <p class="status {{status}}">
+        {{responseMessage}}
+      </p>
+    }
+
     <div id="buttons">
       <button type="button" (click)="submit()" class="button save">Salvar alterações</button>
       <button type="button" class="button " [routerLink]="'/servicos/lista'">Voltar</button>

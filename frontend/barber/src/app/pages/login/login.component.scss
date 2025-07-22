@@ -169,23 +169,16 @@ h1.register-text{
 }
 
 @media screen and (max-width:1000px){
-  #background{
-    padding-top: 4em;
-    padding-bottom: 4em;
-  }
   .container{
     width: 90vw;
-    padding: 3em;
-    margin-bottom: 4em;
   }
 
   .box{
     border-radius: 1em;
     width: 100vw;
+    max-width: none;
   }
   aside{
     display: none;
   }
   }
-
-

@@ -27,7 +27,6 @@ header{
   background-color: variables.$Secondary;
   padding: 2rem;
   border-radius: 16px 0 0 16px;
-  max-width: 400px;
   width: 40vw;
   display: flex;
   flex-direction: column;
@@ -93,7 +92,7 @@ form {
   flex-direction: column;
   gap: 2rem;
      #link{
-        display: flex;
+        display: none;
         justify-content: end;
         color: white;
         gap: .3rem;
@@ -162,18 +161,22 @@ h1.register-text{
 
 @media screen and (max-width:1000px){
   #background{
-    padding-top: 4em;
+    display: block;
+    justify-content: start;
   }
   .container{
-    width: 90vw;
-    padding: 3em;
+    width: auto;
   }
 
   .box{
     border-radius: 1em;
-    width: 100vw;
+    width: 100%;
 
     form{
+      #link{
+        display: flex;
+      }
+
       p{
         display: flex;
         justify-content: end;

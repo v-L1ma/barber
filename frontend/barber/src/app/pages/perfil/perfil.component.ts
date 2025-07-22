@@ -19,6 +19,8 @@ export class PerfilComponent implements OnInit{
   form!: FormGroup;
   isAlterarSenha: boolean = false;
   isPopUpOpen: boolean = false;
+  status: string = "";
+  responseMessage:string="";
 
   constructor(private router:Router, 
     private atualizarDadosService: AtualizarDadosCadastraisService,
@@ -48,9 +50,13 @@ export class PerfilComponent implements OnInit{
     this.atualizarDadosService.executar(this.clienteInfo.id!, this.form.value).subscribe({
       next:(response)=>{
         console.log(response);
+        this.responseMessage = response.message;
+        this.status = "sucess";
       },
       error:(error)=>{
         console.log(error.message);
+        this.responseMessage = error.error.message;
+        this.status = "erro";
       }
     })
   }
