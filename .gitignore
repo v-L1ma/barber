@@ -33,3 +33,6 @@ build/
 .vscode/
 /notificacoesWhatsApp/node_modules
 /backend/dados
+emailSenderMicroService/.env
+/emailSenderMicroService/node_modules
+/node_modules

@@ -32,14 +32,19 @@ public class RabbitMQConnection {
     @PostConstruct
     private void adiciona(){
         Queue filaWhatsapp = this.fila("FILA_WHATSAPP");
+        Queue filaEmail = this.fila("FILA_EMAIL");
 
         DirectExchange troca = this.trocaDireta();
 
         Binding ligacao = this.relactionamento(filaWhatsapp, troca);
+        Binding ligacaoEmail = this.relactionamento(filaEmail, troca);
 
         this.amqpAdmin.declareQueue(filaWhatsapp);
         this.amqpAdmin.declareExchange(troca);
         this.amqpAdmin.declareBinding(ligacao);
+
+        this.amqpAdmin.declareQueue(filaEmail);
+        this.amqpAdmin.declareBinding(ligacaoEmail);
 
     }
 }
