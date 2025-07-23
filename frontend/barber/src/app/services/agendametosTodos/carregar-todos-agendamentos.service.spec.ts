@@ -30,6 +30,7 @@ describe('FetchTodosAgendamentosService', () => {
       message: "Agendamentos listados com sucesso",
       agendamentos: []
     }
+    
     service.fetch().subscribe(response => expect(response).toEqual(expectedResponse));
 
     const req = httpMock.expectOne("https://barberbookingapi.onrender.com/agendamento");

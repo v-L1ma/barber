@@ -20,9 +20,9 @@
                             <li (click)="navegarParaEdicao(agendamento.id!)">
                                 <img src="editIcon.svg" alt="">
                                 <p>Editar</p>
-
+                            <!-- deletar(agendamento.id!) -->
                             </li>
-                            <li (click)="deletar(agendamento.id!)">
+                            <li (click)="setPopUpOpen()">
                                 <img src="deleteIcon.svg" alt="">
                                 <p>Cancelar</p>
                             </li>
@@ -30,7 +30,17 @@
                     </div>
                 </div>
             </li>
+
+            @if (isPopUpOpen) {
+            <app-modal 
+            titulo="Deseja cancelar esse agendamento?"
+            mensagem="Ao cancelar um agendamento a ação não poderá ser revertida e você corre o risco de perder essa data, gostaria de continuar?"
+            (fechar)="setPopUpOpen()"
+            (function)="deletar(agendamento.id!)"
+            ></app-modal>
         }
+        }
+        
 
         </ul>
         

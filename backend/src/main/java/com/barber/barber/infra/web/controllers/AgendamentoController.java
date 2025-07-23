@@ -5,11 +5,11 @@ import com.barber.barber.application.usecases.criarAgendamento.ICriarAgendamento
 import com.barber.barber.application.usecases.deletarAgendamento.IDeletarAgendamentoUseCase;
 import com.barber.barber.application.usecases.listarAgendamento.IListarAgendamentoUseCase;
 import com.barber.barber.application.usecases.listarAgendamentoPorData.IListarAgendamentoPorDataUseCase;
+import com.barber.barber.application.usecases.listarAgendamentosPorIdCliente.IListarAgendamentosPorIdClienteUseCase;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
 import com.barber.barber.infra.web.DTOs.ListarAgendamentoResponseDTO;
-import com.barber.barber.application.services.IAgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -29,6 +29,7 @@ public class AgendamentoController {
     private final IDeletarAgendamentoUseCase deletarAgendamentoUseCase;
     private final IListarAgendamentoPorDataUseCase listarAgendamentoPorDataUseCase;
     private final ICriarAgendamentoUseCase criarAgendamentoUseCase;
+    private final IListarAgendamentosPorIdClienteUseCase listarAgendamentosPorIdClienteUseCase;
 
     @Autowired
     public AgendamentoController(
@@ -36,13 +37,15 @@ public class AgendamentoController {
             IAtualizarAgendamentoUseCase atualizarAgendamentoUseCase,
             IDeletarAgendamentoUseCase deletarAgendamentoUseCase,
             IListarAgendamentoPorDataUseCase listarAgendamentoPorDataUseCase,
-            ICriarAgendamentoUseCase criarAgendamentoUseCase
+            ICriarAgendamentoUseCase criarAgendamentoUseCase,
+            IListarAgendamentosPorIdClienteUseCase listarAgendamentosPorIdClienteUseCase
     ) {
         this.listarAgendamentoUseCase = listarAgendamentoUseCase;
         this.atualizarAgendamentoUseCase = atualizarAgendamentoUseCase;
         this.deletarAgendamentoUseCase = deletarAgendamentoUseCase;
         this.listarAgendamentoPorDataUseCase = listarAgendamentoPorDataUseCase;
         this.criarAgendamentoUseCase = criarAgendamentoUseCase;
+        this.listarAgendamentosPorIdClienteUseCase = listarAgendamentosPorIdClienteUseCase;
     }
 
     @GetMapping
@@ -55,13 +58,18 @@ public class AgendamentoController {
         return ResponseEntity.ok(listarAgendamentoPorDataUseCase.executar(data));
     }
 
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<ListarAgendamentoResponseDTO> listaPorData(@PathVariable int id){
+        return ResponseEntity.ok(listarAgendamentosPorIdClienteUseCase.executar(id));
+    }
+
     @PostMapping
     public ResponseEntity<CadastrarAgendamentoResponseDto> criarAgendamento(@RequestBody CadastrarAgendamentoDto agendamentoDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(criarAgendamentoUseCase.executar(agendamentoDto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CadastrarAgendamentoResponseDto> atualizarAgendamento(@PathVariable int id, @RequestBody Agendamento agendamentoNovo){
+    public ResponseEntity<CadastrarAgendamentoResponseDto> atualizarAgendamento(@PathVariable int id, @RequestBody CadastrarAgendamentoDto agendamentoNovo){
         return ResponseEntity.status(HttpStatus.OK).body(atualizarAgendamentoUseCase.executar(id, agendamentoNovo));
     }
 

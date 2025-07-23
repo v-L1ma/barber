@@ -1,6 +1,6 @@
 package com.barber.barber.application.usecases.atualizarAgendamento;
 
-import com.barber.barber.application.services.IAgendamentoService;
+import com.barber.barber.application.services.AgendamentoService.IAgendamentoService;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.AgendamentoJaExisteException;
 import com.barber.barber.domain.exceptions.AgendamentoNaoEncontradoException;
@@ -17,8 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,8 +36,11 @@ class atualizarAgendamentoUseCaseTest {
 
         Mockito.when(agendamentoService.listarAgendamentoPorId(agendamentoId)).thenReturn(null);
 
-        Agendamento agendamentoNovo = new Agendamento(1,"vinicius",  LocalDate.now().plusDays(2),
-                LocalTime.of(10, 0), "Barba");
+        CadastrarAgendamentoDto agendamentoNovo = new CadastrarAgendamentoDto();
+        agendamentoNovo.setClienteId(1);
+        agendamentoNovo.setData(LocalDate.now().plusDays(2));
+        agendamentoNovo.setHorario(LocalTime.of(10, 0));
+        agendamentoNovo.setServico("Barba");
 
         assertThrows(AgendamentoNaoEncontradoException.class, ()->{
             atualizarAgendamentoUseCase.executar(agendamentoId,agendamentoNovo);
@@ -51,8 +52,11 @@ class atualizarAgendamentoUseCaseTest {
     void deveLancarExcecaoAgendamentoNaoPodeSerNoPassado(){
         int agendamentoId = 1;
 
-        Agendamento agendamentoNovo = new Agendamento(1,"vinicius",  LocalDate.now().minusMonths(4),
-                LocalTime.of(10, 0), "Barba");
+        CadastrarAgendamentoDto agendamentoNovo = new CadastrarAgendamentoDto();
+        agendamentoNovo.setClienteId(1);
+        agendamentoNovo.setData(LocalDate.now().minusDays(2));
+        agendamentoNovo.setHorario(LocalTime.of(10, 0));
+        agendamentoNovo.setServico("Barba");
 
         Agendamento agendamento = new Agendamento(1,"vinicius",  LocalDate.now().plusDays(2),
                 LocalTime.of(10, 0), "Barba");
@@ -70,8 +74,11 @@ class atualizarAgendamentoUseCaseTest {
 
         int agendamentoId = 1;
 
-        Agendamento agendamentoNovo = new Agendamento(1,"vinicius",  LocalDate.now().plusDays(2),
-                LocalTime.of(10, 0), "Barba");
+        CadastrarAgendamentoDto agendamentoNovo = new CadastrarAgendamentoDto();
+        agendamentoNovo.setClienteId(1);
+        agendamentoNovo.setData(LocalDate.now().plusDays(2));
+        agendamentoNovo.setHorario(LocalTime.of(10, 0));
+        agendamentoNovo.setServico("Barba");
 
         Agendamento agendamento = new Agendamento(1,"vinicius",  LocalDate.now().plusDays(2),
                 LocalTime.of(10, 0), "Barba");
@@ -90,8 +97,11 @@ class atualizarAgendamentoUseCaseTest {
 
         int agendamentoId = 1;
 
-        Agendamento agendamentoNovo = new Agendamento(1,"vinicius",  LocalDate.now().plusDays(2),
-                LocalTime.of(10, 0), "Barba");
+        CadastrarAgendamentoDto agendamentoNovo = new CadastrarAgendamentoDto();
+        agendamentoNovo.setClienteId(1);
+        agendamentoNovo.setData(LocalDate.now().plusDays(2));
+        agendamentoNovo.setHorario(LocalTime.of(10, 0));
+        agendamentoNovo.setServico("Barba");
 
         Agendamento agendamento = new Agendamento(1,"vinicius",  LocalDate.now().plusDays(6),
                 LocalTime.of(10, 0), "Barba");

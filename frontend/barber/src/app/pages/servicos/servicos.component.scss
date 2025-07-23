@@ -1,6 +1,7 @@
+@use "../../styles/variables.scss";
+
 main{
-    background-color: #050505;
-    padding: 1em;
+    background-color: variables.$Background;
     color: white;
     display: flex;
     flex-direction: column;
@@ -9,7 +10,8 @@ main{
     section{
         display: flex;
         flex-direction: column;
-        width: 72vw;
+        width: 74vw;
+        padding: 0;
         margin: auto;
         box-sizing: border-box;
 
@@ -20,14 +22,16 @@ main{
         #buttons{
             display: flex;
             gap: .5em;
+            
             button{
+                appearance: none;
                 display: flex;
                 gap: 1em;
                 align-items: center;
-
+                border: 1px solid rgb(68, 68, 68);
+                border-bottom: none;
                 appearance: none;
                 background-color: #2322253b;
-                border: none;
                 border-radius: .5em .5em 0 0;
                 color: white;
                 font-weight: bolder;
@@ -50,6 +54,7 @@ main{
         background-position: center;
         background-size: cover;
         padding: 1em;
+        border: 1px solid rgb(68, 68, 68);
     }
 
 
@@ -64,7 +69,15 @@ main{
         }
 
         #banner{
-            width: 82vw;
+            width: 90vw;
+            height: 30vh;
+            padding: 0;
+        }
+
+        button{
+            p{
+                display: none;
+            }
         }
     }
 }

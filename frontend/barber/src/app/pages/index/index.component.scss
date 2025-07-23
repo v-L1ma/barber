@@ -1,3 +1,5 @@
+@use "../../styles/variables.scss";
+
 main{
     #mobile{
         display: none;
@@ -12,7 +14,7 @@ main{
         justify-content: space-between;
         padding: 1em 3em;
         align-items: center;
-        background-color: #070A14;
+        background-color: variables.$Background;
         color: white;
         div{
             display: flex;

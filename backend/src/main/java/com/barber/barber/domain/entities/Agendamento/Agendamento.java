@@ -68,7 +68,7 @@ public class Agendamento {
     public static Agendamento converter(Map<String,Object> registro){
         int id = (Integer) registro.get("id");
 
-        String cliente = (String) registro.get("cliente");
+        String cliente = (String) registro.get("nome");
 
         Date dataSql = (Date) registro.get("data");
         LocalDate data = dataSql.toLocalDate();

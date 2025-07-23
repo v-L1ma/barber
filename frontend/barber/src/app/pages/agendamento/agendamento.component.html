@@ -149,16 +149,6 @@
                 }
             </div>
 
-            <div id="cliente">
-                <label for="">Cliente</label>
-                <input 
-                type="text" 
-                placeholder="Seu nome" 
-                formControlName="cliente">
-                @if ( cliente.invalid) {
-                    <p class="erro">Informe o seu nome para o agendamento.</p>
-                }
-            </div>
             <button [disabled]="agendamentoForm.invalid">AGENDAR</button>
         </form>
     </div>

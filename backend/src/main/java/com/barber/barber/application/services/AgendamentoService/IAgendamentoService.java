@@ -1,4 +1,4 @@
-package com.barber.barber.application.services;
+package com.barber.barber.application.services.AgendamentoService;
 
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
@@ -14,7 +14,9 @@ public interface IAgendamentoService {
 
     List<Agendamento> listarAgendamentosPorData(LocalDate data);
 
-    void atualizarAgendamento(int id, Agendamento novo);
+    List<Agendamento> listarAgendamentosPorIdCliente(int id);
+
+    void atualizarAgendamento(int id, CadastrarAgendamentoDto novo);
 
     Agendamento listarAgendamentoPorId(int id);
 

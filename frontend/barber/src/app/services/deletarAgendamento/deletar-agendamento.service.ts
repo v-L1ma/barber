@@ -1,17 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DeletarAgendamentoService {
 
-  private baseUrl = "https://barberbookingapi.onrender.com"
-
   constructor(private readonly http: HttpClient) { }
 
   delete(id:number):Observable<any>{
-    return this.http.delete(`${this.baseUrl}/agendamento/${id}`)
+    return this.http.delete(`${environment.apiUrl}/agendamento/${id}`)
   }
 }

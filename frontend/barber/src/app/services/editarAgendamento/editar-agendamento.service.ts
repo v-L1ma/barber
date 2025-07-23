@@ -2,17 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TAgendamento } from '../../types/TAgendamentos';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EditarAgendamentoService {
 
-  private baseUrl:string = "https://barberbookingapi.onrender.com"
-
   constructor(private http: HttpClient) { }
 
   editar(id:number, agendamento:TAgendamento):Observable<any>{
-    return this.http.put(`${this.baseUrl}/agendamento/${id}`, agendamento)
+    return this.http.put(`${environment.apiUrl}/agendamento/${id}`, agendamento)
   }
 }

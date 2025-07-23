@@ -4,7 +4,8 @@
     padding-top: 2em;
     padding-bottom: 2em;
     border-bottom: 1px solid rgba(128, 128, 128, 0.288);
-
+    flex-wrap: wrap;
+    gap: 1em;
     div{
         display: flex;
         flex-direction: column;
@@ -48,11 +49,13 @@
 
     .card{
         
+        h2{
+            width: 9em;
+        }
     
         div:nth-child(2){
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
     }
 

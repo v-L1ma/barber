@@ -1,7 +1,6 @@
 package com.barber.barber.application.usecases.listarAgendamentoPorData;
 
-import com.barber.barber.application.services.IAgendamentoService;
-import com.barber.barber.application.usecases.listarAgendamento.listarAgendamentoUseCase;
+import com.barber.barber.application.services.AgendamentoService.IAgendamentoService;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import com.barber.barber.domain.exceptions.NenhumAgendamentoEncontradoException;
 import com.barber.barber.infra.web.DTOs.ListarAgendamentoResponseDTO;

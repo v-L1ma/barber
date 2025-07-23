@@ -1,0 +1,131 @@
+$black: #121212;
+$gray-dark: #1e1e1e;
+$gray: #2c2c2c;
+$white: #e0e0e0;
+@use "../../styles/variables.scss";
+.header {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  background: variables.$Secondary;
+  color: #fff;
+  padding: .5rem 13%;
+  border-bottom: 1px solid rgb(68, 68, 68);
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .profile-container {
+    position: relative;
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #2c2c2c;
+    }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 44px;
+      right: 0;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 1rem;
+      width: 260px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+      z-index: 10;
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .avatar {
+          width: 58px;
+          height: 58px;
+          margin-right: 0.75rem;
+        }
+
+        .info {
+          .nome {
+            font-weight: 600;
+            font-size: 1rem;
+          }
+        }
+
+        .status-indicator {
+          width: 14px;
+          height: 14px;
+          background: #22c55e;
+          border-radius: 50%;
+          position: absolute;
+          left: 44px;
+          bottom: 4px;
+          border: 2px solid #1e1e1e;
+        }
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid #333;
+        margin: 1rem 0;
+      }
+
+      .menu-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem 0;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: bold;
+        color: #ddd;
+        transition: background 0.2s;
+
+        &:hover {
+          background: #2c2c2c;
+        }
+
+        .icon {
+          margin-right: 0.5rem;
+        }
+
+        .tag {
+          font-size: 0.75rem;
+          color: #999;
+        }
+
+        .arrow {
+          font-size: 0.85rem;
+          color: #666;
+        }
+
+        &.logout {
+          color: #f87171;
+        }
+      }
+    }
+
+    &:hover .dropdown {
+      display: block;
+    }
+
+    &:active .dropdown{
+      display: block;
+    }
+  }
+}
+
+@media screen and (max-width:1000px){
+  .header{
+    padding: .5em 5%;
+  }
+}

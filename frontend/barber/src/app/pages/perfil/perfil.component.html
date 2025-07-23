@@ -1,0 +1,71 @@
+<app-header></app-header>
+<div class="settings-wrapper">
+  <h2>Perfil</h2>
+  <p>Confira e e mantenha atualizadas as informações do seu perfil aqui!</p>
+
+  <section>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" #formDir="ngForm">
+    <div class="section">
+      <h3>Nome completo</h3>
+      <div class="row">
+        <input type="text" placeholder="Nome completo" formControlName="nome" />
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Email</h3>
+      <input type="email" placeholder="Email" formControlName="email" />
+    </div>
+
+    <div class="section">
+      <h3>Celular</h3>
+      <div class="row">
+        <input type="text" placeholder="(xx)xxxxxxxxx" formControlName="celular" />
+      </div>
+    </div>
+
+    <div class="section">
+      <div id="senha">
+        <h3>Alterar senha</h3>
+        <label class="toggle-switch">
+          <input type="checkbox" (click)="setIsAlterarSenha()">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      @if (isAlterarSenha) {
+        <div class="row">
+          <input type="password" placeholder="Senha Atual" formControlName="senha" />
+          <input type="password" placeholder="Nova Senha" formControlName="confirmarSenha" />
+        </div>
+      }
+
+    </div>
+
+    @if (status) {
+      <p class="status {{status}}">
+        {{responseMessage}}
+      </p>
+    }
+
+    <div id="buttons">
+      <button type="button" (click)="submit()" class="button save">Salvar alterações</button>
+      <button type="button" class="button " [routerLink]="'/servicos/lista'">Voltar</button>
+    </div>
+  </form>
+
+  <hr />
+
+  <div class="section">
+      <h3>Excluir conta</h3>
+      <p>Cuidado, essa opção não tem volta, ao prosseguir todos os seus dados serão apagados 
+      <strong>permanentemente</strong>.</p>
+      <button type="button" (click)="fecharPopup()" class="button delete">Excluir conta</button>
+    </div>
+</section>
+
+@if (isPopUpOpen) {
+      <app-modal [mensagem]="'Deseja realmente Excluir a sua contar? Ao confirmar a sua conta sera excluida e seus dados serão permanentemente excluidos dos bancos de dados.'" 
+      [titulo]="'Excluir sua conta'" [isOpen]="isPopUpOpen" (fechar)="fecharPopup()" (function)="deletar()"></app-modal>
+    }

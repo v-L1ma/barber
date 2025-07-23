@@ -1,6 +1,5 @@
-package com.barber.barber.infra.repositories.DAOs;
+package com.barber.barber.domain.repositories.AgendamentoRepository;
 
-import com.barber.barber.domain.repositories.IAgendamentoDAO;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoDto;
 import com.barber.barber.domain.entities.Agendamento.Agendamento;
 import jakarta.annotation.PostConstruct;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class AgendamentoDAO implements IAgendamentoDAO {
+public class AgendamentoRepository implements IAgendamentoRepository {
 
     @Autowired
     DataSource dataSource;
@@ -28,27 +27,28 @@ public class AgendamentoDAO implements IAgendamentoDAO {
     }
 
     public void inserirAgendamento(CadastrarAgendamentoDto dto){
-        String sql = "INSERT INTO agendamento(cliente, data, horario, servico) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO agendamento(cliente_id, data, horario, servico) VALUES(?,?,?,?)";
         Object[] parametros = new Object[4];
-        parametros[0] = dto.cliente();
-        parametros[1] = dto.data();
-        parametros[2] = dto.horario();
-        parametros[3] = dto.servico();
+        parametros[0] = dto.getClienteId();
+        parametros[1] = dto.getData();
+        parametros[2] = dto.getHorario();
+        parametros[3] = dto.getServico();
         jdbc.update(sql,parametros);
     }
 
     public List<Map<String,Object>> listarAgendamentos(){
-        String sql = "SELECT * FROM agendamento";
+        String sql = "SELECT a.id, a.data, a.horario, a.servico, c.nome FROM agendamento AS a LEFT JOIN cliente AS c ON c.id = a.cliente_id";
         return jdbc.queryForList(sql);
     }
 
     public List<Map<String,Object>> listarAgendamentoPorData(LocalDate data){
-        String sql = "SELECT * FROM agendamento where agendamento.data = ?";
+        String sql = "SELECT a.id, a.data, a.horario, a.servico, c.nome FROM agendamento AS a LEFT JOIN cliente AS c ON c.id = a.cliente_id where a.data = ?";
         return jdbc.queryForList(sql, data);
     }
 
     public Map<String,Object> listarAgendamentoPorId(int id){
-        String sql = "SELECT * FROM agendamento where agendamento.id = ?";
+        String sql = "SELECT a.id, a.data, a.horario, a.servico, c.nome FROM agendamento AS a LEFT JOIN cliente AS c ON c.id = a.cliente_id where a.id = ?";
+
         try {
             return jdbc.queryForMap(sql, id);
         } catch (EmptyResultDataAccessException e) {
@@ -56,10 +56,20 @@ public class AgendamentoDAO implements IAgendamentoDAO {
         }
     }
 
-    public void atualizarAgendamento(int id, Agendamento novo){
-        String sql = "UPDATE agendamento SET cliente = ?, data = ?, horario = ?, servico = ? WHERE id = ?";
+    public List<Map<String,Object>> listarAgendamentosPorIdCliente(int id){
+        String sql = "SELECT a.id, a.data, a.horario, a.servico, c.nome FROM agendamento AS a LEFT JOIN cliente AS c ON c.id = a.cliente_id where a.cliente_id = ?";
+
+        try {
+            return jdbc.queryForList(sql, id);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public void atualizarAgendamento(int id, CadastrarAgendamentoDto novo){
+        String sql = "UPDATE agendamento SET cliente_id = ?, data = ?, horario = ?, servico = ? where id = ?";
         Object[] parametros = new Object[5];
-        parametros[0] = novo.getCliente();
+        parametros[0] = novo.getClienteId();
         parametros[1] = novo.getData();
         parametros[2] = novo.getHorario();
         parametros[3] = novo.getServico();
@@ -72,17 +82,4 @@ public class AgendamentoDAO implements IAgendamentoDAO {
         jdbc.update(sql, id);
     }
 
-//    public List<Agendamento> listarAgendamentosPorCliente(String cliente){
-//        String sql = "SELECT * FROM agendamento WHERE agendamento.cliente = ?";
-//        List<Agendamento> agendamentos = jdbc.query(sql, new Object[]{cliente}, (result, index)->{
-//            Agendamento agendamento = new Agendamento();
-//            agendamento.setId(result.getInt("id"));
-//            agendamento.setCliente(result.getString("cliente"));
-//            agendamento.setData(result.getString("data"));
-//            agendamento.setHorario(result.getString("horario"));
-//            agendamento.setServico(result.getString("servico"));
-//            return agendamento;
-//        });
-//        return agendamentos;
-//    }
 }

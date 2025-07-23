@@ -31,6 +31,7 @@ export class AgendaComponent implements OnInit {
       },
       error: (error) => {
         console.log(error.error.message)
+        this.agendamentos = error.agendamentos;
       }
     })
   }

@@ -1,8 +1,11 @@
 package com.barber.barber.infra.web.handlers;
 
+import com.barber.barber.domain.entities.Cliente.Cliente;
 import com.barber.barber.domain.exceptions.*;
 import com.barber.barber.infra.web.DTOs.CadastrarAgendamentoResponseDto;
+import com.barber.barber.infra.web.DTOs.CadastrarClienteResponseDto;
 import com.barber.barber.infra.web.DTOs.ListarAgendamentoResponseDTO;
+import com.barber.barber.infra.web.DTOs.LoginClienteResponseDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -55,6 +58,30 @@ public class GlobalExceptionHandler {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new CadastrarAgendamentoResponseDto(ex.getMessage()));
+    }
+
+    @ExceptionHandler(SenhaInvalidaException.class)
+    public ResponseEntity<LoginClienteResponseDTO> handlerSenhaInvalida(SenhaInvalidaException ex){
+        logger.warn(ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new LoginClienteResponseDTO(ex.getMessage(), "", new Cliente(0, null, null, null, null, null)));
+    }
+
+    @ExceptionHandler(UsuarioNaoCadastradoException.class)
+    public ResponseEntity<LoginClienteResponseDTO> handlerUsuarioNaoCadastrado(UsuarioNaoCadastradoException ex){
+        logger.warn(ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new LoginClienteResponseDTO(ex.getMessage(), "", new Cliente(0, null, null, null, null, null)));
+    }
+
+    @ExceptionHandler(ContaJaCadastradaException.class)
+    public ResponseEntity<CadastrarClienteResponseDto> handlerContaJaCadastrada(ContaJaCadastradaException ex){
+        logger.warn(ex.getMessage());
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new CadastrarClienteResponseDto(ex.getMessage()));
     }
      
 }
