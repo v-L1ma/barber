@@ -9,16 +9,16 @@ export default class RabbitMQConnection{
     private emailSenderService = EmailSenderService.getInstance();
 
     private connectionOptions: amqp.Options.Connect = {
-        hostname: 'localhost',
+        hostname: process.env.RABBITMQ_HOSTNAME,
         port: 5672,
-        username: 'admin',
-        password: "123456"
+        username: process.env.RABBITMQ_USERNAME,
+        password: process.env.RABBITMQ_PASSWORD
     }
 
     public async initialize():Promise<void>{
                 
         amqp.connect(this.connectionOptions)
-            .then((conexao) => {
+            .then((conexao:any) => {
                 conexao.createChannel().then((canal:any)=>{
                     console.log("Conexão estabelecida com a fila WhatsApp");
 
@@ -34,9 +34,9 @@ export default class RabbitMQConnection{
                         }
                     }, {noAck:false})
 
-                }).catch((erro)=>{ console.log(erro) });
+                }).catch((erro:any)=>{ console.log(erro) });
 
-            }).catch((erro)=>{ console.log(erro); });
+            }).catch((erro:any)=>{ console.log(erro); });
     }
     
 
