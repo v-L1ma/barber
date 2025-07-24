@@ -57,7 +57,7 @@ public class AtualizarDadosCadastraisUseCase implements IAtualizarDadosCadastrai
             }
         }
 
-        Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail(), dto.getCelular(), cliente.getSenha());
+        Cliente clienteNovo = new Cliente(id, dto.getNome(), dto.getDataNascimento(), dto.getEmail().toUpperCase(), dto.getCelular(), cliente.getSenha());
         this.clienteService.atualizarDadosCliente(id, clienteNovo);
 
         return new CadastrarClienteResponseDto("Dados atualizados com sucesso!");

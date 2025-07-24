@@ -57,6 +57,7 @@ public class CadastrarClienteUseCase implements ICadastrarClienteUseCase{
         }
 
         dto.setSenha(passwordEncoder.encode(dto.getSenha()));
+        dto.setEmail(dto.getEmail().toUpperCase());
 
         clienteService.cadastrarCliente(dto);
 

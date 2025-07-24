@@ -26,7 +26,7 @@ public class LoginClienteUseCase implements ILoginClienteUseCase{
 
     @Override
     public LoginClienteResponseDTO executar(LoginClienteDTO dto) {
-        Cliente cliente = this.clienteService.buscarClientePorEmail(dto.getEmail());
+        Cliente cliente = this.clienteService.buscarClientePorEmail(dto.getEmail().toUpperCase());
 
         if (cliente==null){
             throw new UsuarioNaoCadastradoException("Usuario Não Cadastrado");
