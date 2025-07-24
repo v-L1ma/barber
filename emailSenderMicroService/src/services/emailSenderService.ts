@@ -23,22 +23,23 @@ export default class EmailSenderService{
 
     public async enviarEmail(to:string, subject:string){
 
-        const criacaoDeContaTemplate:string = "Assunto: Sua conta foi criada com sucesso!"+
-        "Olá {{nome}},"+
-        "Seja bem-vindo ao BarberBooking!"+
-        "Sua conta foi criada com sucesso e já está pronta para uso. Agora você pode agendar seus horários com praticidade e rapidez."+
-        "Acesse sua conta pelo link abaixo:"+
-        "{{link_login}}"+
-        "Se tiver qualquer dúvida, estamos à disposição."+
-        "BarberBooking © 2025";
+        const criacaoDeContaTemplate = `
+        <div style="background: #d33; color: #fff; text-decoration: none; width:100%; height: 50px"></div>
+        <h2>Sua conta foi criada com sucesso!</h2>
+        <p>Seja bem-vindo ao <strong>BarberBooking</strong>!</p>
+        <p>Sua conta já está pronta para uso. Agora você pode agendar seus horários com praticidade e rapidez.</p>
+        <p><a href="https://time4barber.netlify.app/login" style="background: #000; color: #fff; padding: 10px 15px; text-decoration: none;">Acessar minha conta</a></p>
+        <p>Se tiver qualquer dúvida, estamos à disposição.</p>
+        <p><em>BarberBooking © 2025</em></p>
+        `;
 
-        const redefinicaoDeSenhaTemplate:string = "Assunto: Redefinição de senha"
-        "Olá {{nome}},"+
-        "Recebemos uma solicitação para redefinir a senha da sua conta no BarberBooking."+
-        "Para criar uma nova senha, acesse o link abaixo:"+
-        "{{link_redefinir}}"+
-        "Se você não fez essa solicitação, apenas ignore este e-mail. Sua senha atual continuará válida."+
-        "BarberBooking © 2025";
+        const redefinicaoDeSenhaTemplate = `
+        <h2>Redefinição de senha</h2>
+        <p>Recebemos uma solicitação para redefinir a senha da sua conta no BarberBooking.</p>
+        <p><a href="https://time4barber.netlify.app/login" style="background: #d33; color: #fff; padding: 10px 15px; text-decoration: none;">Redefinir senha</a></p>
+        <p>Se você não fez essa solicitação, apenas ignore este e-mail.</p>
+        <p><em>BarberBooking © 2025</em></p>
+        `;
 
         const mailOptions = {
         from: 'barberbooking@hotmail.com',
