@@ -1,16 +1,20 @@
 package com.barber.barber.application.usecases.cadastrarCliente;
 
-import com.barber.barber.application.services.ClienteService.IClienteService;
-import com.barber.barber.application.services.rabbitMQService.RabbitmqService;
-import com.barber.barber.domain.entities.Cliente.Cliente;
-import com.barber.barber.domain.exceptions.*;
-import com.barber.barber.infra.web.DTOs.CadastrarClienteDto;
-import com.barber.barber.infra.web.DTOs.CadastrarClienteResponseDto;
-import com.barber.barber.infra.web.DTOs.EmailDto;
+import java.time.LocalDate;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import com.barber.barber.application.services.ClienteService.IClienteService;
+import com.barber.barber.application.services.rabbitMQService.RabbitmqService;
+import com.barber.barber.domain.entities.Cliente.Cliente;
+import com.barber.barber.domain.exceptions.AgendamentoNaoPodeSerNoPassadoException;
+import com.barber.barber.domain.exceptions.CamposObrigatoriosException;
+import com.barber.barber.domain.exceptions.ContaJaCadastradaException;
+import com.barber.barber.domain.exceptions.SenhaInvalidaException;
+import com.barber.barber.infra.web.DTOs.CadastrarClienteDto;
+import com.barber.barber.infra.web.DTOs.CadastrarClienteResponseDto;
+import com.barber.barber.infra.web.DTOs.EmailDto;
 
 @Service
 public class CadastrarClienteUseCase implements ICadastrarClienteUseCase{
@@ -36,6 +40,8 @@ public class CadastrarClienteUseCase implements ICadastrarClienteUseCase{
             dto.getConfirmarSenha() == null){
             throw new CamposObrigatoriosException();
         }
+        
+        dto.setEmail(dto.getEmail().toUpperCase());
 
         if (!dto.getConfirmarSenha().equals(dto.getSenha())){
             throw new SenhaInvalidaException("As senhas não conferem.");
@@ -57,7 +63,6 @@ public class CadastrarClienteUseCase implements ICadastrarClienteUseCase{
         }
 
         dto.setSenha(passwordEncoder.encode(dto.getSenha()));
-        dto.setEmail(dto.getEmail().toUpperCase());
 
         clienteService.cadastrarCliente(dto);
 
