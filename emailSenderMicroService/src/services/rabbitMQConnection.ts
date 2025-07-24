@@ -8,19 +8,22 @@ export default class RabbitMQConnection{
 
     private emailSenderService = EmailSenderService.getInstance();
 
-    private connectionOptions: amqp.Options.Connect = {
-        hostname: process.env.RABBITMQ_HOSTNAME,
-        port: 5672,
-        username: process.env.RABBITMQ_USERNAME,
-        password: process.env.RABBITMQ_PASSWORD
+    private readonly connectionUrl: string;
+
+    constructor() {
+        const envUrl = process.env.RABBITMQ_URL;
+        if (!envUrl) {
+        throw new Error("RABBITMQ_URL não encontrado nas variaveis de ambiente.");
+        }
+        this.connectionUrl = envUrl;
     }
 
     public async initialize():Promise<void>{
                 
-        amqp.connect(this.connectionOptions)
+        amqp.connect(this.connectionUrl)
             .then((conexao:any) => {
                 conexao.createChannel().then((canal:any)=>{
-                    console.log("Conexão estabelecida com a fila WhatsApp");
+                    console.log("Conexão estabelecida com a fila email");
 
                     canal.consume(this.fila, (mensagem: amqp.ConsumeMessage)=>{
                         try {
