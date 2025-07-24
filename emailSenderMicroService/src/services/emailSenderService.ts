@@ -45,23 +45,23 @@ export default class EmailSenderService{
         from: 'barberbooking@hotmail.com',
         to: to,
         subject: subject,
-        text: 'Corpo do e-mail'
+        html: ''
         };
 
         switch (subject) {
             case "criacao":
                 mailOptions.subject="Sua conta foi criada com sucesso!";
-                mailOptions.text=criacaoDeContaTemplate;
+                mailOptions.html=criacaoDeContaTemplate;
                 break;
             case "senha":
                 mailOptions.subject="Redefina sua senha";
-                mailOptions.text=redefinicaoDeSenhaTemplate;
+                mailOptions.html=redefinicaoDeSenhaTemplate;
                 break;
             default:
                 break;
         }
 
-        this.transporter.sendMail(mailOptions, (error, info) => {
+        this.transporter.sendMail(mailOptions, (error:any, info:any) => {
             if (error) {
                 return console.log(error);
             }
@@ -69,10 +69,4 @@ export default class EmailSenderService{
         });
 
     };
-
-    
-
-
 }
-
-
