@@ -13,11 +13,19 @@
         </ul>
     
         <div>
-            <button id="agenda" [routerLink]="'agenda'">
-                Minha agenda
+            <button id="agenda" [routerLink]="'agenda'" (click)="setIsloading('Minha agenda')" [disabled]="isLoading">
+                 @if(isLoading && button==='Minha agenda'){
+                    <app-loading></app-loading>
+                } @else {
+                    <p>Minha agenda</p>
+                }
             </button>
-            <button [routerLink]="'servicos/lista'">
-                Agendar horário
+            <button [routerLink]="'servicos/lista'" (click)="setIsloading('Agendar horário')" [disabled]="isLoading">
+                @if(isLoading && button==='Agendar horário'){
+                    <app-loading></app-loading>
+                } @else {
+                    <p>Agendar horário</p>
+                }
             </button>
         </div>
     </nav>
@@ -42,11 +50,19 @@
                         <li>Contatos</li>
                     </ul>
                     <div>
-                        <button id="agenda" [routerLink]="'agenda'">
-                            Minha agenda
+                        <button id="agenda" [routerLink]="'agenda'" (click)="setIsloading('Minha agenda')" [disabled]="isLoading">
+                            @if(isLoading && button==='Minha agenda'){
+                                <app-loading></app-loading>
+                            } @else {
+                                <p>Minha agenda</p>
+                            }
                         </button>
-                        <button [routerLink]="'servicos/lista'">
-                            Agendar horário
+                        <button [routerLink]="'servicos/lista'" (click)="setIsloading('Agendar horário')" [disabled]="isLoading">
+                            @if(isLoading && button==='Agendar horário'){
+                                <app-loading></app-loading>
+                            } @else {
+                                <p>Agendar horário</p>
+                            }
                         </button>
                     </div>
                 </div>
@@ -62,7 +78,13 @@
         <section id="hero">
             <h1>ESTILO É UM REFLEXO DA SUA ATITUDE E <br> SUA PERSONALIDADE.</h1>
             <p>Horário de funcionamento das 08:00 às 19:00</p>
-            <button [routerLink]="'servicos/lista'">Agendar horário</button>
+            <button [routerLink]="'servicos/lista'" (click)="setIsloading('heroSection')" [disabled]="isLoading">
+                @if(isLoading && button==='heroSection'){
+                    <app-loading></app-loading>
+                } @else {
+                    <p>Agendar horário</p>
+                }
+            </button>
         </section>
     
         <section id="sobre">

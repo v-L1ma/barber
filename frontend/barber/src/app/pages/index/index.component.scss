@@ -28,9 +28,14 @@ main{
                 background-color: #B8952E;
                 font-weight: bold;
                 cursor: pointer;
+                min-width: 10em;
 
                 &:hover{
                     opacity: .9;
+                }
+
+                &:disabled{
+                    opacity: .8;
                 }
             }
 
@@ -91,6 +96,11 @@ main{
             border: none;
             border-radius: .5em;
             font-weight: bolder;
+            min-width: 10em;
+
+            &:disabled{
+                    opacity: .8;
+            }
         }
     }
 
