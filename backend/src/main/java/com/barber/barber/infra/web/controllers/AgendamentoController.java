@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@CrossOrigin(origins = "https://time4barber.netlify.app")
+@CrossOrigin(origins = "https://time4barber.netlify.app", allowCredentials = "true")
 @RestController
 @RequestMapping("/agendamento")
 public class AgendamentoController {

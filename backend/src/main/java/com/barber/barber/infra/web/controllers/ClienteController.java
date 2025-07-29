@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://time4barber.netlify.app")
+@CrossOrigin(origins = "https://time4barber.netlify.app", allowCredentials = "true")
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
