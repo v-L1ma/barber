@@ -43,9 +43,10 @@ public class ClienteController {
 
         Cookie cookie = new Cookie("token", result.getToken());
         cookie.setHttpOnly(true);
+        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setMaxAge(24 * 60 * 60);
-        cookie.setAttribute("SameSite", "Strict");
+        cookie.setAttribute("SameSite", "None");
 
         response.addCookie(cookie);
 
