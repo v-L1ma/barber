@@ -9,6 +9,9 @@ import com.barber.barber.infra.web.DTOs.CadastrarClienteDto;
 import com.barber.barber.infra.web.DTOs.CadastrarClienteResponseDto;
 import com.barber.barber.infra.web.DTOs.LoginClienteDTO;
 import com.barber.barber.infra.web.DTOs.LoginClienteResponseDTO;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +38,18 @@ public class ClienteController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginClienteResponseDTO> loginCliente(@RequestBody LoginClienteDTO dto){
-        return ResponseEntity.status(HttpStatus.OK).body(loginClienteUseCase.executar(dto));
+    public ResponseEntity<LoginClienteResponseDTO> loginCliente(@RequestBody LoginClienteDTO dto, HttpServletResponse response){
+        LoginClienteResponseDTO result = loginClienteUseCase.executar(dto);
+
+        Cookie cookie = new Cookie("token", result.getToken());
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(24 * 60 * 60);
+        cookie.setAttribute("SameSite", "Strict");
+
+        response.addCookie(cookie);
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @PostMapping("/cadastro")
@@ -55,10 +68,32 @@ public class ClienteController {
     }
 
     @GetMapping("/validar-token")
-    public ResponseEntity<Boolean> validarToken(@RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.replace("Bearer ", "");
-        String subject = tokenService.validateToken(token);
+    public ResponseEntity<Boolean> validarToken(HttpServletRequest request) {
+        String token = null;
+
+        if(request.getCookies() !=null){
+            for (Cookie cookie : request.getCookies()){
+                if ("token".equals(cookie.getName())){
+                    token= cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        String subject = token !=null ? tokenService.validateToken(token) : null;
+
         return ResponseEntity.ok(subject != null);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("token", null);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
