@@ -17,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://time4barber.netlify.app", allowCredentials = "true")
+@CrossOrigin(origins = "https://time4barber.netlify.app")
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -38,19 +38,8 @@ public class ClienteController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginClienteResponseDTO> loginCliente(@RequestBody LoginClienteDTO dto, HttpServletResponse response){
-        LoginClienteResponseDTO result = loginClienteUseCase.executar(dto);
-
-        Cookie cookie = new Cookie("token", result.getToken());
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(24 * 60 * 60);
-        cookie.setAttribute("SameSite", "None");
-
-        response.addCookie(cookie);
-
-        return ResponseEntity.status(HttpStatus.OK).body(result);
+    public ResponseEntity<LoginClienteResponseDTO> loginCliente(@RequestBody LoginClienteDTO dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(loginClienteUseCase.executar(dto));
     }
 
     @PostMapping("/cadastro")
@@ -69,32 +58,10 @@ public class ClienteController {
     }
 
     @GetMapping("/validar-token")
-    public ResponseEntity<Boolean> validarToken(HttpServletRequest request) {
-        String token = null;
-
-        if(request.getCookies() !=null){
-            for (Cookie cookie : request.getCookies()){
-                if ("token".equals(cookie.getName())){
-                    token= cookie.getValue();
-                    break;
-                }
-            }
-        }
-
-        String subject = token !=null ? tokenService.validateToken(token) : null;
-
+    public ResponseEntity<Boolean> validarToken(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.replace("Bearer ", "");
+        String subject = tokenService.validateToken(token);
         return ResponseEntity.ok(subject != null);
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletResponse response) {
-        Cookie cookie = new Cookie("token", null);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
-
-        return ResponseEntity.noContent().build();
     }
 
 }

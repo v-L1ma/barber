@@ -17,9 +17,25 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private router: Router, private httpCliente:HttpClient) {}
 
   private isAuthenticated(): Observable<boolean> {
+    const token = localStorage.getItem('token');
+
+    this.httpCliente.get<boolean>(`${environment.apiUrl}/cliente/validar-token`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+    }).subscribe({
+      next: (next)=>{
+        console.log(next)
+      },
+      error: (error)=>{
+        console.log(error)
+      }
+    })
 
     return this.httpCliente.get<boolean>(`${environment.apiUrl}/cliente/validar-token`, {
-        withCredentials: true
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
     }).pipe(catchError(()=> of(false)))
   }
 
@@ -27,6 +43,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return this.isAuthenticated().pipe(
     tap(isAuth => {
       if (!isAuth) {
+        console.log("indo pro login pq nn ta auth")
         this.router.navigate(['/login'], {
           state: {destino: state.url}
         });

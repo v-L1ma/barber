@@ -36,3 +36,4 @@ build/
 emailSenderMicroService/.env
 /emailSenderMicroService/node_modules
 /node_modules
+backend/src/main/resources/application.yaml

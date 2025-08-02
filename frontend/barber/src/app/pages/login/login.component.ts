@@ -48,14 +48,18 @@ export class LoginComponent implements OnInit{
       next: (response)=>{
         this.status="sucess";
         this.responseMessage=response.message;
+        localStorage.setItem("token", response.token)
         localStorage.setItem("clienteInfo", JSON.stringify(response.clienteInfo))
-        this.router.navigateByUrl(this.destino);
         console.log(response)
+        console.log("destino no login: ", this.destino)
+        this.router.navigateByUrl(this.destino);
       },
       error:(error)=>{
         this.status="erro";
         this.responseMessage=error.error.message;
         console.log(error)
+        window.alert(JSON.stringify(error))
+
       }
     })
     console.log(this.loginForm.value)

@@ -12,15 +12,12 @@ import { environment } from '../../../environments/environment';
 })
 export class HeaderComponent {
   clienteInfo: TCliente = JSON.parse(localStorage.getItem("clienteInfo")!)
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router) {}
 
   logout() {
-  this.http.post(`${environment.apiUrl}/cliente/logout`, {}, { withCredentials: true })
-    .subscribe(() => {
-      localStorage.removeItem('clienteInfo');
-      this.router.navigate(['/login']);
-    });
-}
+    localStorage.clear();
+    this.router.navigate(['/']);
+  }
 
   navegar(destino: string) {
     this.router.navigate([destino]);
