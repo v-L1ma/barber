@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit{
         this.status="erro";
         this.responseMessage=error.error.message;
         console.log(error)
-        window.alert(JSON.stringify(error))
 
       }
     })
