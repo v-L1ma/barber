@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TCliente } from '../../types/TCliente';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

@@ -1,74 +1,115 @@
-<div id="background">
-    <div class="container">
-      <div class="box">
-        <header>
-            <app-voltar-btn go="/"></app-voltar-btn>
-            <h2 class="title">Primeira vez aqui?<br>Crie sua conta!</h2>   
-        </header>      
-    
-        <form [formGroup]="signupForm" (ngSubmit)="signUp()" #formDir="ngForm">
-          <div class="input">
-              <label for="nome">Nome completo</label>
-              <input type="nome" id="nome" formControlName="nome" placeholder="Seu nome" />
-              @if (nome?.invalid && formDir.submitted) {
-                <p class="error">O nome deve ter entre 5 a 50 caracteres.</p>
-              }
-          </div>
-
-          <div class="input">
-              <label for="email">Email</label>
-              <input type="email" id="email" formControlName="email" placeholder="seuemail@email.com" />
-              @if (email?.invalid && formDir.submitted) {
-                <p class="error">Insira um email válido.</p>
-              }
-          </div>
-
-          <div class="input">
-              <label for="celular">Celular</label>
-              <input type="celular" id="celular" formControlName="celular" placeholder="(xx)xxxxxxxxx" />
-              @if (celular?.invalid && formDir.submitted) {
-                <p class="error">O celular deve ter 11 digitos, contando o DDD.</p>
-              }
-          </div>
-    
-          <div class="input">
-              <label for="senha">Senha</label>
-              <input type="password" id="senha" formControlName="senha" placeholder="********" />
-              @if (senha?.invalid && formDir.submitted) {
-                <p class="error">A senha deve ter no minimo 6 caracteres.</p>
-              }
-          </div>
-
-          <div class="input">
-              <label for="senha">Confirme a sua senha</label>
-              <input type="password" id="senha" formControlName="confirmarSenha" placeholder="********" />
-              @if (confirmarSenha?.invalid && formDir.submitted) {
-                <p class="error">Deve conter no minimo 6 digitos.</p>
-              }
-          </div>
-
-          <p id="link">
-            Já possui uma conta?<a href="/login"> Faça login</a>
-          </p>
-
-          <p>
-            @if (status) {
-              <p class="status {{status}}">{{responseMessage}}</p>
-            }
-          </p>
-
-          <button type="submit">Cadastrar</button>
-        </form>
-    
-       
-      </div>
-    
-      <aside>
-        <h1 class="register-text">Seja bem-vindo de volta!</h1>
-         <p class="register-text">
-          Se você já possuí uma conta basta clicar no botão abaixo e fazer login
-        </p>
-        <a href="/login">Faça login</a>
-      </aside>
-    </div>
+<!-- Background Layer -->
+<div class="auth-bg">
+  <div class="auth-bg__overlay"></div>
+  <img class="auth-bg__img"
+    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoUToy1PwrwEiPAbeL6lrk5tAwyf021q9sH4lzae5M6hSG_NZQAOw-bciMMUK9Bya61UsDo0r5VHxV7-tKqzWLyiwHNtOBIo1SosJDxBr1WkANvbET7VJmDOvmwvORBNLxJIu6_2q_ZoOBCpepWR_oimz9KbUkEBcfBTb2sXFCYBvMiQlhgIqiEuSpWT7XFvCUNkY7M5xrBRUEsA48M9TX7yOrCl2MQ3iz6VJEJuFyDsjsbBq-EOT3gqHx5Arbt9UzJ53cuTJnfhT2"
+    alt="Barbershop atmosphere" />
 </div>
+
+<!-- Cadastro Container -->
+<main class="auth-main">
+  <div class="auth-card auth-card--wide">
+
+    <!-- Brand Header -->
+    <header class="auth-card__header">
+      <div class="auth-card__icon-wrap">
+        <span class="material-symbols-outlined auth-card__icon">content_cut</span>
+      </div>
+      <h1 class="auth-card__brand">Time4Barber</h1>
+      <p class="auth-card__subtitle">Crie sua conta gratuitamente</p>
+    </header>
+
+    <!-- Cadastro Form -->
+    <form [formGroup]="signupForm" (ngSubmit)="signUp()" #formDir="ngForm" class="auth-form">
+
+      <!-- Nome Field -->
+      <div class="auth-field">
+        <label class="auth-field__label" for="nome">Nome Completo</label>
+        <div class="auth-field__wrap">
+          <span class="material-symbols-outlined auth-field__icon">person</span>
+          <input class="auth-field__input" type="text" id="nome" formControlName="nome" placeholder="Seu nome" />
+        </div>
+        @if (nome?.invalid && formDir.submitted) {
+        <p class="auth-field__error">O nome deve ter entre 5 a 50 caracteres.</p>
+        }
+      </div>
+
+      <!-- Email Field -->
+      <div class="auth-field">
+        <label class="auth-field__label" for="email">Email</label>
+        <div class="auth-field__wrap">
+          <span class="material-symbols-outlined auth-field__icon">mail</span>
+          <input class="auth-field__input" type="email" id="email" formControlName="email"
+            placeholder="seuemail@email.com" />
+        </div>
+        @if (email?.invalid && formDir.submitted) {
+        <p class="auth-field__error">Insira um email válido.</p>
+        }
+      </div>
+
+      <!-- Celular Field -->
+      <div class="auth-field">
+        <label class="auth-field__label" for="celular">Celular</label>
+        <div class="auth-field__wrap">
+          <span class="material-symbols-outlined auth-field__icon">phone</span>
+          <input class="auth-field__input" type="tel" id="celular" formControlName="celular"
+            placeholder="(xx) xxxxx-xxxx" />
+        </div>
+        @if (celular?.invalid && formDir.submitted) {
+        <p class="auth-field__error">O celular deve ter 11 dígitos, contando o DDD.</p>
+        }
+      </div>
+
+      <!-- Senha Field -->
+      <div class="auth-field">
+        <label class="auth-field__label" for="senha">Senha</label>
+        <div class="auth-field__wrap">
+          <span class="material-symbols-outlined auth-field__icon">lock</span>
+          <input class="auth-field__input" type="password" id="senha" formControlName="senha" placeholder="••••••••" />
+        </div>
+        @if (senha?.invalid && formDir.submitted) {
+        <p class="auth-field__error">A senha deve ter no mínimo 6 caracteres.</p>
+        }
+      </div>
+
+      <!-- Confirmar Senha Field -->
+      <div class="auth-field">
+        <label class="auth-field__label" for="confirmarSenha">Confirme a Senha</label>
+        <div class="auth-field__wrap">
+          <span class="material-symbols-outlined auth-field__icon">lock_reset</span>
+          <input class="auth-field__input" type="password" id="confirmarSenha" formControlName="confirmarSenha"
+            placeholder="••••••••" />
+        </div>
+        @if (confirmarSenha?.invalid && formDir.submitted) {
+        <p class="auth-field__error">Deve conter no mínimo 6 dígitos.</p>
+        }
+      </div>
+
+      <!-- Status Message -->
+      @if (status) {
+      <p class="auth-status auth-status--{{status}}">{{responseMessage}}</p>
+      }
+
+      <!-- Submit -->
+      <button class="auth-btn" type="submit">Criar Conta</button>
+
+    </form>
+
+    <!-- Footer link -->
+    <div class="auth-card__footer">
+      <p class="auth-card__footer-text">
+        Já tem conta? <a class="auth-link auth-link--muted" href="/login">Faça login</a>
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<!-- Page Footer -->
+<footer class="auth-footer">
+  <span class="auth-footer__copy">© 2024 Time4Barber . ALL RIGHTS RESERVED.</span>
+  <div class="auth-footer__links">
+    <a class="auth-footer__link" href="#">Política de Privacidade</a>
+    <a class="auth-footer__link" href="#">Termos de Uso</a>
+  </div>
+</footer>

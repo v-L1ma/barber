@@ -6,10 +6,11 @@ import { CarregarTodosAgendamentosService } from '../../services/agendametosTodo
 import { Router, RouterModule } from '@angular/router';
 import { ListarAgendamentosPorClienteIdService } from '../../services/listarAgendamentosPorClienteId/listar-agendamentos-por-cliente-id.service';
 import { ModalComponent } from "../../components/modal/modal/modal.component";
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
   selector: 'app-meus-agendamentos',
-  imports: [RouterModule, ModalComponent],
+  imports: [RouterModule, ModalComponent, HeaderComponent],
   templateUrl: './meus-agendamentos.component.html',
   styleUrl: './meus-agendamentos.component.scss'
 })
@@ -18,8 +19,8 @@ export class MeusAgendamentosComponent implements OnInit{
   agendamentos: TAgendamento[] = [];
   isPopUpOpen:boolean = false;
   
-  private clienteInfo = JSON.parse(localStorage.getItem("clienteInfo")!);
-  private clienteId:number = this.clienteInfo.id;
+  private clienteInfo = JSON.parse(localStorage.getItem("clienteInfo")!) ?? null;
+  private clienteId:number = this.clienteInfo?.id ?? 0;
 
   constructor(private listarAgendamentosPorClienteIdService: ListarAgendamentosPorClienteIdService,
     private deleteAgendamento: DeletarAgendamentoService,
@@ -44,7 +45,27 @@ export class MeusAgendamentosComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.carregarAgendamentos(this.clienteId)
+    // this.carregarAgendamentos(this.clienteId)
+    this.agendamentos = [
+    {
+        data: "2025-02-13",
+        horario: "10:00",
+        cliente: "Vanuza",
+        servico: "Corte feminino"
+    },
+    {
+        data: "2025-02-13",
+        horario: "12:00",
+        cliente: "Vinicius",
+        servico: "Corte"
+    },
+    {
+        data: "2025-02-13",
+        horario: "12:00",
+        cliente: "Vinicius",
+        servico: "Corte"
+    }
+  ]
   }
 
   deletar(id:number){

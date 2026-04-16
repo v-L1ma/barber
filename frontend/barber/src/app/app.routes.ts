@@ -16,24 +16,14 @@ export const routes: Routes = [
         component: IndexComponent
     },
     {
-        path: "agendamento",
+        path: "servicos/agendamento",
         component: AgendamentoComponent,
         canActivate: [AuthGuard]
     },
     {
-        path: "servicos",
-        component: ServicosComponent,
-        canActivateChild: [AuthGuard],
-        children:[
-            {
-                path:"lista",
-                component: ListaComponent
-            },
-            {
-                path:"meus-agendamentos",
-                component: MeusAgendamentosComponent
-            }
-        ],
+        path: "servicos/meus-agendamentos",
+        component: MeusAgendamentosComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: "agenda",

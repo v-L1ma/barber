@@ -1,27 +1,29 @@
-<div class="header">
-
-  <div class="profile-container">
-    <img src="https://img.icons8.com/ios-filled/100/ffffff/user-male-circle.png" alt="Perfil" class="avatar" />
-
-    <div class="dropdown">
-      <div class="user-info">
-        <img src="https://img.icons8.com/ios-filled/100/ffffff/user-male-circle.png" alt="Perfil" class="avatar" />
-        <div class="info">
-          <div class="nome">{{clienteInfo.nome}}</div>
-        </div>
-        <div class="status-indicator"></div>
+<header class="header">
+  <div class="header__brand">
+    <div class="header__logo-wrap">
+      <div class="header__logo-box text-on-primary">
+        <span class="material-symbols-outlined">content_cut</span>
       </div>
-
-      <hr />
-
-      <div class="menu-item" (click)="navegar('/perfil')">
-        <span class="icon">⚙️</span>
-        <span>Perfil</span>
-      </div>
-      <div class="menu-item logout" (click)="logout()">
-        <span class="icon">↩️</span>
-        <span>Sair</span>
+      <div class="header__titles">
+        <h1>Time4Barber</h1>
+        <span>Enterprise Edition</span>
       </div>
     </div>
+    <nav class="header__nav">
+      <button class="header__nav-btn" [routerLink]="'/servicos/agendamento'"
+        routerLinkActive="header__nav-btn--active">Agendamento</button>
+      <button class="header__nav-btn" [routerLink]="'/servicos/meus-agendamentos'"
+        routerLinkActive="header__nav-btn--active">Histórico</button>
+      <button class="header__nav-btn" [routerLink]="'/perfil'" routerLinkActive="header__nav-btn--active">Minha
+        Conta</button>
+    </nav>
   </div>
-</div>
+  <div class="header__actions">
+    <button class="header__action-btn">
+      <span class="material-symbols-outlined">notifications</span>
+    </button>
+    <button class="header__action-btn" (click)="logout()">
+      <span class="material-symbols-outlined">logout</span>
+    </button>
+  </div>
+</header>

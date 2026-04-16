@@ -1,99 +1,361 @@
-section{
-    width: 72vw;
-    margin: 0 auto;
-    padding: 1em;
-    background-color: #232225b9;
-    border-radius: 0 1em 1em 1em;
-    border: 1px solid rgb(68, 68, 68);
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
+@use "../../styles/variables" as *;
 
-    .card{
-        
-        h2{
-            padding: 1em;
-            font-size: 1em;
-            font-weight: bold;
-        }
-
-        ul{
-            padding: 2em 1.5em;
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 1em;
-            
-            li{
-                display: flex;
-                padding: 1em 0;
-                align-items: center;
-                justify-content: space-between;
-                border-bottom: 1px solid #323135;
-                text-align: center;
-
-                position: relative;
-
-                button{
-                    appearance: none;
-                    background-color: transparent;
-                    border: none;
-                    padding: .5em;
-                    border-radius: .5em;
-                    cursor: pointer;
-
-                    &:hover{
-                        background-color: #303033;
-                    }
-                }
-
-                button:hover + #popup{
-                    display: flex;
-                }
-
-                #popup{
-                    display: none;
-                    
-                    position: absolute;
-                    right: 35px;
-                    top: 1.2em;
-                    z-index: 1;
-
-                    background-color: rgb(41, 41, 41);
-                    width: fit-content;
-                    border-radius: .2em;
-                    overflow: hidden;
-                    color: rgba(255, 255, 255, 0.626);
-    
-                    ul{
-                        padding: 0;
-                        gap: 0em;
-                        
-                        li{
-                            display: flex;
-                            padding: 1em 2em;
-                            cursor: pointer;
-                            gap: 1em;
-
-                            &:hover{
-                                color: white;
-                            }
-                        }
-                    }
-
-                    &:hover{
-                        display: flex;
-                    }
-                }
-            }            
-        }
-    }
-
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $bg;
+  font-family: 'Inter', sans-serif;
+  color: $on-surface;
 }
 
-@media screen and (max-width:950px){
-    section{
-        width: 90vw;
-        padding: 0;
+.page-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  
+  @media (min-width: 768px) {
+    padding: 3rem 2rem;
+  }
+}
+
+.page-content {
+  max-width: 56rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid rgba($primary, 0.2);
+  padding-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: $primary;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.page-desc {
+  font-size: 0.875rem;
+  color: rgba($on-surface, 0.6);
+  margin: 0;
+}
+
+// ──────────────────────────────────────────────
+// Grid & Cards
+// ──────────────────────────────────────────────
+.appointments-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.appointment-card {
+  background-color: $surface-low;
+  border: 1px solid $outline;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: rgba($primary, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+// Date Section
+.appointment-date {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid $outline;
+
+  @media (min-width: 640px) {
+    padding-bottom: 0;
+    border-bottom: none;
+    border-right: 1px solid $outline;
+    padding-right: 2rem;
+    min-width: 200px;
+  }
+}
+
+.date-badge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.375rem;
+  background-color: rgba($primary, 0.1);
+  color: $primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba($primary, 0.2);
+
+  .material-symbols-outlined {
+    font-size: 1.5rem;
+  }
+}
+
+.date-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.date-full {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: $on-surface;
+}
+
+.time-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background-color: $surface-container;
+  border: 1px solid $outline-variant;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba($on-surface, 0.8);
+
+  .icon-small {
+    font-size: 1rem;
+    color: $primary;
+  }
+}
+
+// Info Section
+.appointment-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.appointment-status {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: $success-bg;
+  color: $success;
+  border: 1px solid rgba($success, 0.2);
+  border-radius: 99px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.appointment-service {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $on-surface;
+}
+
+.appointment-professional {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba($on-surface, 0.6);
+
+  .icon-small {
+    font-size: 1.125rem;
+  }
+}
+
+// Actions Section
+.appointment-actions {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+
+  @media (min-width: 640px) {
+    position: static;
+  }
+}
+
+.btn-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  color: rgba($on-surface, 0.6);
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $surface-container;
+    color: $primary;
+    border-color: $outline-variant;
+  }
+}
+
+// Dropdown
+.dropdown-container {
+  position: relative;
+
+  &:hover .dropdown-menu,
+  &:focus-within .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  width: 160px;
+  background-color: $surface-container;
+  border: 1px solid $outline-variant;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 10;
+  
+  // Animation and hide by default
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  color: $on-surface;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  .material-symbols-outlined {
+    font-size: 1.125rem;
+  }
+
+  &:hover {
+    background-color: rgba($primary, 0.1);
+    color: $primary;
+  }
+
+  &.dropdown-danger {
+    color: $error;
+
+    &:hover {
+      background-color: rgba($error, 0.1);
     }
+  }
+}
+
+// ──────────────────────────────────────────────
+// Empty State
+// ──────────────────────────────────────────────
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background-color: $surface-container;
+  border: 1px dashed $outline-variant;
+  border-radius: 0.5rem;
+  text-align: center;
+  
+  .empty-icon {
+    font-size: 4rem;
+    color: rgba($primary, 0.5);
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $on-surface;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: rgba($on-surface, 0.6);
+  }
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+// Buttons
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  padding: 0.625rem 1.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: $primary;
+  color: $on-primary;
+
+  &:hover {
+    background-color: $primary-dim;
+    box-shadow: 0 4px 14px rgba($primary, 0.2);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
 }

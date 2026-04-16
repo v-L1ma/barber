@@ -26,9 +26,28 @@ export class PerfilComponent implements OnInit{
     private atualizarDadosService: AtualizarDadosCadastraisService,
     private deletarClienteService: DeletarClienteService){}
 
+  get avatarInitial(): string {
+    if (!this.clienteInfo || !this.clienteInfo.nome) {
+      return 'U';
+    }
+
+    return this.clienteInfo.nome.charAt(0).toUpperCase();
+  }
+
   ngOnInit(): void {
     const local = localStorage.getItem("clienteInfo")
     this.clienteInfo = JSON.parse(local!);
+
+    if(this.clienteInfo == null){
+        this.clienteInfo = {
+        id: 0,
+        nome: "",
+        email: "",
+        celular: "",
+        senha: "",
+        confirmarSenha: ""
+      }
+    }
 
     this.form = new FormGroup({
       nome: new FormControl(this.clienteInfo.nome, [Validators.required]),

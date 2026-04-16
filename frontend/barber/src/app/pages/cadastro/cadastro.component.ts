@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { VoltarBtnComponent } from "../../components/voltar-btn/voltar-btn.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CadastroService } from '../../services/cadastro/cadastro.service';
 
 @Component({
   selector: 'app-cadastro',
-  imports: [VoltarBtnComponent, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.scss'
 })

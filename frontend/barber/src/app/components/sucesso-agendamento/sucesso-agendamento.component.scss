@@ -16,12 +16,12 @@ main{
     #container{
         display: flex;
         flex-direction: column;
-        background-color: #232225;
+        background-color: #12110e;
         align-items: center;
         height: fit-content;
         padding: 2em;
         padding-top: 5em;
-        border-radius: 1em;
+        border-radius: 0.2em;
         box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.5);
         gap: 2em;
 
@@ -35,12 +35,12 @@ main{
             appearance: none;
             width: 100%;
             padding: .5em;
-            background-color: yellow;
+            background-color: #d7ab33;
             border: none;
             color: black;
             font-weight: bolder;
             font-size: 1em;
-            border-radius: .5em;
+            border-radius: .2rem;
             cursor: pointer;
         }
     }

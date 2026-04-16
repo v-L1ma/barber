@@ -1,166 +1,295 @@
-<main>
-    <nav id="desktop">
-        <ul>
-            <a href="#sobre">
-                <li>Sobre</li>
-            </a>
-            <a href="#servicos">
-                <li>Serviços</li>
-            </a>
-            <a href="#unidades">
-                <li>Unidades</li>
-            </a>
-        </ul>
-    
-        <div>
-            <button id="agenda" [routerLink]="'agenda'" (click)="setIsloading('Minha agenda')" [disabled]="isLoading">
-                 @if(isLoading && button==='Minha agenda'){
-                    <app-loading></app-loading>
+<!-- ===== HEADER ===== -->
+<header class="site-header">
+    <div class="header-inner">
+        <div class="logo">
+            <span class="material-symbols-outlined logo-icon">content_cut</span>
+            <span class="logo-text">Time<span class="accent">4Barber</span></span>
+        </div>
+
+        <nav class="desktop-nav">
+            <a href="#inicio">Início</a>
+            <a href="#servicos">Serviços</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#localizacao">Localização</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="btn-primary" [routerLink]="'servicos/lista'" (click)="setIsloading('headerAgendar')"
+                [disabled]="isLoading">
+                @if(isLoading && button==='headerAgendar'){
+                <app-loading></app-loading>
                 } @else {
-                    <p>Minha agenda</p>
+                Agendar Agora
                 }
             </button>
-            <button [routerLink]="'servicos/lista'" (click)="setIsloading('Agendar horário')" [disabled]="isLoading">
+            <button class="mobile-menu-btn" (click)="openMenu()">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- ===== MOBILE DRAWER ===== -->
+@if(isOpen){
+<div class="mobile-overlay" (click)="openMenu()">
+    <div class="mobile-drawer" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="openMenu()">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <nav class="mobile-nav">
+            <a href="#inicio" (click)="openMenu()">Início</a>
+            <a href="#servicos" (click)="openMenu()">Serviços</a>
+            <a href="#sobre" (click)="openMenu()">Sobre</a>
+            <a href="#localizacao" (click)="openMenu()">Localização</a>
+        </nav>
+        <div class="mobile-actions">
+            <button class="btn-outline-gold" [routerLink]="'agenda'" (click)="setIsloading('Minha agenda')"
+                [disabled]="isLoading">
+                @if(isLoading && button==='Minha agenda'){
+                <app-loading></app-loading>
+                } @else {
+                Minha agenda
+                }
+            </button>
+            <button class="btn-primary" [routerLink]="'servicos/lista'" (click)="setIsloading('Agendar horário')"
+                [disabled]="isLoading">
                 @if(isLoading && button==='Agendar horário'){
-                    <app-loading></app-loading>
+                <app-loading></app-loading>
                 } @else {
-                    <p>Agendar horário</p>
+                Agendar horário
                 }
             </button>
         </div>
-    </nav>
+    </div>
+</div>
+}
 
-    <nav>
-        <div id="header">
-            <button (click)="openMenu()">
-                <img src="menuIcon.svg" alt="">
-            </button>
+<main>
+    <!-- ===== HERO SECTION ===== -->
+    <section id="inicio" class="hero-section">
+        <div class="hero-bg">
+            <div class="hero-overlay"></div>
+            <img class="hero-img"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFSHFtefLZWFLX0Po7OSikrHATzdsF7BPPhMa41OwjFeJucadMr6KwPs4V92B3Riy2CHuJeLGfDpXe7uLVizalNdSaYVNmkhVNyCbu62oug8IoWnf65DVjWhqUebP3mKsN7mx4FlaKuGnnFaV3ZKsdA2jK7a8iP_WqAi0U8TkHGDH5JNGJKORL33lRyEyffRf5Out3p_l7TrbtHXcEXtiy9CwbPIgdLe4-VsZUow2tdvnZ7Jz2yQKLppz7xC79XLu3icgl-YKfxFyu"
+                alt="Interior de barbearia luxuosa" />
         </div>
-
-        @if(isOpen){
-            <div id="mobile">
-                <div id="container">
-                    <button id="closeBtn" (click)="openMenu()">
-                        <img src="closeIcon.svg" alt="">
+        <div class="hero-content">
+            <div class="hero-inner">
+                <span class="hero-badge">Premium Grooming Experience</span>
+                <h1 class="hero-title">
+                    Estilo é um reflexo da sua <span class="accent">atitude</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Experiência premium em barbearia com foco em agilidade e excelência para o homem que não abre mão da
+                    sua melhor versão.
+                </p>
+                <div class="hero-actions">
+                    <button class="btn-primary btn-lg" [routerLink]="'servicos/lista'"
+                        (click)="setIsloading('heroServicos')" [disabled]="isLoading">
+                        @if(isLoading && button==='heroServicos'){
+                        <app-loading></app-loading>
+                        } @else {
+                        Ver Serviços
+                        }
                     </button>
-                    <ul>
-                        <li>Sobre</li>
-                        <li>Serviços</li>
-                        <li>Quem somos</li>
-                        <li>Contatos</li>
-                    </ul>
-                    <div>
-                        <button id="agenda" [routerLink]="'agenda'" (click)="setIsloading('Minha agenda')" [disabled]="isLoading">
-                            @if(isLoading && button==='Minha agenda'){
-                                <app-loading></app-loading>
-                            } @else {
-                                <p>Minha agenda</p>
-                            }
-                        </button>
-                        <button [routerLink]="'servicos/lista'" (click)="setIsloading('Agendar horário')" [disabled]="isLoading">
-                            @if(isLoading && button==='Agendar horário'){
-                                <app-loading></app-loading>
-                            } @else {
-                                <p>Agendar horário</p>
-                            }
-                        </button>
-                    </div>
+                    <button class="btn-outline btn-lg" [routerLink]="'servicos/lista'"
+                        (click)="setIsloading('heroAgendar')" [disabled]="isLoading">
+                        @if(isLoading && button==='heroAgendar'){
+                        <app-loading></app-loading>
+                        } @else {
+                        Agendar Horário
+                        }
+                    </button>
                 </div>
-    
             </div>
-        }
+        </div>
+    </section>
 
-        
-        
-    </nav>
-    
-    <body>
-        <section id="hero">
-            <h1>ESTILO É UM REFLEXO DA SUA ATITUDE E <br> SUA PERSONALIDADE.</h1>
-            <p>Horário de funcionamento das 08:00 às 19:00</p>
-            <button [routerLink]="'servicos/lista'" (click)="setIsloading('heroSection')" [disabled]="isLoading">
-                @if(isLoading && button==='heroSection'){
-                    <app-loading></app-loading>
-                } @else {
-                    <p>Agendar horário</p>
-                }
-            </button>
-        </section>
-    
-        <section id="sobre">
-            <div id="images">
-                <img src="sobre1.png" alt="">
-                <img src="sobre1.png" alt="">
-                <img src="sobre1.png" alt="">
-            </div>
-    
-            <div id="texto">
-                <h1>Sobre</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam ducimus, doloremque excepturi natus incidunt deserunt ut, vel magnam corporis esse doloribus cupiditate saepe consectetur magni omnis. Consequatur quis eligendi fugit?</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores quasi distinctio vero. Ratione ex ad similique ut, eligendi maxime accusamus dignissimos enim id numquam tenetur odio at quisquam et! Hic.</p>
-                <p>Horário de funcionamento das 08:08 às 19:00</p>
-            </div>
-    
-        </section>
-    
-        <section id="servicos">
-            <h1>SERVIÇOS</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum illo deserunt, repellendus quia deleniti aliquid eligendi maiores sint ullam iusto sit numquam minus harum quaerat explicabo repudiandae quos eaque adipisci.</p>
-            <div class="galery">
-                <div class="card">
-                    <img src="servico1.png" alt="">
-                    <div>
-                        <h1>Corte de cabelo</h1>
-                        <p>R$ 40,00</p>
-                    </div>
+    <!-- ===== PILLARS SECTION ===== -->
+    <section class="pillars-section">
+        <div class="section-container">
+            <div class="pillars-header">
+                <div>
+                    <p class="section-label">Nossos Pilares</p>
+                    <h2 class="section-title">
+                        Excelência em cada detalhe, compromisso com sua imagem.
+                    </h2>
                 </div>
-    
-                <div class="card">
-                    <img src="servico1.png" alt="">
-                    <div>
-                        <h1>Corte de cabelo</h1>
-                        <p>R$ 40,00</p>
+                <p class="pillars-desc">
+                    Elevamos o padrão do cuidado masculino através de técnicas tradicionais e atendimento personalizado.
+                </p>
+            </div>
+
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <span class="material-symbols-outlined">schedule</span>
                     </div>
+                    <h3>Agilidade</h3>
+                    <p>Respeitamos seu tempo com processos otimizados e pontualidade rigorosa, sem nunca comprometer a
+                        qualidade do serviço.</p>
                 </div>
-    
-                <div class="card">
-                    <img src="servico1.png" alt="">
-                    <div>
-                        <h1>Corte de cabelo</h1>
-                        <p>R$ 40,00</p>
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <span class="material-symbols-outlined">verified</span>
                     </div>
+                    <h3>Excelência</h3>
+                    <p>O mais alto padrão em cortes e cuidados masculinos, utilizando produtos premium das melhores
+                        marcas mundiais.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <span class="material-symbols-outlined">person_pin</span>
+                    </div>
+                    <h3>Atendimento</h3>
+                    <p>Ambiente exclusivo projetado para seu conforto, proporcionando uma experiência relaxante e
+                        revigorante.</p>
                 </div>
             </div>
-        </section>
-    
-        <section id="unidades">
-            <h1 id="titulo">NOSSAS UNIDADES</h1>
-    
-            <div class="galery">
-                <div class="cardUnidade">
-                    <div>
-    
-                    <h1>Canal 1</h1>
-                    <h2>Santos - SP</h2>
-                    </div>
-                </div>
-    
-                <div class="cardUnidade">
-                    <div>
-    
-                    <h1>Canal 3</h1>
-                    <h2>Santos - SP</h2>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES SECTION ===== -->
+    <section id="servicos" class="services-section">
+        <div class="section-container">
+            <div class="services-grid">
+                <div class="services-image-wrap">
+                    <img class="services-img"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBki0UmBL8-2Xvfo0JNlyqn48bZWXFmfk2saxuBRKThnAcaBMKiqa7-3KSH07VBuIqeTzND4dCySVtd4AKnI31er2j6v5GmcW_qUy-T9D5eH86mN4XUjiVgZA4tAIGkAAlSAChxitXroZh9KmIJxITUqpfO1kpC7tMR3jeI2smHh0R0hsY8QJlYKB_8roneDjB6U7iqzWIb_fqcEF2d3tgEFObokYteQmhE09j3z_AHWaXqOonOvkjNmI8LnuvbWdvszqUZ7iODjmWR"
+                        alt="Barbeiro profissional realizando corte detalhado" />
+                    <div class="experience-badge">
+                        <p class="badge-number">15+</p>
+                        <p class="badge-label">Anos de Experiência</p>
                     </div>
                 </div>
 
-                <div class="cardUnidade">
-                    <div>
-    
-                    <h1>Canal 7</h1>
-                    <h2>Santos - SP</h2>
+                <div class="services-content">
+                    <p class="section-label">Nossos Serviços</p>
+                    <h2 class="section-title">Uma gama completa de serviços de elite.</h2>
+
+                    <div class="service-list">
+                        <div class="service-item">
+                            <div class="service-info">
+                                <h4>Corte Social</h4>
+                                <p>Clássico e atemporal</p>
+                            </div>
+                            <span class="service-price">R$ 80</span>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-info">
+                                <h4>Barba de Toalha Quente</h4>
+                                <p>Experiência relaxante completa</p>
+                            </div>
+                            <span class="service-price">R$ 65</span>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-info">
+                                <h4>Combo Elite (Cabelo + Barba)</h4>
+                                <p>O cuidado integral para o homem</p>
+                            </div>
+                            <span class="service-price">R$ 130</span>
+                        </div>
+                        <div class="service-item">
+                            <div class="service-info">
+                                <h4>Grooming Facial</h4>
+                                <p>Limpeza e hidratação profunda</p>
+                            </div>
+                            <span class="service-price">R$ 50</span>
+                        </div>
+                    </div>
+
+                    <button class="btn-text-gold" [routerLink]="'servicos/lista'" (click)="setIsloading('menuCompleto')"
+                        [disabled]="isLoading">
+                        @if(isLoading && button==='menuCompleto'){
+                        <app-loading></app-loading>
+                        } @else {
+                        Ver Menu Completo <span class="material-symbols-outlined">arrow_right_alt</span>
+                        }
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LOCATION SECTION ===== -->
+    <section id="localizacao" class="location-section">
+        <div class="section-container">
+            <div class="location-grid">
+                <div class="location-info">
+                    <p class="section-label">Localização</p>
+                    <h2 class="section-title">Onde nos encontrar.</h2>
+                    <p class="location-desc">
+                        Estamos localizados no coração da cidade, em um espaço moderno pensado para sua conveniência.
+                    </p>
+                    <div class="location-details">
+                        <div class="location-item">
+                            <span class="material-symbols-outlined">location_on</span>
+                            <div>
+                                <h4>Endereço</h4>
+                                <p>Av. da Independência, 1500 - Centro Histórico</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <span class="material-symbols-outlined">call</span>
+                            <div>
+                                <h4>Telefone</h4>
+                                <p>(11) 99999-9999</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <span class="material-symbols-outlined">access_time</span>
+                            <div>
+                                <h4>Horário</h4>
+                                <p>Seg - Sex: 09h às 20h | Sáb: 09h às 18h</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="location-map">
+                    <img class="map-img"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALVL102nLkgxW6bD560tan444ST_jNwWxwxMAIE7pwfjC-QL0KPNfql817rWOxGy79vqUpj6J18qCAhzkwb9M8X05GQCexN8JeZQzPAOfgYQyNa8UGT51_0EdEJGRyn3dulYtZ6dhNMhxl9X-hAIgnaLS0-sainVGAziwEd2AG4a4HxhbXtiwS2Od_EkpUTIIcDq58hRZkql6oSl1bdlfXT2ZMwlGy77cIUu-K7CXUPLUmziLyyDZdfH42HRE0PF4999btxVCzq7YG"
+                        alt="Mapa de localização" />
+                    <div class="map-tint"></div>
+                    <div class="map-pin">
+                        <span class="material-symbols-outlined">location_on</span>
+                        <div class="map-ping"></div>
                     </div>
                 </div>
             </div>
-        </section>
-    </body>
+        </div>
+    </section>
 </main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="logo">
+                <span class="material-symbols-outlined logo-icon">content_cut</span>
+                <span class="logo-text">Time<span class="accent">4Barber</span></span>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram">
+                    <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.85-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Time4Barber. Todos os direitos reservados.</p>
+            <div class="footer-links">
+                <a href="#">Termos</a>
+                <a href="#">Privacidade</a>
+            </div>
+        </div>
+    </div>
+</footer>

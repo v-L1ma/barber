@@ -1,49 +1,75 @@
-<section>
-    <div class="card">
-        <ul>
-            @for (agendamento of agendamentos; track agendamento.id) {
-            <li id="item">
-                <div>
-                    <h3>{{agendamento.data.replaceAll("-","/")}}</h3>
-                    <h3>{{agendamento.horario.slice(0,5)}}</h3>
+<app-header></app-header>
+
+<main class="page-container">
+  <div class="page-content">
+    <header class="page-header">
+      <h2 class="page-title">Histórico de Agendamentos</h2>
+      <p class="page-desc">Visualize e gerencie seus horários marcados em nossa barbearia.</p>
+    </header>
+
+    @if (agendamentos.length === 0) {
+      <div class="empty-state">
+        <span class="material-symbols-outlined empty-icon">event_busy</span>
+        <h3>Nenhum agendamento encontrado</h3>
+        <p>Você ainda não possui horários marcados em nosso sistema.</p>
+        <button class="btn btn-primary mt-4" routerLink="/servicos/agendamento">Agendar agora</button>
+      </div>
+    } @else {
+      <div class="appointments-grid">
+        @for (agendamento of agendamentos; track agendamento.id) {
+          <article class="appointment-card">
+            
+            <div class="appointment-date">
+              <div class="date-badge">
+                <span class="material-symbols-outlined">calendar_today</span>
+              </div>
+              <div class="date-details">
+                <p class="date-full">{{ agendamento.data.replaceAll("-", "/") }}</p>
+                <div class="time-badge">
+                  <span class="material-symbols-outlined icon-small">schedule</span>
+                  {{ agendamento.horario.slice(0, 5) }}
                 </div>
-                <p>{{agendamento.cliente}}</p>
-                <p>{{agendamento.servico}}</p>
+              </div>
+            </div>
+            
+            <div class="appointment-info">
+              <div class="info-top">
+                <span class="appointment-status">Confirmado</span>
+              </div>
+              <h3 class="appointment-service">{{ agendamento.servico }}</h3>
+              <div class="appointment-professional">
+                <span class="material-symbols-outlined icon-small">person</span>
+                <span>{{ agendamento.cliente }}</span>
+              </div>
+            </div>
 
-                <div>
-                    <button>
-                        <img src="moreIcon.svg" alt="Três pontos">
-                    </button>
-
-                    <div id="popup">
-                        <ul>
-                            <li (click)="navegarParaEdicao(agendamento.id!)">
-                                <img src="editIcon.svg" alt="">
-                                <p>Editar</p>
-                            <!-- deletar(agendamento.id!) -->
-                            </li>
-                            <li (click)="setPopUpOpen()">
-                                <img src="deleteIcon.svg" alt="">
-                                <p>Cancelar</p>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="appointment-actions dropdown-container">
+                <button class="btn-icon" aria-label="Opções">
+                  <span class="material-symbols-outlined">more_vert</span>
+                </button>
+                <div class="dropdown-menu">
+                  <button class="dropdown-item" (click)="navegarParaEdicao(agendamento.id!)">
+                    <span class="material-symbols-outlined">edit</span>
+                    Editar
+                  </button>
+                  <button class="dropdown-item dropdown-danger" (click)="setPopUpOpen()">
+                    <span class="material-symbols-outlined">cancel</span>
+                    Cancelar
+                  </button>
                 </div>
-            </li>
-
+            </div>
+            
             @if (isPopUpOpen) {
-            <app-modal 
-            titulo="Deseja cancelar esse agendamento?"
-            mensagem="Ao cancelar um agendamento a ação não poderá ser revertida e você corre o risco de perder essa data, gostaria de continuar?"
-            (fechar)="setPopUpOpen()"
-            (function)="deletar(agendamento.id!)"
-            ></app-modal>
+              <app-modal 
+                [titulo]="'Deseja cancelar esse agendamento?'"
+                [mensagem]="'Ao cancelar um agendamento a ação não poderá ser revertida e você corre o risco de perder essa data, gostaria de continuar?'"
+                (fechar)="setPopUpOpen()"
+                (function)="deletar(agendamento.id!)"
+              ></app-modal>
+            }
+          </article>
         }
-        }
-        
-
-        </ul>
-        
-    </div>
-</section>
-
+      </div>
+    }
+  </div>
+</main>

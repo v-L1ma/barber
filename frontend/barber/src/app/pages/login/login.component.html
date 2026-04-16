@@ -1,54 +1,86 @@
-<div id="background">
-    <div class="container">
-      <div class="box">
-
-          <app-voltar-btn go="/"></app-voltar-btn>
-
-        
-          <h2 class="title">Seja bem-vindo(a) novamente!</h2>
-    
-        <form [formGroup]="loginForm" (ngSubmit)="login()" #formDir="ngForm">
-          <div class="input">
-              <label for="email">Email</label>
-              <input type="email" id="email" formControlName="email" placeholder="seuemail@email.com" />
-              @if (email?.invalid && formDir.submitted) {
-                <p class="error">Por favor forneça um email válido.</p>
-              }
-          </div>
-    
-          <div class="input">
-              <label for="senha">Senha</label>
-              <input type="password" id="senha" formControlName="senha" placeholder="********" />
-              @if (senha?.invalid && formDir.submitted) {
-                <p class="error">A senha deve conter no minino 6 caracteres.</p>
-              }
-          </div>
-        
-          <p id="link">   
-          Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a>
-          </p>
-          
-          <p>
-            @if (status) {
-              <p class="status {{status}}">{{responseMessage}}</p>
-            }
-          </p>
-
-          <button type="submit">Entrar</button>
-        </form>
-
-        <div></div>
-      </div>
-    
-      <aside>
-
-        <h1 class="register-text">Sua primeria vez por aqui?</h1>
-        <p class="register-text">
-          Não se preocupe, crie uma conta e em menos de um minuto você já estará usando todos os nossos serviços
-        </p>
-
-        <a href="/cadastro">Cadastre-se</a>
-        
-      </aside>
-    </div>
+<!-- Background Layer -->
+<div class="auth-bg">
+  <div class="auth-bg__overlay"></div>
+  <img class="auth-bg__img"
+    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoUToy1PwrwEiPAbeL6lrk5tAwyf021q9sH4lzae5M6hSG_NZQAOw-bciMMUK9Bya61UsDo0r5VHxV7-tKqzWLyiwHNtOBIo1SosJDxBr1WkANvbET7VJmDOvmwvORBNLxJIu6_2q_ZoOBCpepWR_oimz9KbUkEBcfBTb2sXFCYBvMiQlhgIqiEuSpWT7XFvCUNkY7M5xrBRUEsA48M9TX7yOrCl2MQ3iz6VJEJuFyDsjsbBq-EOT3gqHx5Arbt9UzJ53cuTJnfhT2"
+    alt="Barbershop atmosphere" />
 </div>
+
+<!-- Login Container -->
+<main class="auth-main">
+  <div class="auth-card">
+
+    <!-- Brand Header -->
+    <header class="auth-card__header">
+      <div class="auth-card__icon-wrap">
+        <span class="material-symbols-outlined auth-card__icon">content_cut</span>
+      </div>
+      <h1 class="auth-card__brand">Time4Barber</h1>
+      <p class="auth-card__subtitle">Sistema de Gestão </p>
+    </header>
+
+    <!-- Login Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="login()" #formDir="ngForm" class="auth-form">
+
+      <!-- Email Field -->
+      <div class="auth-field">
+        <label class="auth-field__label" for="email">Email</label>
+        <div class="auth-field__wrap">
+          <span class="material-symbols-outlined auth-field__icon">mail</span>
+          <input class="auth-field__input" type="email" id="email" formControlName="email"
+            placeholder="seuemail@email.com" />
+        </div>
+        @if (email?.invalid && formDir.submitted) {
+        <p class="auth-field__error">Por favor forneça um email válido.</p>
+        }
+      </div>
+
+      <!-- Password Field -->
+      <div class="auth-field">
+        <label class="auth-field__label" for="senha">Senha</label>
+        <div class="auth-field__wrap">
+          <span class="material-symbols-outlined auth-field__icon">lock</span>
+          <input class="auth-field__input" type="password" id="senha" formControlName="senha" placeholder="••••••••" />
+        </div>
+        @if (senha?.invalid && formDir.submitted) {
+        <p class="auth-field__error">A senha deve conter no mínimo 6 caracteres.</p>
+        }
+      </div>
+
+      <!-- Remember & Link -->
+      <div class="auth-form__row">
+        <label class="auth-remember">
+          <input class="auth-remember__check" type="checkbox" />
+          <span class="auth-remember__label">Lembrar-me</span>
+        </label>
+        <a class="auth-link auth-link--gold" href="/cadastro">Criar conta</a>
+      </div>
+
+      <!-- Status Message -->
+      @if (status) {
+      <p class="auth-status auth-status--{{status}}">{{responseMessage}}</p>
+      }
+
+      <!-- Submit -->
+      <button class="auth-btn" type="submit">Acessar Sistema</button>
+
+    </form>
+
+    <!-- Footer link -->
+    <div class="auth-card__footer">
+      <p class="auth-card__footer-text">
+        Não tem conta? <a class="auth-link auth-link--muted" href="/cadastro">Cadastre-se</a>
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<!-- Page Footer -->
+<footer class="auth-footer">
+  <span class="auth-footer__copy">© 2024 Time4Barber . ALL RIGHTS RESERVED.</span>
+  <div class="auth-footer__links">
+    <a class="auth-footer__link" href="#">Política de Privacidade</a>
+    <a class="auth-footer__link" href="#">Termos de Uso</a>
+  </div>
+</footer>

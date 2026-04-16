@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { VoltarBtnComponent } from "../../components/voltar-btn/voltar-btn.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login/login.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [VoltarBtnComponent, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
